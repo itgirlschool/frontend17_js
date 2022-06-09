@@ -1,4 +1,3 @@
-console.log('Это написал скрипт из файла sidebar.js');;
 // block, button : setColor()
 // block, image : setBackground()
 // text, button : setText()
@@ -131,4 +130,4 @@ const dragAndDrop = () => {
 	targetBlock.addEventListener('dragenter', dragEnter);
 	targetBlock.addEventListener('drop', dragDrop);
 }
-dragAndDrop();;
+dragAndDrop();
