@@ -1,1 +1,1 @@
-@@include('sidepanel.js');
+@@include('sidebar.js');

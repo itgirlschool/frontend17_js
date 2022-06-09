@@ -1,1 +1,0 @@
-console.log('Это написал скрипт из файла sidepanel.js');

@@ -1,1 +1,1 @@
-console.log('Это написал скрипт из файла sidepanel.js');;
+console.log('Это написал скрипт из файла sidebar.js');;
