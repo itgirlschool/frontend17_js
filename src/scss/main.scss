@@ -1,0 +1,90 @@
+html,
+body {
+	height: 90%;
+	width: 100%;
+}
+
+.main {
+	max-width: 700px;
+	height: 100%;
+	margin: 50px auto;
+}
+
+.wrapper {
+	width: 100%;
+	height: 100%;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+
+.elements {
+	width: 30%;
+	height: 100%;
+	border: 1px solid black;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	&__element {
+		&:hover {
+			cursor: move;
+		}
+
+		margin: 20px 0;
+	}
+}
+
+
+
+.target {
+	width: 70%;
+	height: 100%;
+	border: 1px solid black;
+	display: block;
+	position: relative;
+}
+
+.hovered {
+	background-color: whitesmoke;
+}
+
+.square {
+	width: 150px;
+	height: 30px;
+	background-color: darkorchid;
+}
+
+.square1 {
+	width: 150px;
+	height: 30px;
+	background-color: darkcyan;
+}
+
+.moved {
+	margin: 0;
+}
+
+.draggable-element {
+	position: absolute;
+	display: block;
+}
+
+.wide {
+	height: 100px;
+	width: 100%;
+}
+
+.btn {
+	width: 150px;
+	height: 30px;
+	background-color: darkblue;
+	color: whitesmoke;
+	text-align: center;
+	line-height: 25px;
+}
