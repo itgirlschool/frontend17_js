@@ -12,8 +12,44 @@
 
 <body>
     <div>Я боковая панель</div>
-    <div class="wrap">
-    <div>djfhldsjkfhds</div>
+    <div id="wrapper__button" class="wrapper__button">
+    <button onclick="showReg('block')" id="buttonReg"  class="regButton">Регистрация</button> <!--  -->
+    <button id="buttonIn" onclick="showIn('block')" class="regButton">Войти</button>
+</div>
+
+<div onclick="showReg('none')" id="gray"></div> <!--  -->
+<div onclick="showIn('none')" id="gray2"></div>
+
+<div id="windowReg">
+    <img onclick="showReg('none')" src="./img/close.png" alt="close" class="close"> <!--  -->
+    <div class="popup__form">
+        <h2>Регистрация</h2>
+        <form id="regForm" action="index.html" name="f1" novalidate>
+            <input id="firstname" type="text" placeholder="Имя" name="firstname" class="inputReg" required>
+            <input id="lastname" type="text" placeholder="Фамилия" name="lastname" class="inputReg" required>
+            <input id="email" type="email" placeholder="E-mail" name="email" class="inputReg" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"> 
+            <input id="pass1" type="password" placeholder="Пароль" name="pass" class="inputReg" required>
+            <input id="pass2" type="password" placeholder="Повторите пароль" name="pass" class="inputReg" required>
+            <button onclick="pushReg()" class="btnForm">Зарегистрироваться</button>
+            <div id="error" class="error"></div>
+            <div>Нажимая «Зарегистрироваться», вы
+                подтверждаете,
+                что
+                прочитали и согласны с нашими Условиями Пользования и Политикой Конфиденциальности.</div>
+        </form>
+    </div>
+</div>
+
+<div id="windowIn">
+    <img onclick="showIn('none')" src="./img/close.png" alt="close" class="close">
+    <div class="popup__form">
+        <h2>Добро пожаловать!</h2>
+        <form id="inForm" action="index.html" name="f1">
+            <input id="email__in" type="email" placeholder="E-mail" name="email" class="input">
+            <input id="pass__in" type="password" placeholder="Пароль" name="pass" class="input">
+            <button class="btnForm" onclick="getIn()">Войти</button>
+        </form>
+    </div>
 </div>
     <header></header>
 
