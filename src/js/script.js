@@ -1,3 +1,2 @@
-@ @include('sidebar.js');
-@ @include('dragndrop.js');
-@ @include('data.js');
+@@include('sidebar.js');
+@@include('dragndrop.js');

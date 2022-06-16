@@ -1,12 +1,12 @@
 {
   "name": "drag-n-drop",
   "version": "1.0.0",
-  "description": "test drag-n-drop project",
+  "description": "drag-n-drop project",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "azagatskaya",
+  "author": "frontend17",
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.27.10",
