@@ -30,6 +30,7 @@ const elementExample = {
 const dragAndDrop = () => {
 	const menuBlock = document.querySelector('.menu');
 	const templateBlock = document.querySelector('.template');
+	// let elementsInLS = [];
 	const templateElements = [{
 		templateInd: 0,
 		type: 'block',
@@ -187,10 +188,7 @@ const dragAndDrop = () => {
 	let templateIndCount = 0;
 
 	class DragNDrop {
-		constructor(menuId, parent) {
-			this.menuId = menuId;
-			this.parent = parent;
-		}
+		// static
 
 	}
 
@@ -210,12 +208,18 @@ const dragAndDrop = () => {
 			// TODO
 		}
 		saveToLS() {
-			let item = JSON.stringify(this);
-			console.log(item);
+			let elArray = [];
+			let data = null;
 			if (!localStorage.getItem('template')) {
-				localStorage.setItem('template', JSON.stringify(this))
+				localStorage.setItem('template', JSON.stringify(this));
 			} else {
-				localStorage.setItem('template', [localStorage.getItem('template'), JSON.stringify(this)])
+				data = JSON.parse(localStorage.getItem('template'));
+				if (data.length > 1) {
+					elArray.push(...data, this);
+				} else {
+					elArray.push(data, this);
+				}
+				localStorage.setItem('template', JSON.stringify(elArray));
 			}
 		}
 	}
@@ -265,8 +269,8 @@ const dragAndDrop = () => {
 		// }
 	}
 	class Button extends ResizableElement {
-		constructor(menuId, parent, type, classes, width, height, posX, posY, bgColor, btnLabel, fontColor) {
-			super(menuId, parent, type, classes, width, height, posX, posY);
+		constructor(type, classes, width, height, posX, posY, bgColor, btnLabel, fontColor) {
+			super(type, classes, width, height, posX, posY);
 			this.bgColor = bgColor;
 			this.btnLabel = btnLabel;
 			this.fontColor = fontColor;
@@ -295,8 +299,8 @@ const dragAndDrop = () => {
 		}
 	}
 	class SocialIcon extends ResizableElement {
-		constructor(menuId, parent, type, classes, width, height, posX, posY, iconColor, link) {
-			super(menuId, parent, type, classes, width, height, posX, posY);
+		constructor(type, classes, width, height, posX, posY, iconColor, link) {
+			super(type, classes, width, height, posX, posY);
 			this.iconColor = iconColor;
 			this.link = link;
 		}
@@ -383,10 +387,45 @@ const dragAndDrop = () => {
 		e.preventDefault();
 		// console.log('drag leave');
 	}
-
+	const createNewElement = function (e, movingElement) {
+		const type = movingElement.dataset.type;
+		let newBlock = null;
+		if (type === 'block') {
+			movingElement.classList.add('wide');
+			newBlock = new Block(type, movingElement.classList, movingElement.style.backgroundColor);
+			newBlock.saveToLS();
+		} else {
+			movingElement.classList.add('draggable-element');
+			movingElement.style.top = e.layerY - elementY + 'px';
+			movingElement.style.left = e.layerX - elementX + 'px';
+			if (type === 'button') {
+				newBlock = new Button(type, movingElement.classList, movingElement.clientWidth,
+					movingElement.clientHeight,
+					movingElement.style.left,
+					movingElement.style.top,
+					movingElement.style.backgroundColor,
+					movingElement.innerHTML,
+					movingElement.style.color
+				);
+				// type, classes, width, height, posX, posY, bgColor, btnLabel, fontColor;
+				newBlock.saveToLS();
+				// console.log(newBlock);
+			} else if (type === 'icon') {
+				// newBlock = new SocialIcon(type, movingElement.classList, movingElement.clientWidth,
+				// movingElement.clientHeight,
+				// movingElement.style.left,
+				// movingElement.style.top,
+				// iconColor, link);
+				// newBlock.saveToLS();
+				// console.log(newBlock);
+			}
+		}
+	}
 	const dragDrop = function (e) {
 		e.preventDefault();
 		console.log('drag drop');
+		console.log(movingElement);
+		// console.log(e.clientY, e.clientX, e.layerY, e.layerX);
 		this.append(movingElement);
 		movingElement.classList.remove('menu__element');
 		movingElement.classList.add('template__element');
@@ -394,17 +433,7 @@ const dragAndDrop = () => {
 		movingElement.addEventListener('mousedown', getElementMousePosTemplate);
 		movingElement.addEventListener('dragstart', dragStart);
 		if (!templateFlag) {
-			if (movingElement.dataset.type === 'block') {
-				movingElement.classList.add('wide');
-				console.log(movingElement);
-				const newBlock = new Block(movingElement.dataset.type, movingElement.classList, movingElement.style.backgroundColor);
-				newBlock.saveToLS();
-				console.log(newBlock);
-			} else {
-				movingElement.classList.add('draggable-element');
-				movingElement.style.top = e.layerY - elementY + 1 + 'px';
-				movingElement.style.left = e.layerX - elementX + 1 + 'px';
-			}
+			createNewElement(e, movingElement);
 		} else {
 			movingElement.style.top = e.clientY - elementY + 'px';
 			movingElement.style.left = e.clientX - elementX + 'px';
@@ -413,26 +442,31 @@ const dragAndDrop = () => {
 
 	const getElementMousePosMenu = function (e) {
 		templateFlag = false;
-		if (e.target.tagName === 'path') {
-			elementX = e.layerX - e.target.parentNode.parentNode.offsetLeft + 5;
-			elementY = e.layerY - e.target.parentNode.parentNode.offsetTop + 5;
-		} else if (e.target.tagName === 'svg') {
-			elementX = e.layerX - e.target.parentNode.offsetLeft + 5;
-			elementY = e.layerY - e.target.parentNode.offsetTop + 5;
-		} else if (e.target.parentNode === menuBlock) {
-			elementX = e.layerX - e.originalTarget.offsetLeft;
-			elementY = e.layerY - e.originalTarget.offsetTop;
-		}
+		console.log('from menu');
+		elementY = e.offsetY;
+		elementX = e.offsetX;
+		// if (e.target.tagName === 'path' || e.target.tagName === 'svg') {
+		// 	elementY = e.offsetY;
+		// 	elementX = e.offsetX;
+		// } else {
+		// 	elementY = e.offsetY;
+		// 	elementX = e.offsetX;
+		// }
 	}
 	const getElementMousePosTemplate = function (e) {
+		console.log('from template');
+		console.log(`e.client: ${e.clientY},${e.clientX}`);
+		console.log(e);
+		console.log('offset E: ' + e.offsetY, e.offsetX);
+		console.log('offset: ' + e.target.offsetTop, e.target.offsetLeft);
 		templateFlag = true;
-		if (e.target.tagName === 'path' || e.target.tagName === 'svg') {
-			elementX = e.layerX + 5;
-			elementY = e.layerY + 5;
-		} else {
-			elementX = e.layerX;
-			elementY = e.layerY;
-		}
+		elementY = e.offsetY;
+		elementX = e.offsetX;
+		// if (e.target.tagName === 'path' || e.target.tagName === 'svg') {
+		// 	elementY = e.offsetY + 1;
+		// } else {
+		// 	elementY = e.offsetY;
+		// }
 	}
 
 	elements.forEach(el => {
