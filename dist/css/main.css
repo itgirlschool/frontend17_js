@@ -84,3 +84,95 @@ h6 {
   font-size: inherit;
   font-weight: 400;
 }
+
+.wrapper__button {
+  gap: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: baseline;
+  font-size: 26px;
+}
+
+.regButton {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 6px 24px;
+  cursor: pointer;
+}
+
+.regButton:hover {
+  background: rgb(238, 159, 159);
+}
+
+#gray,
+#gray2 {
+  background-color: rgba(1, 1, 1, 0.75);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: none;
+  z-index: 100;
+  overflow: auto;
+}
+
+#windowReg,
+#windowIn {
+  width: 350px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: 40px auto;
+  background: rgb(238, 159, 159);
+  border: 1px solid rgb(180, 97, 97);
+  border-radius: 15px;
+  z-index: 150;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.close {
+  position: absolute;
+  margin: 10px 0 0 320px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  padding: 2px;
+  background: #fff;
+}
+
+.close:hover {
+  background: #ccc;
+}
+
+.popup__form {
+  width: 275px;
+  margin: 15px auto 20px auto;
+  text-align: center;
+}
+
+.input,
+.btnForm,
+.inputReg {
+  width: 260px;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  border: 1px solid rgb(180, 97, 97);
+}
+
+.btnForm:hover {
+  background: rgb(180, 97, 97);
+}
+
+.error {
+  font-size: 20px;
+  font-weight: bold;
+  padding-bottom: 15px;
+}
