@@ -57,16 +57,18 @@ const buttonElements = [{
 
 const textElements = [{
     type: 'text',
+    textStyle: 'header_h2',
     width: '150px',
     height: '30px',
-    fontSize: '20px',
+    fontSize: '32px',
     color: '#000',
     text: 'Заголовок 2'
 }, {
     type: 'text',
+    textStyle: 'simple_text',
     width: '150px',
     height: '30px',
-    fontSize: '20px',
+    fontSize: '14px',
     color: '#000',
     text: 'Ваш текст будет написан в этом блоке'
 }];
@@ -76,7 +78,7 @@ const imageElements = [{
     width: '150px',
     height: '150px',
     border: '1px solid #c6c3af',
-    bgImage: 'url(./img/work-together.jpg)'
+    bgImage: 'url("./img/work-together.jpg")'
 }];
 
 const iconElements = [{
@@ -100,10 +102,10 @@ for (let i = 0; i < categories.length; i++) {
             let elementsContent = "";
             for (let element of elements) {
                 elementsContent +=
-                    `<div class="element" type="${element.type}" style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height};"> </div>`;
+                    `<div class="element"  tabindex="0" data-type="${element.type}" style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height};" draggable="true"> </div>`;
             }
             document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
-            dragFromSidebar();
+            // dragFromSidebar();
         }
 
         //button
@@ -112,10 +114,10 @@ for (let i = 0; i < categories.length; i++) {
             let elementsContent = "";
             for (let element of elements) {
                 elementsContent +=
-                    `<div class="element" type="${element.type}" style="color: ${element.color}; background-color: ${element.bgColor}; width: ${element.width}; height: ${element.height};">${element.text}</div>`;
+                    `<div class="element" tabindex="0" data-type="${element.type}" style="color: ${element.color}; background-color: ${element.bgColor}; width: ${element.width}; height: ${element.height};" draggable="true">${element.text}</div>`;
             }
             document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
-            dragFromSidebar();
+            // dragFromSidebar();
         }
 
         //text
@@ -124,10 +126,10 @@ for (let i = 0; i < categories.length; i++) {
             let elementsContent = "";
             for (let element of elements) {
                 elementsContent +=
-                    `<div class="element" type="${element.type}" style="color: ${element.color}; width: ${element.width}; height: ${element.height};">${element.text}</div>`;
+                    `<div class="element"  tabindex="0" data-type="${element.type}" data-textstyle="${element.textStyle}" style="color: ${element.color}; width: ${element.width}; height: ${element.height}; font-size: ${element.fontSize}" draggable="true">${element.text}</div>`;
             }
             document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
-            dragFromSidebar();
+            // dragFromSidebar();
         }
 
         //image
@@ -136,10 +138,10 @@ for (let i = 0; i < categories.length; i++) {
             let elementsContent = "";
             for (let element of elements) {
                 elementsContent +=
-                    `<div class="element" type="${element.type}" style="width: ${element.width}; border: ${element.border}; background-image: ${element.bgImage}; height: ${element.height};"> </div>`;
+                    `<div class="element"  tabindex="0" data-type="${element.type}" style="width: ${element.width}; border: ${element.border}; background-image: ${element.bgImage}; height: ${element.height};" draggable="true"> </div>`;
             }
             document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
-            dragFromSidebar();
+            // dragFromSidebar();
         }
 
         //icon
@@ -148,26 +150,27 @@ for (let i = 0; i < categories.length; i++) {
             let elementsContent = "";
             for (let element of elements) {
                 elementsContent +=
-                    `<div class="element" type="${element.type}" style="width: ${element.width}; border: ${element.border}; icon: ${element.icon}; height: ${element.height};"> </div>`;
+                    `<div class="element"  tabindex="0" data-type="${element.type}" style="width: ${element.width}; border: ${element.border}; icon: ${element.icon}; height: ${element.height};" draggable="true"> </div>`;
             }
             document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
-            dragFromSidebar();
+            // dragFromSidebar();
         }
-
+        dragAndDrop();
     }
+
 };
 
 //при клике на элемент выводит его в body, где потом его можно переносить с dragndrop
-function dragFromSidebar() {
-    let newElements = document.querySelectorAll(".element");
-    let elementId = 0;
-    for (let j = 0; j < newElements.length; j++) {
-        newElements[j].onclick = function (event) {
-            let target = event.target;
-            const newDiv = target.cloneNode(true);
-            elementId++;
-            newDiv.id = elementId; //чтобы обратиться по id
-            document.body.appendChild(newDiv);
-        }
-    }
-};
+// function dragFromSidebar() {
+//     let newElements = document.querySelectorAll(".element");
+//     let elementId = 0;
+//     for (let j = 0; j < newElements.length; j++) {
+//         newElements[j].onclick = function (event) {
+//             let target = event.target;
+//             const newDiv = target.cloneNode(true);
+//             elementId++;
+//             newDiv.id = elementId; //чтобы обратиться по id
+//             document.querySelector('.template').appendChild(newDiv);
+//         }
+//     }
+// };
