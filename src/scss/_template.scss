@@ -2,10 +2,37 @@
 	width: 100%;
 	height: 100%;
 	position: relative;
+	// border: 1px solid rgb(238, 159, 159);
+	box-shadow: inset 1px 1px 10px lightgrey;
 
 	&__button {
 		text-align: center;
 		line-height: 2;
+	}
+}
+
+.save {
+	width: 42px;
+	height: 42px;
+	position: absolute;
+	top: 65px;
+	right: 12px;
+	background-color: #fff;
+	box-shadow: 1px 1px 10px rgb(170, 170, 170);
+	border-radius: 50%;
+	z-index: 50;
+
+	&:hover {
+		cursor: pointer;
+		box-shadow: 1px 1px 10px rgb(150, 150, 150);
+	}
+
+	& img {
+		position: absolute;
+		top: 5px;
+		left: 5px;
+		width: 32px;
+		height: 32px;
 	}
 }
 
@@ -16,18 +43,34 @@
 .draggable-element {
 	position: absolute;
 	cursor: move;
+}
 
-	&.selected {
-		border: 2px solid rgb(112, 198, 255);
-		cursor: default;
-	}
+.selected {
+	border: 1px solid rgb(112, 198, 255);
+	cursor: default;
 }
 
 .element {
 	cursor: move;
+
+	&[data-type="button"] {
+		line-height: 2;
+	}
+
+	&[data-textstyle="header_h2"] {
+		font-weight: bold;
+	}
+}
+
+[data-type="image"] {
+	width: 100%;
+	height: 100%;
+	background-position: center;
+	background-size: contain;
 }
 
 .header_h2 {
+	color: whitesmoke;
 	font-weight: bold;
 	width: auto;
 }

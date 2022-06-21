@@ -11,7 +11,7 @@ const blockElements = [{
     type: 'block',
     width: '100%',
     height: '80px',
-    bgColor: '#c6c3af'
+    bgColor: '#c6c3af77'
 }, {
     type: 'block',
     width: '100%',
@@ -26,7 +26,7 @@ const blockElements = [{
     type: 'block',
     width: '100%',
     height: '500px',
-    bgColor: '#c6c3af'
+    bgColor: '#c6c3af77'
 }, {
     type: 'block',
     width: '100%',
@@ -62,7 +62,7 @@ const textElements = [{
     height: '30px',
     fontSize: '32px',
     color: '#000',
-    text: 'Заголовок 2'
+    text: 'Заголовок'
 }, {
     type: 'text',
     textStyle: 'simple_text',
@@ -78,7 +78,13 @@ const imageElements = [{
     width: '150px',
     height: '150px',
     border: '1px solid #c6c3af',
-    bgImage: 'url("./img/work-together.jpg")'
+    bgImage: 'url(./img/bar-chart.png)'
+}, {
+    type: 'image',
+    width: '150px',
+    height: '150px',
+    border: '1px solid #c6c3af',
+    bgImage: 'url(./img/team-work.png)'
 }];
 
 const iconElements = [{
@@ -102,7 +108,7 @@ for (let i = 0; i < categories.length; i++) {
             let elementsContent = "";
             for (let element of elements) {
                 elementsContent +=
-                    `<div class="element"  tabindex="0" data-type="${element.type}" style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height};" draggable="true"> </div>`;
+                    `<div class="element" tabindex="0" data-type="${element.type}" style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height};" draggable="true"> </div>`;
             }
             document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
             // dragFromSidebar();
@@ -126,7 +132,7 @@ for (let i = 0; i < categories.length; i++) {
             let elementsContent = "";
             for (let element of elements) {
                 elementsContent +=
-                    `<div class="element"  tabindex="0" data-type="${element.type}" data-textstyle="${element.textStyle}" style="color: ${element.color}; width: ${element.width}; height: ${element.height}; font-size: ${element.fontSize}" draggable="true">${element.text}</div>`;
+                    `<div class="element" tabindex="0" data-type="${element.type}" data-textstyle="${element.textStyle}" style="color: ${element.color}; width: ${element.width}; height: ${element.height}; font-size: ${element.fontSize}" draggable="true">${element.text}</div>`;
             }
             document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
             // dragFromSidebar();
@@ -138,7 +144,7 @@ for (let i = 0; i < categories.length; i++) {
             let elementsContent = "";
             for (let element of elements) {
                 elementsContent +=
-                    `<div class="element"  tabindex="0" data-type="${element.type}" style="width: ${element.width}; border: ${element.border}; background-image: ${element.bgImage}; height: ${element.height};" draggable="true"> </div>`;
+                    `<div class="element" tabindex="0" data-type="${element.type}" style="width: ${element.width}; border: ${element.border}; background-image: ${element.bgImage}; height: ${element.height};" draggable="true"> </div>`;
             }
             document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
             // dragFromSidebar();
@@ -150,7 +156,7 @@ for (let i = 0; i < categories.length; i++) {
             let elementsContent = "";
             for (let element of elements) {
                 elementsContent +=
-                    `<div class="element"  tabindex="0" data-type="${element.type}" style="width: ${element.width}; border: ${element.border}; icon: ${element.icon}; height: ${element.height};" draggable="true"> </div>`;
+                    `<div class="element" tabindex="0" data-type="${element.type}" style="width: ${element.width}; border: ${element.border}; icon: ${element.icon}; height: ${element.height};" draggable="true"> </div>`;
             }
             document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
             // dragFromSidebar();

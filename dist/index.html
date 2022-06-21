@@ -15,12 +15,17 @@
         <nav></nav>
     </header>
     <div id="wrapper__button" class="wrapper__button">
-    <button onclick="showReg('block')" id="buttonReg"  class="regButton">Регистрация</button> <!--  -->
+    <div class="save">
+        <img src="./img/save.svg" alt="Save to Local Storage">
+    </div>
+
+    <button onclick="showReg('block')" id="buttonReg" class="regButton">Регистрация</button> <!--  -->
     <button id="buttonIn" onclick="showIn('block')" class="regButton">Войти</button>
 </div>
 
 <div onclick="showReg('none')" id="gray"></div> <!--  -->
 <div onclick="showIn('none')" id="gray2"></div>
+<div onclick="showPopup('none')" id="grayBackground"></div>
 
 <div id="windowReg">
     <img onclick="showReg('none')" src="./img/close.png" alt="close" class="close"> <!--  -->
@@ -29,7 +34,7 @@
         <form id="regForm" action="index.html" name="f1" novalidate>
             <input id="firstname" type="text" placeholder="Имя" name="firstname" class="inputReg" required>
             <input id="lastname" type="text" placeholder="Фамилия" name="lastname" class="inputReg" required>
-            <input id="email" type="email" placeholder="E-mail" name="email" class="inputReg" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"> 
+            <input id="email" type="email" placeholder="E-mail" name="email" class="inputReg" required pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$">
             <input id="pass1" type="password" placeholder="Пароль" name="pass" class="inputReg" required>
             <input id="pass2" type="password" placeholder="Повторите пароль" name="pass" class="inputReg" required>
             <button onclick="pushReg()" class="btnForm">Зарегистрироваться</button>
@@ -54,7 +59,15 @@
     </div>
 </div>
 
+<div onclick="showPopup('none')" id="grayBackground"></div>
+<div id="windowSelectTemplate">
+    <img onclick="showPopup('none')" src="./img/close.png" alt="close" class="close">
+    <div class="popup__form">
+    </div>
+</div>
+
     <main class="main">
+       
         <aside class="left-sidebar">
 
     <div class="left-sidebar__button">
@@ -85,6 +98,7 @@
     </div>
 </aside>
         <div class="main__template template"></div>
+
     </main>
 
     <script src="./js/script.js"></script>
