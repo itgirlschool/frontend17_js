@@ -2,7 +2,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
     let login = localStorage.getItem('login');
     let firstName = localStorage.getItem('firstname');
     if (login != null) {
-        document.getElementById('wrapper__button').innerHTML = `<div>Привет, ${firstName}!</div><button id="buttonOut" onclick="outUser()" class="regButton">Выйти</button>`
+        document.getElementById('wrapper__button').innerHTML = `
+        <div>Привет, ${firstName}!</div>
+        <button id="buttonOut" onclick="outUser()" class="regButton">Выйти</button>`
     }
 })
 
@@ -108,11 +110,11 @@ function saveData() {
         localStorage.setItem('pass', password2);
     }
 
-localStorage.setItem('login', true);
-document.getElementById('windowReg').style.display = "none";
-document.getElementById('gray').style.display = "none";
-document.querySelector('form').addEventListener('submit', (e) => e.preventDefault())
-document.getElementById('wrapper__button').innerHTML = `<div>Привет, ${firstName}!</div><button id="buttonOut" onclick="outUser()" class="regButton">Выйти</button>`
+    localStorage.setItem('login', true);
+    document.getElementById('windowReg').style.display = "none";
+    document.getElementById('gray').style.display = "none";
+    document.querySelector('form').addEventListener('submit', (e) => e.preventDefault())
+    document.getElementById('wrapper__button').innerHTML = `<div>Привет, ${firstName}!</div><button id="buttonOut" onclick="outUser()" class="regButton">Выйти</button>`
 }
 
 function getIn() {

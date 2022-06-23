@@ -21,7 +21,7 @@
         transform: translateY(100%);
         background: #fff;
         width: 45vw;
-        max-width: 520px;
+        max-width: 550px;
         min-width: 300px;
         height: 100vh;
         background: rgb(255, 255, 255);
@@ -43,7 +43,7 @@
 
     &__content {
         display: grid;
-        grid-template-columns: 0.5fr 1fr;
+        grid-template-columns: 0.37fr 1fr;
     }
 
     &__categories {
@@ -69,6 +69,15 @@
             border-radius: 40px;
         }
     }
+
+    // ----new 
+    &__elements {
+
+        max-height: 50vh;
+        padding: 10px;
+    }
+
+    // ---- end
 }
 
 //for animation
@@ -97,12 +106,47 @@
 }
 
 .element {
-    max-width: 200px;
+    max-width: 150px;
     max-height: 200px;
+    // ----new
+    margin: auto;
+    // padding: 5px;
+    // ----- end
 }
 
 //todo
 //или сделать отдельный блок, куда будут падать элементы из бокового меню
 body {
     padding-left: 50px;
+}
+
+// ------new
+
+//for elements in menu
+.elementPreview {
+    // max-width: 100px;
+    max-height: 150px;
+    justify-self: flex-start;
+    align-self: center;
+    cursor: pointer;
+    margin: auto;
+    // padding: 5px;
+}
+
+.menuFlexStyle {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 10px;
+}
+
+//mixins
+@mixin flexible () {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flexible {
+    @include flexible ();
 }

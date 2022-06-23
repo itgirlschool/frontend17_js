@@ -1,190 +1,10 @@
-const leftSidebarButton = document.querySelector('.left-sidebar__button');
-const leftSidebarMenu = document.querySelector('.left-sidebar__menu');
-
-leftSidebarButton.addEventListener('click', function () {
-    leftSidebarMenu.classList.toggle("leftSidebarMenu");
-});
-
-
-//examples from dragndrop.js
-const blockElements = [{
-    type: 'block',
-    width: '100%',
-    height: '80px',
-    bgColor: '#c6c3af77'
-}, {
-    type: 'block',
-    width: '100%',
-    height: '80px',
-    bgColor: '#fff973'
-}, {
-    type: 'block',
-    width: '100%',
-    height: '300px',
-    bgColor: 'pink'
-}, {
-    type: 'block',
-    width: '100%',
-    height: '500px',
-    bgColor: '#c6c3af77'
-}, {
-    type: 'block',
-    width: '100%',
-    height: '100px',
-    bgColor: '#fff973'
-}, {
-    type: 'block',
-    width: '100%',
-    height: '100px',
-    bgColor: 'pink'
-}];
-
-const buttonElements = [{
-    type: 'button',
-    width: '150px',
-    height: '30px',
-    bgColor: '#fff973',
-    color: 'black',
-    text: 'Кнопка'
-}, {
-    type: 'button',
-    width: '150px',
-    height: '30px',
-    bgColor: '#c6c3af',
-    color: 'black',
-    text: 'Кнопка'
-}];
-
-const textElements = [{
-    type: 'text',
-    textStyle: 'header_h2',
-    width: '150px',
-    height: '30px',
-    fontSize: '32px',
-    color: '#000',
-    text: 'Заголовок'
-}, {
-    type: 'text',
-    textStyle: 'simple_text',
-    width: '150px',
-    height: '30px',
-    fontSize: '14px',
-    color: '#000',
-    text: 'Ваш текст будет написан в этом блоке'
-}];
-
-const imageElements = [{
-    type: 'image',
-    width: '150px',
-    height: '150px',
-    border: '1px solid #c6c3af',
-    bgImage: 'url(./img/bar-chart.png)'
-}, {
-    type: 'image',
-    width: '150px',
-    height: '150px',
-    border: '1px solid #c6c3af',
-    bgImage: 'url(./img/team-work.png)'
-}];
-
-const iconElements = [{
-    type: 'icon',
-    width: '24px',
-    height: '24px',
-    border: '1px solid #c6c3af',
-    icon: 'url(./img/social/facebook.svg)',
-    link: 'https://www.facebook.com'
-}];
-
-
-let categories = document.querySelectorAll(".categories__button");
-for (let i = 0; i < categories.length; i++) {
-    categories[i].onclick = function (event) {
-        let target = event.target;
-
-        //blocks
-        if (target.classList.contains('left-sidebar__categories-block')) {
-            let elements = blockElements;
-            let elementsContent = "";
-            for (let element of elements) {
-                elementsContent +=
-                    `<div class="element" tabindex="0" data-type="${element.type}" style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height};" draggable="true"> </div>`;
-            }
-            document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
-            // dragFromSidebar();
-        }
-
-        //button
-        else if (target.classList.contains('left-sidebar__categories-button')) {
-            let elements = buttonElements;
-            let elementsContent = "";
-            for (let element of elements) {
-                elementsContent +=
-                    `<div class="element" tabindex="0" data-type="${element.type}" style="color: ${element.color}; background-color: ${element.bgColor}; width: ${element.width}; height: ${element.height};" draggable="true">${element.text}</div>`;
-            }
-            document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
-            // dragFromSidebar();
-        }
-
-        //text
-        else if (target.classList.contains('left-sidebar__categories-text')) {
-            let elements = textElements;
-            let elementsContent = "";
-            for (let element of elements) {
-                elementsContent +=
-                    `<div class="element" tabindex="0" data-type="${element.type}" data-textstyle="${element.textStyle}" style="color: ${element.color}; width: ${element.width}; height: ${element.height}; font-size: ${element.fontSize}" draggable="true">${element.text}</div>`;
-            }
-            document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
-            // dragFromSidebar();
-        }
-
-        //image
-        else if (target.classList.contains('left-sidebar__categories-image')) {
-            let elements = imageElements;
-            let elementsContent = "";
-            for (let element of elements) {
-                elementsContent +=
-                    `<div class="element" tabindex="0" data-type="${element.type}" style="width: ${element.width}; border: ${element.border}; background-image: ${element.bgImage}; height: ${element.height};" draggable="true"> </div>`;
-            }
-            document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
-            // dragFromSidebar();
-        }
-
-        //icon
-        else if (target.classList.contains('left-sidebar__categories-icon')) {
-            let elements = iconElements;
-            let elementsContent = "";
-            for (let element of elements) {
-                elementsContent +=
-                    `<div class="element" tabindex="0" data-type="${element.type}" style="width: ${element.width}; border: ${element.border}; icon: ${element.icon}; height: ${element.height};" draggable="true"> </div>`;
-            }
-            document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
-            // dragFromSidebar();
-        }
-        dragAndDrop();
-    }
-
-};
-
-//при клике на элемент выводит его в body, где потом его можно переносить с dragndrop
-// function dragFromSidebar() {
-//     let newElements = document.querySelectorAll(".element");
-//     let elementId = 0;
-//     for (let j = 0; j < newElements.length; j++) {
-//         newElements[j].onclick = function (event) {
-//             let target = event.target;
-//             const newDiv = target.cloneNode(true);
-//             elementId++;
-//             newDiv.id = elementId; //чтобы обратиться по id
-//             document.querySelector('.template').appendChild(newDiv);
-//         }
-//     }
-// };;
 document.addEventListener("DOMContentLoaded", function (event) {
     let login = localStorage.getItem('login');
     let firstName = localStorage.getItem('firstname');
     if (login != null) {
-        document.getElementById('wrapper__button').innerHTML = `<div>Привет, ${firstName}!</div><button id="buttonOut" onclick="outUser()" class="regButton">Выйти</button>`
+        document.getElementById('wrapper__button').innerHTML = `
+        <div>Привет, ${firstName}!</div>
+        <button id="buttonOut" onclick="outUser()" class="regButton">Выйти</button>`
     }
 })
 
@@ -290,11 +110,11 @@ function saveData() {
         localStorage.setItem('pass', password2);
     }
 
-localStorage.setItem('login', true);
-document.getElementById('windowReg').style.display = "none";
-document.getElementById('gray').style.display = "none";
-document.querySelector('form').addEventListener('submit', (e) => e.preventDefault())
-document.getElementById('wrapper__button').innerHTML = `<div>Привет, ${firstName}!</div><button id="buttonOut" onclick="outUser()" class="regButton">Выйти</button>`
+    localStorage.setItem('login', true);
+    document.getElementById('windowReg').style.display = "none";
+    document.getElementById('gray').style.display = "none";
+    document.querySelector('form').addEventListener('submit', (e) => e.preventDefault())
+    document.getElementById('wrapper__button').innerHTML = `<div>Привет, ${firstName}!</div><button id="buttonOut" onclick="outUser()" class="regButton">Выйти</button>`
 }
 
 function getIn() {
@@ -309,8 +129,637 @@ function outUser() {
     document.getElementById('wrapper__button').innerHTML = `<button id="buttonReg" onclick="showReg('block')" class="regButton">Регистрация</button>
     <button id="buttonIn" onclick="showIn('block')" class="regButton">Войти</button>`
     localStorage.removeItem('login');
+};
+let json = `[{
+    "type": "block",
+    "width": "100%",
+    "height": "80px",
+    "bgColor": "#DCDCDC"
+},{
+    "type": "block",
+    "width": "100%",
+    "height": "80px",
+    "bgColor": "#fff973dd"
+},{
+    "type": "block",
+    "width": "100%",
+    "height": "500px",
+    "bgColor": "#FFE4E1"
+},{
+    "type": "block",
+    "width": "100%",
+    "height": "500px",
+    "bgColor": "#DCDCDC"
+},{
+    "type": "block",
+    "width": "100%",
+    "height": "100px",
+    "bgColor": "#fff973dd"
+},{
+    "type": "block",
+    "width": "100%",
+    "height": "100px",
+    "bgColor": "#FFE4E1"
+},{
+    "type": "block",
+    "width": "100%",
+    "height": "80px",
+    "bgColor": "#F0FFF0"
+}, {
+	"type": "block",
+	"width": "100%",
+	"height": "500px",
+	"bgColor": "#FFFFF0"
+},{
+	"type": "block",
+	"width": "100%",
+	"height": "150px",
+	"bgColor": "#c6c3af",
+	"borderRadius": "40px"
+},{
+    "type": "block",
+    "width": "100px",
+    "height": "100px",
+    "border": "thick solid grey"
+},{
+	"type": "block",
+	"width": "80px",
+	"height": "80px",
+	"bgColor": "grey",
+	"borderRadius": "50%"
+},{
+    "type": "block",
+    "width": "100px",
+    "height": "50px",
+    "bgColor": "#fff973",
+    "borderRadius": "100px / 50px"
+},{
+    "type": "block",
+    "width": "100%",
+    "height": "100px",
+    "bgColor": "pink"
+},{
+	"type": "button",
+	"width": "150px",
+	"height": "30px",
+	"bgColor": "#fff973",
+	"color": "black",
+	"text": "Кнопка"
+},{
+	"type": "button",
+	"width": "150px",
+	"height": "30px",
+	"bgColor": "#c6c3af",
+	"color": "black",
+	"text": "Кнопка"
+},{
+    "type": "button",
+    "width": "150px",
+    "height": "40px",
+    "bgColor": "black",
+    "color": "white",
+    "text": "View More",
+    "fontFamily": "Courier New",
+    "fontSize": "16px"
+},{
+    "type": "button",
+    "width": "150px",
+    "height": "40px",
+    "bgColor": "white",
+    "color": "black",
+    "text": "Read More",
+    "fontSize": "20px"
+},{
+    "type": "button",
+    "width": "150px",
+    "height": "40px",
+    "bgColor": "rgb(11, 47, 91)",
+    "color": "rgb(202, 215, 231)",
+    "text": "SEND",
+    "fontFamily": "Trebuchet MS",
+    "fontSize": "20px",
+    "border": "2px solid rgb(202, 215, 231)"
+},{
+    "type": "button",
+    "width": "150px",
+    "height": "40px",
+    "bgColor": "rgb(63, 118, 82)",
+    "color": "white",
+    "text": "SHOP &#8594;",
+    "fontFamily": "Cambria",
+    "fontSize": "20px",
+    "borderRadius": "40px"
+},{
+    "type": "button",
+    "width": "150px",
+    "height": "40px",
+    "bgColor": "white",
+    "color": "blue",
+    "text": "VIEW ALL",
+    "fontFamily": "Helvetica",
+    "fontSize": "20px"
+},{
+    "type": "button",
+    "width": "150px",
+    "height": "40px",
+    "bgColor": "rgb(7, 61, 81)",
+    "color": "white",
+    "text": "DOWNLOAD",
+    "fontFamily": "Helvetica",
+    "fontSize": "14px"
+},{
+    "type": "button",
+    "width": "150px",
+    "height": "40px",
+    "bgColor": "rgb(229, 235, 250)",
+    "color": "rgb(4, 107, 254)",
+    "text": "JOIN US",
+    "fontFamily": "Helvetica",
+    "fontSize": "14px",
+    "borderRadius": "40px"
+},{
+    "type": "button",
+    "width": "70px",
+    "height": "40px",
+    "bgColor": "pink",
+    "color": "red",
+    "text": "&#10084;",
+    "fontFamily": "Helvetica",
+    "fontSize": "40px",
+    "borderRadius": "100px"
+},{
+    "type": "button",
+    "width": "70px",
+    "height": "40px",
+    "bgColor": "rgb(229, 235, 250)",
+    "color": "rgb(4, 107, 254)",
+    "text": "&#10006;",
+    "fontFamily": "Helvetica",
+    "fontSize": "30px",
+    "borderRadius": "5px"
+},{
+    "type": "button",
+    "width": "45px",
+    "height": "40px",
+    "bgColor": "rgb(229, 235, 250)",
+    "color": "rgb(4, 107, 254)",
+    "text": "&#128386;",
+    "fontFamily": "Helvetica",
+    "fontSize": "30px",
+    "borderRadius": "5px"
+},{
+    "type": "button",
+    "width": "45px",
+    "height": "40px",
+    "bgColor": "rgb(229, 235, 250)",
+    "color": "rgb(4, 107, 254)",
+    "text": "&#9742;",
+    "fontFamily": "Helvetica",
+    "fontSize": "30px",
+    "borderRadius": "5px"
+},{
+    "type": "button",
+    "width": "45px",
+    "height": "40px",
+    "bgColor": "rgb(229, 235, 250)",
+    "color": "rgb(4, 107, 254)",
+    "text": "&#9997;",
+    "fontFamily": "Helvetica",
+    "fontSize": "30px",
+    "borderRadius": "5px"
+},{
+    "type": "button",
+    "width": "45px",
+    "height": "40px",
+    "bgColor": "rgb(229, 235, 250)",
+    "color": "rgb(4, 107, 254)",
+    "text": "&#9786;",
+    "fontFamily": "Helvetica",
+    "fontSize": "30px",
+    "borderRadius": "5px"
+},{
+    "type": "button",
+    "width": "45px",
+    "height": "40px",
+    "bgColor": "rgb(229, 235, 250)",
+    "color": "rgb(4, 107, 254)",
+    "text": "&#10046;",
+    "fontFamily": "Helvetica",
+    "fontSize": "30px",
+    "borderRadius": "5px"
+},{
+    "type": "button",
+    "width": "150px",
+    "height": "40px",
+    "bgColor": "white",
+    "color": "rgb(63, 118, 82)",
+    "text": "Apply Now",
+    "fontFamily": "Franklin Gothic Medium",
+    "fontSize": "18px",
+    "fontStyle": "italic"
+},{
+    "type": "button",
+    "width": "150px",
+    "height": "40px",
+    "bgColor": "white",
+    "color": "rgb(63, 118, 82)",
+    "text": "Featured",
+    "fontFamily": "Arial",
+    "fontSize": "18px",
+    "border": "2px solid rgb(63, 118, 82)"
+},{
+    "type": "button",
+    "width": "45px",
+    "height": "40px",
+    "bgColor": "rgb(255, 252, 204)",
+    "color": "rgb(161, 103, 7)",
+    "text": "&#62;",
+    "fontFamily": "Helvetica",
+    "fontSize": "30px"
+},{
+    "type": "button",
+    "width": "110px",
+    "height": "40px",
+    "bgColor": "rgb(255, 248, 107)",
+    "color": "black",
+    "text": "SEND",
+    "fontFamily": "Verdana",
+    "fontSize": "18px",
+    "fontWeight": "bold"
+},{
+    "type": "button",
+    "width": "110px",
+    "height": "40px",
+    "bgColor": "white",
+    "color": "rgb(12, 68, 38)",
+    "text": "BACK TO TOP",
+    "fontFamily": "Franklin Gothic Medium",
+    "fontSize": "16px"
+},{
+    "type": "button",
+    "width": "40px",
+    "height": "40px",
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d='M256 112c-48.6 0-88 39.4-88 88C168 248.6 207.4 288 256 288s88-39.4 88-88C344 151.4 304.6 112 256 112zM256 240c-22.06 0-40-17.95-40-40C216 177.9 233.9 160 256 160s40 17.94 40 40C296 222.1 278.1 240 256 240zM256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-46.73 0-89.76-15.68-124.5-41.79C148.8 389 182.4 368 220.2 368h71.69c37.75 0 71.31 21.01 88.68 54.21C345.8 448.3 302.7 464 256 464zM416.2 388.5C389.2 346.3 343.2 320 291.8 320H220.2c-51.36 0-97.35 26.25-124.4 68.48C65.96 352.5 48 306.3 48 256c0-114.7 93.31-208 208-208s208 93.31 208 208C464 306.3 446 352.5 416.2 388.5z' fill='#401a49'/></svg>"
+}, {
+    "type": "button",
+    "width": "48px",
+    "height": "48px",
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' height='48' width='48'><path d='M6 36V33H42V36ZM6 25.5V22.5H42V25.5ZM6 15V12H42V15Z' fill='#401a49'/></svg>"
+}, {
+    "type": "button",
+    "width": "48px",
+    "height": "48px",
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' height='48' width='48'><path d='M24 32.35 14.35 22.7 16.5 20.55 22.5 26.55V8H25.5V26.55L31.5 20.55L33.65 22.7ZM11 40Q9.8 40 8.9 39.1Q8 38.2 8 37V29.85H11V37Q11 37 11 37Q11 37 11 37H37Q37 37 37 37Q37 37 37 37V29.85H40V37Q40 38.2 39.1 39.1Q38.2 40 37 40Z' fill='#401a49'/></svg>"
+}, {
+    "type": "button",
+    "width": "48px",
+    "height": "48px",
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' height='48' width='48'><path d='M23 33.5H25.25V25.3H33.5V23H25.25V14.5H23V23H14.5V25.3H23ZM24 43Q20 43 16.525 41.55Q13.05 40.1 10.475 37.525Q7.9 34.95 6.45 31.475Q5 28 5 24Q5 20 6.45 16.55Q7.9 13.1 10.475 10.525Q13.05 7.95 16.525 6.475Q20 5 24 5Q28 5 31.45 6.475Q34.9 7.95 37.475 10.525Q40.05 13.1 41.525 16.55Q43 20 43 24Q43 28 41.525 31.475Q40.05 34.95 37.475 37.525Q34.9 40.1 31.45 41.55Q28 43 24 43ZM24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24ZM24 40.75Q30.9 40.75 35.825 35.825Q40.75 30.9 40.75 24Q40.75 17.1 35.825 12.175Q30.9 7.25 24 7.25Q17.1 7.25 12.175 12.175Q7.25 17.1 7.25 24Q7.25 30.9 12.175 35.825Q17.1 40.75 24 40.75Z' fill='#401a49'/></svg>"
+}, {
+	"type": "text",
+	"textStyle": "header_h1",
+	"width": "150px",
+	"height": "30px",
+	"fontSize": "29px",
+	"color": "#000",
+	"text": "Название",
+	"fontFamily": "Verdana"
+},{
+    "type": "text",
+    "textStyle": "header_h2",
+    "width": "150px",
+    "height": "30px",
+    "fontSize": "26px",
+    "color": "#000",
+    "text": "Заголовок",
+    "fontFamily": "Verdana"
+},{
+	"type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
+	"fontSize": "14px",
+	"color": "#000",
+	"text": "Ваш текст будет написан в этом блоке"
+},{
+    "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
+    "fontSize": "20px",
+    "color": "#000",
+    "text": "Arial",
+    "fontFamily": "Arial"
+},{
+    "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
+    "fontSize": "20px",
+    "color": "#000",
+    "text": "Times New Roman",
+    "fontFamily": "Times New Roman"
+},{
+    "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
+    "fontSize": "20px",
+    "color": "#000",
+    "text": "Courier New",
+    "fontFamily": "Courier New"
+},{
+    "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
+    "fontSize": "20px",
+    "color": "#000",
+    "text": "Verdana",
+    "fontFamily": "Verdana"
+},{
+    "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
+    "fontSize": "20px",
+    "color": "#000",
+    "text": "Trebuchet MS",
+    "fontFamily": "Trebuchet MS"
+},{
+    "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
+    "fontSize": "20px",
+    "color": "#000",
+    "text": "Cambria",
+    "fontFamily": "Cambria"
+},{
+    "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
+    "fontSize": "20px",
+    "color": "#000",
+    "text": "Franklin Gothic Medium",
+    "fontFamily": "Franklin Gothic Medium"
+},{
+    "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
+    "fontSize": "20px",
+    "color": "#000",
+    "text": "Helvetica",
+    "fontFamily": "Helvetica"
+},{
+    "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
+    "fontSize": "16px",
+    "color": "#000",
+    "text": "Helvetica Light is an easy-to-read font, with tall and narrow letters, that works well on almost every site.",
+    "fontFamily": "Helvetica"
+},{
+    "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
+    "fontSize": "16px",
+    "color": "#000",
+    "text": "Helvetica Light is an easy-to-read font, with tall and narrow letters, that works well on almost every site.",
+    "fontFamily": "Helvetica",
+    "fontWeight": "bold"
+},{
+    "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
+    "fontSize": "16px",
+    "color": "#000",
+    "text": "Helvetica Light is an easy-to-read font, with tall and narrow letters, that works well on almost every site.",
+    "fontFamily": "Helvetica",
+    "fontStyle": "italic"
+},{
+	"type": "image",
+	"width": "300px",
+	"height": "300px",
+	"border": "1px solid #c6c3af",
+	"bgImage": "url(./img/bar-chart.png)"
+},{
+	"type": "image",
+	"width": "300px",
+	"height": "300px",
+	"border": "1px solid #c6c3af",
+	"bgImage": "url(./img/team-work.png)"
+},{
+    "type": "image",
+    "width": "150px",
+    "height": "150px",
+    "border": "1px solid #c6c3af",
+    "bgImage": "url(./img/letter.png)"
+},{
+    "type": "image",
+    "width": "150px",
+    "height": "150px",
+    "border": "1px solid #c6c3af",
+    "bgImage": "url(./img/web-programming.png)"
+},{
+    "type": "icon",
+    "width": "30px",
+    "height": "30px",
+    "icon": "url(./img/social/facebook.svg)",
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><path d='M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z'/></svg>",
+    "link": "https://www.facebook.com"
+},{
+    "type": "icon",
+    "width": "30px",
+    "height": "30px",
+    "icon": "url(./img/social/twitter.svg)",
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><path d='M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-48.9 158.8c.2 2.8.2 5.7.2 8.5 0 86.7-66 186.6-186.6 186.6-37.2 0-71.7-10.8-100.7-29.4 5.3.6 10.4.8 15.8.8 30.7 0 58.9-10.4 81.4-28-28.8-.6-53-19.5-61.3-45.5 10.1 1.5 19.2 1.5 29.6-1.2-30-6.1-52.5-32.5-52.5-64.4v-.8c8.7 4.9 18.9 7.9 29.6 8.3a65.447 65.447 0 0 1-29.2-54.6c0-12.2 3.2-23.4 8.9-33.1 32.3 39.8 80.8 65.8 135.2 68.6-9.3-44.5 24-80.6 64-80.6 18.9 0 35.9 7.9 47.9 20.7 14.8-2.8 29-8.3 41.6-15.8-4.9 15.2-15.2 28-28.8 36.1 13.2-1.4 26-5.1 37.8-10.2-8.9 13.1-20.1 24.7-32.9 34z'/></svg>",
+    "link": "https://www.twitter.com"
+},{
+    "type": "icon",
+    "width": "30px",
+    "height": "30px",
+    "icon": "url(./img/social/telegram.svg)",
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 496 512'><path d='M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z'/></svg>",
+    "link": "https://www.telegram.com"
+}]
+`
+
+const leftSidebarButton = document.querySelector('.left-sidebar__button');
+const leftSidebarMenu = document.querySelector('.left-sidebar__menu');
+const leftSidebarElements = document.querySelector(".left-sidebar__elements");
+
+leftSidebarButton.addEventListener('click', function () {
+    leftSidebarMenu.classList.toggle("leftSidebarMenu");
+});
+
+let jsonElements = JSON.parse(json);
+let blocksArray = [];
+let buttonsArray = [];
+let textArray = [];
+let imagesArray = [];
+let iconsArray = [];
+
+for (let jsonElement of jsonElements) {
+    const jsonElementType = jsonElement.type;
+    switch (true) {
+        case (jsonElementType == "block"): {
+            blocksArray.push(jsonElement);
+            break;
+        }
+        case (jsonElementType == "button"): {
+            buttonsArray.push(jsonElement)
+            break;
+        }
+        case (jsonElementType == "text"): {
+            textArray.push(jsonElement)
+            break;
+        }
+        case (jsonElementType == "image"): {
+            imagesArray.push(jsonElement)
+            break;
+        }
+        case (jsonElementType == "icon"): {
+            iconsArray.push(jsonElement)
+            break;
+        }
+    }
 }
-;
+
+// //отрисовываем элементы из json в меню
+// //переделано в отдельные функции для каждого типа блока
+// function drawCategories(elements) {
+//     let elementsContent = "";
+//     for (let element of elements) {
+//         elementsContent +=
+//             `<div class="element elementPreview"
+//             draggable="true"
+//             contenteditable="true"
+//             data-type="${element.type}"
+//             style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height}; color: ${element.color}; font-size: ${element.fontSize}; border: ${element.border}; bgImage: ${element.bgImage}; icon: ${element.icon}; link: ${element.link}; border-radius: ${element.borderRadius}; border-left: ${element.borderLeft}; border-right: ${element.borderRight}; border-bottom: ${element.borderBottom}; border-top: ${element.borderTop};
+//             ">` +
+//             ((element.text == undefined) ? `` : `"${element.text}"`) +
+//             `</div>`;
+//     }
+//     document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
+//     dragFromSidebar();
+// }
+
+let categories = document.querySelectorAll(".categories__button");
+for (let i = 0; i < categories.length; i++) {
+    categories[i].addEventListener('click', function (event) {
+        let target = event.target;
+        switch (true) {
+            case (target.classList.contains('left-sidebar__categories-block')): {
+                leftSidebarElements.classList.add('menuFlexStyle');
+                let elements = blocksArray;
+                let elementsContent = "";
+
+                for (let element of elements) {
+                    elementsContent +=
+                        `<div class="element elementPreview"
+                    draggable="true"
+                    tabindex="0" 
+                    data-type="${element.type}" style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height}; border: ${element.border}; bgImage: ${element.bgImage}; icon: ${element.icon}; border-radius: ${element.borderRadius}; border-left: ${element.borderLeft};border-right: ${element.borderRight}; border-bottom: ${element.borderBottom}; border-top: ${element.borderTop};
+                    "></div>`;
+                }
+
+                leftSidebarElements.innerHTML = elementsContent;
+                // dragFromSidebar();
+                break;
+            }
+            case (target.classList.contains('left-sidebar__categories-button')): {
+                leftSidebarElements.classList.add('menuFlexStyle');
+                let elements = buttonsArray;
+                let elementsContent = "";
+
+                for (let element of elements) {
+                    elementsContent +=
+                        `<div class="element elementPreview flexible"
+                        draggable="true" tabindex="0" data-type="${element.type}" style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height}; color: ${element.color}; font-size: ${element.fontSize}; border: ${element.border}; bgImage: ${element.bgImage}; icon: ${element.icon}; link: ${element.link}; border-radius: ${element.borderRadius}; border-left: ${element.borderLeft}; border-right: ${element.borderRight}; border-bottom: ${element.borderBottom}; border-top: ${element.borderTop}; font-family: ${element.fontFamily}; font-size: ${element.fontSize}; font-style: ${element.fontStyle}; font-weight: ${element.fontWeight};
+                        ">` +
+                        ((element.text !== undefined) ? `${element.text}` : (element.svg !== undefined) ? `${element.svg}` : '') +
+                        `</div>`;
+                }
+
+                leftSidebarElements.innerHTML = elementsContent;
+                // dragFromSidebar();
+                break;
+            }
+            case (target.classList.contains('left-sidebar__categories-text')): {
+                leftSidebarElements.classList.remove('menuFlexStyle');
+                let elements = textArray;
+                let elementsContent = "";
+
+                for (let element of elements) {
+                    elementsContent +=
+                        `<div class="element elementPreview"
+                        draggable="true" tabindex="0"
+                        data-type="${element.type}"
+                        data-textstyle="${element.textStyle}"
+                        style = "color: ${element.color}; font-size: ${element.fontSize}; font-family: ${element.fontFamily}; width: ${element.width}; font-weight: ${element.fontWeight}; font-style: ${element.fontStyle};">${element.text}</div>`;
+                }
+
+                leftSidebarElements.innerHTML = elementsContent;
+                // dragFromSidebar();
+                break;
+            }
+            case (target.classList.contains('left-sidebar__categories-image')): {
+                leftSidebarElements.classList.remove('menuFlexStyle');
+                let elements = imagesArray;
+                let elementsContent = "";
+                for (let element of elements) {
+                    elementsContent +=
+                        `<div class="element elementPreview" draggable="true" tabindex = "0" data-type="${element.type}" style="width: ${element.width}; height: ${element.height}; border: ${element.border}; background-image: ${element.bgImage};"></div>`;
+                }
+                leftSidebarElements.innerHTML = elementsContent;
+                // dragFromSidebar();
+                break;
+            }
+            case (target.classList.contains('left-sidebar__categories-icon')): {
+                leftSidebarElements.classList.add('menuFlexStyle');
+                let elements = iconsArray;
+                let elementsContent = "";
+                for (let element of elements) {
+                    elementsContent +=
+                        `<div class="element elementPreview"
+                        draggable="true" tabindex="0" data-type="${element.type}" style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height}; color: ${element.color}; font-size: ${element.fontSize}; border: ${element.border};link: ${element.link}; border-radius: ${element.borderRadius}; border-left: ${element.borderLeft}; border-right: ${element.borderRight}; border-bottom: ${element.borderBottom}; border-top: ${element.borderTop};
+                        ">${element.svg}</div>`;
+                }
+                leftSidebarElements.innerHTML = elementsContent;
+                // dragFromSidebar();
+                //  background-image: ${element.icon}; 
+                break;
+            }
+        }
+        dragAndDrop();
+    });
+};
+
+//при клике на элемент выводит его в body, где потом его можно переносить с dragndrop
+// let elementId = 0;
+
+// function dragFromSidebar() {
+// 	let newElements = document.querySelectorAll(".elementPreview");
+
+// 	for (let j = 0; j < newElements.length; j++) {
+// 		newElements[j].addEventListener('click', function (event) {
+// 			let target = event.target;
+// 			const newDiv = target.cloneNode(true);
+// 			elementId++;
+// 			newDiv.id = elementId; //чтобы обратиться по id
+// 			document.body.appendChild(newDiv);
+// 			newDiv.classList.remove("elementPreview");
+// 			newDiv.classList.add("elementMovable"); //новый класс, чтобы привязать dragndrop
+// 			newDiv.classList.add("flexible");
+// 		});
+// 	}
+// };;
 let templateIndCount = 0;
 const menuBlock = document.querySelector('.left-sidebar__elements');
 const templateBlock = document.querySelector('.template');
@@ -321,19 +770,27 @@ templateBlock.addEventListener('dragleave', dragLeave);
 templateBlock.addEventListener('drop', dragDrop, {
 	capture: true
 });
-document.querySelector('.save img').addEventListener('click', handleSaveClick);
+const elementsProps = {
+	templNameBtn: {
+		classes: ['btnForm', 'selectTemplateBtn'],
+	},
+	templateNameInput: {
+		classes: ['inputReg', 'templateNameInput'],
+		id: 'projectname',
+		placeholder: 'Название проекта',
+		type: 'text'
+	}
+}
+
 
 // --------------- render ---------------
-
+renderHeader();
 handleDocLoad();
 
 function handleDocLoad() {
-	console.log('load');
 	const email = userLoggedIn();
-	console.log(email);
 	if (isUserTemplateInLS(email)) {
-		const template = JSON.parse(localStorage.getItem(email));
-		renderPopup(template, 'open');
+		renderPopup('open');
 	}
 }
 
@@ -346,56 +803,192 @@ function isUserTemplateInLS(email) {
 	return (localStorage.getItem(email) !== null) ? true : false;
 }
 
-function renderPopup(template, action) {
+function renderHeader() {
+	renderSaveBtn();
+	renderListBtn();
+}
+
+function renderSaveBtn() {
+	const btn = document.createElement('div');
+	btn.classList.add('headerBtn', 'save');
+	btn.innerHTML = '<img src="./img/save.svg" alt="Save to Local Storage">'
+	document.querySelector('header').prepend(btn);
+	document.querySelector('.save').addEventListener('click', handleSaveClick);
+}
+
+function renderListBtn() {
+	const btn = document.createElement('div');
+	btn.classList.add('headerBtn', 'list');
+	btn.innerHTML = '<img src="./img/list.svg" alt="List of Projects">'
+	document.querySelector('header').prepend(btn);
+	document.querySelector('.list').addEventListener('click', handleListClick);
+}
+
+function renderProjBtn(action, el, i) {
+	console.log(el);
+	let selectTemplateBtn;
+	if (action === 'list') {
+		selectTemplateBtn = document.createElement('button');
+	} else {
+		selectTemplateBtn = document.createElement('button');
+	}
+	selectTemplateBtn.textContent = el.name;
+	selectTemplateBtn.classList.add('btnForm', 'selectTemplateBtn');
+	selectTemplateBtn.dataset.id = i;
+	selectTemplateBtn.dataset.action = action;
+	document.querySelector('#windowSelectTemplate > .popup__form').append(selectTemplateBtn);
+	selectTemplateBtn.addEventListener('click', selectTemplate);
+}
+
+function selectTemplate(e) {
+	e.preventDefault();
+	const email = userLoggedIn();
+	const template = JSON.parse(localStorage.getItem(email));
+	if (e.target.dataset.action === 'open') {
+		renderHtmlById(e.target.dataset.id, template);
+		handleTemplateLoad();
+	} else if (e.target.dataset.action === 'save') {
+		saveTemplateAs(e.target.dataset.id);
+	} else if (e.target.dataset.action === 'list') {
+		renderHtmlById(e.target.dataset.id, template);
+		handleTemplateLoad();
+	}
+	showPopup('none');
+}
+
+function renderPopup(action) {
 	const popupSelectTemplate = document.querySelector('#windowSelectTemplate > .popup__form');
 	popupSelectTemplate.innerHTML = '';
-	template.forEach((el, i) => {
-		let selectTemplateBtn = document.createElement('button');
-		selectTemplateBtn.textContent = el.name;
-		selectTemplateBtn.classList.add('btnForm');
-		selectTemplateBtn.dataset.id = i;
-		popupSelectTemplate.append(selectTemplateBtn);
-		selectTemplateBtn.addEventListener('click', {
-			handleEvent: selectTemplate,
-			arr: template,
-			action: action
-		});
-	});
+	const email = userLoggedIn();
+	if (isUserTemplateInLS(email)) {
+		const template = JSON.parse(localStorage.getItem(email));
+		try {
+			template.forEach((el, i) => {
+				renderProjBtn(action, el, i);
+			});
+		} catch (e) {
+			renderProjBtn(action, template, 0);
+		}
+	}
+	let title;
 	if (action === 'open') {
-		let title = document.createElement('h2');
-		title.innerHTML = 'Выберите проект';
+		title = renderTitle('Выберите проект');
 		popupSelectTemplate.prepend(title);
 		addEmptyTemplateBtn(popupSelectTemplate);
 	} else if (action === 'save') {
-		let title = document.createElement('h2');
-		title.innerHTML = 'Сохранить под именем:';
-		popupSelectTemplate.prepend(title);
-		console.log('save');
+		if (isUserTemplateInLS(email)) {
+			title = renderTitle('Сохранить под именем:')
+			popupSelectTemplate.prepend(title);
+		}
 		addNewTemplateInput(popupSelectTemplate);
+	} else if (action === 'list') {
+		console.log('list');
+		if (isUserTemplateInLS(email)) {
+			title = renderTitle('Мои проекты');
+			renderEditIcons();
+		} else {
+			title = renderTitle('Вы пока не сохранили ни одного проекта');
+		}
+		popupSelectTemplate.prepend(title);
 	}
 	showPopup('block');
 }
-// function openTemplate(e) {
-// 	templateBlock.innerHTML = this.arr.html;
-// 	handleTemplateLoad();
-// }
+
+function renderEditIcons() {
+	const buttons = document.querySelectorAll('.selectTemplateBtn');
+	buttons.forEach((el) => {
+		const wrapper = document.createElement('div');
+		wrapper.classList.add('popup__form--wrapper');
+		wrapper.dataset.id = el.dataset.id;
+		el.before(wrapper);
+		wrapper.append(el);
+		renderIcon('change-name', wrapper, el);
+		renderIcon('delete', wrapper, el);
+	});
+	const icons = document.querySelectorAll('.btnForm--icon');
+	icons.forEach(icon => {
+		if (icon.dataset.type === 'change-name') {
+			icon.addEventListener('click', handleChangeNameClick);
+		} else if (icon.dataset.type === 'delete') {
+			icon.addEventListener('click', handleDeleteClick);
+		}
+	})
+}
+
+function handleChangeNameClick(e) {
+	let id;
+	let node;
+	if (e.target.tagName === 'IMG') {
+		id = e.target.parentNode.dataset.id;
+		node = e.target.parentNode;
+		e.target.src = "./img/save.svg";
+	} else {
+		id = e.target.dataset.id;
+		node = e.target;
+		e.target.childNodes[0].src = "./img/save.svg";
+	}
+	node.removeEventListener('click', handleChangeNameClick);
+	node.addEventListener('click', saveChangedName);
+	const nameBtn = document.querySelector(`.selectTemplateBtn[data-id="${id}"]`);
+	nameBtn.removeEventListener('click', selectTemplate);
+	nameBtn.contentEditable = true;
+	nameBtn.focus();
+}
+
+function handleDeleteClick(e) {
+	e.preventDefault();
+	let id;
+	if (e.target.tagName === 'IMG') {
+		id = e.target.parentNode.dataset.id;
+	} else {
+		id = e.target.dataset.id;
+	}
+	const wrapper = document.querySelector(`div[data-id="${id}"]`);
+	deleteTemplateFromLS(id);
+	wrapper.remove();
+}
+
+function deleteTemplateFromLS(id) {
+	const email = userLoggedIn();
+	const template = JSON.parse(localStorage.getItem(email));
+	template.splice(id, 1);
+	localStorage.setItem(email, JSON.stringify(template));
+}
+
+function renderIcon(src, block, el) {
+	let newEl = document.createElement('div');
+	newEl.classList.add('btnForm', 'btnForm--icon');
+	newEl.dataset.id = el.dataset.id;
+	newEl.dataset.type = src;
+	newEl.innerHTML = `<img src="./img/${src}.svg" alt="icon">`;
+	block.append(newEl);
+}
+
+function renderTitle(title) {
+	let titleEl = document.createElement('h2');
+	titleEl.innerHTML = title;
+	return titleEl;
+}
+
 function addEmptyTemplateBtn(target) {
 	const emptyTemplateBtn = document.createElement('button');
 	emptyTemplateBtn.textContent = 'Создать новый проект';
 	emptyTemplateBtn.classList.add('btnForm');
 	target.append(emptyTemplateBtn);
-	emptyTemplateBtn.addEventListener('click', openEmptyProject)
+	emptyTemplateBtn.addEventListener('click', openEmptyProject);
 }
 
 function addNewTemplateInput(target) {
-	let title = document.createElement('h2');
-	title.innerHTML = 'Новый проект:';
+	let title = renderTitle('Новый проект:');
 	target.append(title);
 	const inputTemplateName = document.createElement('input');
-	inputTemplateName.id = 'projectname';
-	inputTemplateName.placeholder = 'Название проекта';
-	inputTemplateName.type = 'text';
-	inputTemplateName.classList.add('inputReg');
+	const inputProps = elementsProps.templateNameInput;
+	inputProps.classes.forEach(el => {
+		inputTemplateName.classList.add(el);
+	});
+	inputTemplateName.id = inputProps.id;
+	inputTemplateName.placeholder = inputProps.placeholder;
+	inputTemplateName.type = inputProps.type;
 	target.append(inputTemplateName);
 	const newNameSaveBtn = document.createElement('button');
 	newNameSaveBtn.textContent = 'Сохранить';
@@ -404,10 +997,29 @@ function addNewTemplateInput(target) {
 	newNameSaveBtn.addEventListener('click', saveNewTemplate)
 }
 
+function openEmptyProject() {
+	showPopup('none');
+}
+
+function showPopup(state) {
+	document.getElementById('windowSelectTemplate').style.display = state;
+	document.getElementById('grayBackground').style.display = state;
+}
+
+// --------------- save and load from LS ---------------
+function handleListClick() {
+	renderPopup('list');
+}
+
+function handleSaveClick(e) {
+	const email = userLoggedIn();
+	console.log(email);
+	renderPopup('save');
+}
+
 function saveNewTemplate(e) {
 	const email = userLoggedIn();
 	const projName = document.querySelector('#projectname').value;
-	console.log(projName);
 	const projHtml = templateBlock.innerHTML;
 	const templateObj = {
 		name: projName,
@@ -429,30 +1041,6 @@ function saveNewTemplate(e) {
 	showPopup('none');
 }
 
-function openEmptyProject() {
-	showPopup('none');
-}
-
-// function renderTemplate() {
-// 	// const email = localStorage.getItem('email');
-// 	const template = JSON.parse(localStorage.getItem(email));
-// 	if (template !== null) {
-// 		if (template.length > 1) {
-// 			renderPopup(template);
-// 		} else {
-// 			templateBlock.innerHTML = template.html;
-// 			handleTemplateLoad();
-// 		}
-// 	}
-// }
-
-function showPopup(state) {
-	document.getElementById('windowSelectTemplate').style.display = state;
-	document.getElementById('grayBackground').style.display = state;
-}
-
-// --------------- save and load from LS ---------------
-
 function handleTemplateLoad() {
 	const elements = getTemplateElements();
 	elements.forEach(el => {
@@ -464,32 +1052,70 @@ function getTemplateElements() {
 	return document.querySelectorAll('.template__element');
 }
 
-function selectTemplate(e) {
-	if (this.action === 'open') {
-		renderHtmlById(e.target.dataset.id, this.arr);
-		handleTemplateLoad();
-	} else if (this.action === 'save') {
-
+function saveChangedName(e) {
+	console.log('save as');
+	let id;
+	let node;
+	if (e.target.tagName === 'IMG') {
+		id = e.target.parentNode.dataset.id;
+		node = e.target.parentNode;
+		e.target.src = "./img/change-name.svg";
+	} else {
+		id = e.target.dataset.id;
+		node = e.target;
+		node.childNodes[0].src = "./img/change-name.svg";
 	}
-	showPopup('none');
+	const nameBtn = document.querySelector(`.selectTemplateBtn[data-id="${id}"]`);
+	newName = nameBtn.innerHTML.replace('<br>', '');
+	console.log(newName);
+	const email = userLoggedIn();
+	const template = JSON.parse(localStorage.getItem(email));
+	if (template.length > 1) {
+		template[id].name = newName;
+	} else {
+		template.name = newName;
+	}
+	localStorage.removeItem(email);
+	localStorage.setItem(email, JSON.stringify(template));
+	console.log(JSON.parse(localStorage.getItem(email))[id]);
+	nameBtn.addEventListener('click', selectTemplate);
+	nameBtn.contentEditable = false;
+	nameBtn.blur();
+	node.removeEventListener('click', saveChangedName);
+	node.addEventListener('click', handleChangeNameClick);
+}
+
+function saveTemplateAs(id) {
+	const email = userLoggedIn();
+	const projHtml = templateBlock.innerHTML;
+	const template = JSON.parse(localStorage.getItem(email));
+	if (template.length > 1) {
+		template[id].html = projHtml;
+	} else {
+		template.html = projHtml;
+	}
+	localStorage.setItem(email, JSON.stringify(template));
 }
 
 function renderHtmlById(htmlId, template) {
-	html = template[htmlId].html;
+	let name;
+	if (template.length > 1) {
+		html = template[htmlId].html;
+		name = template[htmlId].name;
+	} else {
+		html = template.html;
+		name = template.name;
+	}
+	addTitleToHeader(name);
+
 	templateBlock.innerHTML = html;
 }
-// ------------------ save -------------------------
 
-function handleSaveClick(e) {
-	const email = userLoggedIn();
-	if (isUserTemplateInLS(email)) {
-		const template = JSON.parse(localStorage.getItem(email));
-		renderPopup(template, 'save');
-	} else {
-		showIn('block');
-	}
+function addTitleToHeader(name) {
+	document.querySelector('header').innerHTML += `<div class="header__title">${name}</div>`;
+	document.querySelector('.list').addEventListener('click', handleListClick);
+	document.querySelector('.save').addEventListener('click', handleSaveClick);
 }
-
 // ----------------- drag and drop -----------------
 
 let templateFlag = false;
@@ -538,7 +1164,7 @@ function dragDrop(e) {
 	e.preventDefault();
 	if (!e.target.isSameNode(movingElement)) {
 		this.append(movingElement);
-		movingElement.classList.remove('element');
+		movingElement.classList.remove('element', 'elementPreview');
 		movingElement.classList.add('template__element');
 		addListenersForNewElement(movingElement);
 		if (!templateFlag) {
@@ -565,8 +1191,7 @@ function createNewElement(e, movingElement) {
 			case 'text':
 				movingElement.style.width = '';
 				const textStyleClassName = movingElement.dataset.textstyle;
-				movingElement.classList.add(textStyleClassName);
-				movingElement.classList.add('template__text');
+				movingElement.classList.add(textStyleClassName, 'template__text');
 				break;
 			case 'image':
 				movingElement.classList.add('template__image');
@@ -601,9 +1226,10 @@ function getTemplateFlag(e) {
 }
 
 function setPosition(e) {
+	const scroll = document.scrollingElement.scrollTop;
 	offParTop = e.target.offsetParent.offsetTop;
 	offParLeft = e.target.offsetParent.offsetLeft;
-	movingElement.style.top = e.clientY - elementY - offParTop + 'px';
+	movingElement.style.top = e.clientY - elementY - offParTop + scroll + 'px';
 	movingElement.style.left = e.clientX - elementX - offParLeft + 'px';
 }
 
@@ -613,28 +1239,43 @@ function getPosition(e) {
 }
 
 // -------------- editing handlers -------------------
+function getTarget(e) {
+	let node;
+	if (e.target.tagName === 'path') {
+		node = e.target.parentNode.parentNode;
+	} else if (e.target.tagName === 'svg') {
+		node = e.target.parentNode;
+	} else {
+		node = e.target;
+	}
+	return node;
+}
 
 function handleClick(e) {
-	e.target.classList.add('selected');
-	e.target.focus();
-	e.target.addEventListener('keydown', handleKeyDown);
+	let target = getTarget(e);
+	target.classList.add('selected');
+	target.focus();
+	target.addEventListener('keydown', handleKeyDown);
+	// node.addEventListener('focusout', handleFocusOut);
 }
 
 function handleDoubleClick(e) {
-	e.target.contentEditable = true;
-	e.target.removeEventListener('click', handleClick);
-	e.target.removeEventListener('keydown', handleKeyDown);
-	e.target.classList.add('selected');
-	if (e.target.dataset.type === 'text') {
-		e.target.style.height = 'auto';
+	let target = getTarget(e);
+	target.contentEditable = true;
+	target.removeEventListener('click', handleClick);
+	target.removeEventListener('keydown', handleKeyDown);
+	target.classList.add('selected');
+	if (target.dataset.type === 'text') {
+		target.style.height = 'auto';
 	}
 }
 
 function handleFocusOut(e) {
+	let target = getTarget(e);
 	window.getSelection().removeAllRanges();
-	e.target.contentEditable = false;
-	e.target.classList.remove('selected');
-	e.target.addEventListener('click', handleClick);
+	target.contentEditable = false;
+	target.classList.remove('selected');
+	target.addEventListener('click', handleClick);
 }
 
 function handleKeyDown(e) {
