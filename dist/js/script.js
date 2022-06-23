@@ -1,25 +1,192 @@
+document.addEventListener("DOMContentLoaded", function (event) {
+    let login = localStorage.getItem('login');
+    let firstName = localStorage.getItem('firstname');
+    if (login != null) {
+        document.getElementById('wrapper__button').innerHTML = `
+        <div>Привет, ${firstName}!</div>
+        <button id="buttonOut" onclick="outUser()" class="regButton">Выйти</button>`
+    }
+})
+
+let errors = [];
+
+function showReg(state) {
+    errors = [];
+    document.getElementById('windowReg').style.display = state;
+    document.getElementById('gray').style.display = state;
+}
+
+function showIn(state) {
+    document.getElementById('windowIn').style.display = state;
+    document.getElementById('gray2').style.display = state;
+    let email = localStorage.getItem('email');
+    let password = localStorage.getItem('pass');
+    if (email != null) {
+        document.querySelector('#email__in').value = email;
+    }
+    if (email != null) {
+        document.querySelector('#pass__in').value = password;
+    }
+}
+
+function checkValidity(input) {
+    let validity = input.validity;
+    console.log(validity.valueMissing);
+
+    if (validity.valueMissing) {
+        errors.push('Поле ' + input.placeholder + ' не заполнено');
+    }
+    if (validity.patternMismatch) {
+        errors.push('Не верный формат заполнения e-mail');
+    }
+    return errors;
+}
+
+function checkPassword() {
+    let password = document.querySelector('#pass1').value;
+    let password2 = document.querySelector('#pass2').value;
+    console.log(password);
+    if (password != null) {
+        if (password.length < 4) {
+            errors.push('Минимальное значение пароля не может быть меньше, чем 4');
+        }
+        if (password.length > 10) {
+            errors.push('Максимальное значение пароля не может быть больше, чем 10');
+        }
+        if (password.search(/[a-z]/) === -1) {
+            errors.push('Пароль должен содержать минимум одну прописную букву');
+        }
+        if (password.search(/[A-Z]/) === -1) {
+            errors.push('Пароль должен содержать минимум одну заглавную букву');
+        }
+        if (password.search(/[0123456789]/) === -1) {
+            errors.push('Пароль должен содержать минимум одну цифру');
+        }
+        if (password != password2) {
+            errors.push('Пароль не совпадает!');
+        }
+    }
+    return errors;
+}
+
+function pushReg() {
+    let inputs = document.querySelectorAll(".inputReg");
+    console.log(inputs);
+    for (let input of inputs) {
+        checkValidity(input);
+    }
+
+    checkPassword();
+
+    if (errors == false) {
+        saveData();
+    } else {
+        document.getElementById("error").innerHTML = errors.join('.<br>');
+        errors = [];
+    }
+    document.querySelector('form').addEventListener('submit', (e) => e.preventDefault())
+
+}
+
+function saveData() {
+    let firstName = document.querySelector('#firstname').value;
+    let lastName = document.querySelector('#lastname').value;
+    let email = document.querySelector('#email').value;
+    let password = document.querySelector('#pass1').value;
+    let password2 = document.querySelector('#pass2').value;
+    console.log(password, password2);
+    document.querySelector('.error').innerHTML = '';
+
+    if (localStorage.getItem('firstName') == null) {
+        localStorage.setItem('firstname', firstName);
+    }
+    if (localStorage.getItem('lastname') == null) {
+        localStorage.setItem('lastname', lastName);
+    }
+    if (localStorage.getItem('email') == null) {
+        localStorage.setItem('email', email);
+    }
+    if (localStorage.getItem('pass') == null) {
+        localStorage.setItem('pass', password2);
+    }
+
+    localStorage.setItem('login', true);
+    document.getElementById('windowReg').style.display = "none";
+    document.getElementById('gray').style.display = "none";
+    document.querySelector('form').addEventListener('submit', (e) => e.preventDefault())
+    document.getElementById('wrapper__button').innerHTML = `<div>Привет, ${firstName}!</div><button id="buttonOut" onclick="outUser()" class="regButton">Выйти</button>`
+}
+
+function getIn() {
+    document.querySelector('#inForm').addEventListener('submit', (e) => e.preventDefault())
+    document.getElementById('windowIn').style.display = "none";
+    document.getElementById('gray2').style.display = "none";
+    document.getElementById('wrapper__button').innerHTML = `<div>Привет, ${localStorage.getItem('firstname')}!</div><button id="buttonOut" onclick="outUser()" class="regButton">Выйти</button>`
+    localStorage.setItem('login', true);
+}
+
+function outUser() {
+    document.getElementById('wrapper__button').innerHTML = `<button id="buttonReg" onclick="showReg('block')" class="regButton">Регистрация</button>
+    <button id="buttonIn" onclick="showIn('block')" class="regButton">Войти</button>`
+    localStorage.removeItem('login');
+};
 let json = `[{
     "type": "block",
     "width": "100%",
     "height": "80px",
-    "bgColor": "grey"
+    "bgColor": "#DCDCDC"
 },{
     "type": "block",
-    "width": "80px",
+    "width": "100%",
     "height": "80px",
-    "bgColor": "grey",
-    "borderRadius": "50%"
+    "bgColor": "#fff973dd"
+},{
+    "type": "block",
+    "width": "100%",
+    "height": "500px",
+    "bgColor": "#FFE4E1"
+},{
+    "type": "block",
+    "width": "100%",
+    "height": "500px",
+    "bgColor": "#DCDCDC"
+},{
+    "type": "block",
+    "width": "100%",
+    "height": "100px",
+    "bgColor": "#fff973dd"
+},{
+    "type": "block",
+    "width": "100%",
+    "height": "100px",
+    "bgColor": "#FFE4E1"
+},{
+    "type": "block",
+    "width": "100%",
+    "height": "80px",
+    "bgColor": "#F0FFF0"
+}, {
+	"type": "block",
+	"width": "100%",
+	"height": "500px",
+	"bgColor": "#FFFFF0"
+},{
+	"type": "block",
+	"width": "100%",
+	"height": "150px",
+	"bgColor": "#c6c3af",
+	"borderRadius": "40px"
 },{
     "type": "block",
     "width": "100px",
     "height": "100px",
     "border": "thick solid grey"
 },{
-    "type": "block",
-    "width": "100%",
-    "height": "500px",
-    "bgColor": "#c6c3af",
-    "borderRadius": "40px"
+	"type": "block",
+	"width": "80px",
+	"height": "80px",
+	"bgColor": "grey",
+	"borderRadius": "50%"
 },{
     "type": "block",
     "width": "100px",
@@ -31,6 +198,20 @@ let json = `[{
     "width": "100%",
     "height": "100px",
     "bgColor": "pink"
+},{
+	"type": "button",
+	"width": "150px",
+	"height": "30px",
+	"bgColor": "#fff973",
+	"color": "black",
+	"text": "Кнопка"
+},{
+	"type": "button",
+	"width": "150px",
+	"height": "30px",
+	"bgColor": "#c6c3af",
+	"color": "black",
+	"text": "Кнопка"
 },{
     "type": "button",
     "width": "150px",
@@ -215,61 +396,137 @@ let json = `[{
     "fontFamily": "Franklin Gothic Medium",
     "fontSize": "16px"
 },{
+    "type": "button",
+    "width": "40px",
+    "height": "40px",
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d='M256 112c-48.6 0-88 39.4-88 88C168 248.6 207.4 288 256 288s88-39.4 88-88C344 151.4 304.6 112 256 112zM256 240c-22.06 0-40-17.95-40-40C216 177.9 233.9 160 256 160s40 17.94 40 40C296 222.1 278.1 240 256 240zM256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-46.73 0-89.76-15.68-124.5-41.79C148.8 389 182.4 368 220.2 368h71.69c37.75 0 71.31 21.01 88.68 54.21C345.8 448.3 302.7 464 256 464zM416.2 388.5C389.2 346.3 343.2 320 291.8 320H220.2c-51.36 0-97.35 26.25-124.4 68.48C65.96 352.5 48 306.3 48 256c0-114.7 93.31-208 208-208s208 93.31 208 208C464 306.3 446 352.5 416.2 388.5z' fill='#401a49'/></svg>"
+}, {
+    "type": "button",
+    "width": "48px",
+    "height": "48px",
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' height='48' width='48'><path d='M6 36V33H42V36ZM6 25.5V22.5H42V25.5ZM6 15V12H42V15Z' fill='#401a49'/></svg>"
+}, {
+    "type": "button",
+    "width": "48px",
+    "height": "48px",
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' height='48' width='48'><path d='M24 32.35 14.35 22.7 16.5 20.55 22.5 26.55V8H25.5V26.55L31.5 20.55L33.65 22.7ZM11 40Q9.8 40 8.9 39.1Q8 38.2 8 37V29.85H11V37Q11 37 11 37Q11 37 11 37H37Q37 37 37 37Q37 37 37 37V29.85H40V37Q40 38.2 39.1 39.1Q38.2 40 37 40Z' fill='#401a49'/></svg>"
+}, {
+    "type": "button",
+    "width": "48px",
+    "height": "48px",
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' height='48' width='48'><path d='M23 33.5H25.25V25.3H33.5V23H25.25V14.5H23V23H14.5V25.3H23ZM24 43Q20 43 16.525 41.55Q13.05 40.1 10.475 37.525Q7.9 34.95 6.45 31.475Q5 28 5 24Q5 20 6.45 16.55Q7.9 13.1 10.475 10.525Q13.05 7.95 16.525 6.475Q20 5 24 5Q28 5 31.45 6.475Q34.9 7.95 37.475 10.525Q40.05 13.1 41.525 16.55Q43 20 43 24Q43 28 41.525 31.475Q40.05 34.95 37.475 37.525Q34.9 40.1 31.45 41.55Q28 43 24 43ZM24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24ZM24 40.75Q30.9 40.75 35.825 35.825Q40.75 30.9 40.75 24Q40.75 17.1 35.825 12.175Q30.9 7.25 24 7.25Q17.1 7.25 12.175 12.175Q7.25 17.1 7.25 24Q7.25 30.9 12.175 35.825Q17.1 40.75 24 40.75Z' fill='#401a49'/></svg>"
+}, {
+	"type": "text",
+	"textStyle": "header_h1",
+	"width": "150px",
+	"height": "30px",
+	"fontSize": "29px",
+	"color": "#000",
+	"text": "Название",
+	"fontFamily": "Verdana"
+},{
     "type": "text",
+    "textStyle": "header_h2",
+    "width": "150px",
+    "height": "30px",
+    "fontSize": "26px",
+    "color": "#000",
+    "text": "Заголовок",
+    "fontFamily": "Verdana"
+},{
+	"type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
+	"fontSize": "14px",
+	"color": "#000",
+	"text": "Ваш текст будет написан в этом блоке"
+},{
+    "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
     "fontSize": "20px",
     "color": "#000",
     "text": "Arial",
     "fontFamily": "Arial"
 },{
     "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
     "fontSize": "20px",
     "color": "#000",
     "text": "Times New Roman",
     "fontFamily": "Times New Roman"
 },{
     "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
     "fontSize": "20px",
     "color": "#000",
     "text": "Courier New",
     "fontFamily": "Courier New"
 },{
     "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
     "fontSize": "20px",
     "color": "#000",
     "text": "Verdana",
     "fontFamily": "Verdana"
 },{
     "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
     "fontSize": "20px",
     "color": "#000",
     "text": "Trebuchet MS",
     "fontFamily": "Trebuchet MS"
 },{
     "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
     "fontSize": "20px",
     "color": "#000",
     "text": "Cambria",
     "fontFamily": "Cambria"
 },{
     "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
     "fontSize": "20px",
     "color": "#000",
     "text": "Franklin Gothic Medium",
     "fontFamily": "Franklin Gothic Medium"
 },{
     "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
     "fontSize": "20px",
     "color": "#000",
     "text": "Helvetica",
     "fontFamily": "Helvetica"
 },{
     "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
     "fontSize": "16px",
     "color": "#000",
     "text": "Helvetica Light is an easy-to-read font, with tall and narrow letters, that works well on almost every site.",
     "fontFamily": "Helvetica"
 },{
     "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
     "fontSize": "16px",
     "color": "#000",
     "text": "Helvetica Light is an easy-to-read font, with tall and narrow letters, that works well on almost every site.",
@@ -277,38 +534,61 @@ let json = `[{
     "fontWeight": "bold"
 },{
     "type": "text",
+	"textStyle": "simple_text",
+	"width": "150px",
+	"height": "30px",
     "fontSize": "16px",
     "color": "#000",
     "text": "Helvetica Light is an easy-to-read font, with tall and narrow letters, that works well on almost every site.",
     "fontFamily": "Helvetica",
     "fontStyle": "italic"
 },{
-    "type": "image",
-    "width": "150px",
-    "height": "150px",
-    "border": "1px solid #c6c3af",
-    "bgImage": "url(./img/work-together.jpg) "
+	"type": "image",
+	"width": "300px",
+	"height": "300px",
+	"border": "1px solid #c6c3af",
+	"bgImage": "url(./img/bar-chart.png)"
+},{
+	"type": "image",
+	"width": "300px",
+	"height": "300px",
+	"border": "1px solid #c6c3af",
+	"bgImage": "url(./img/team-work.png)"
 },{
     "type": "image",
     "width": "150px",
     "height": "150px",
     "border": "1px solid #c6c3af",
-    "bgImage": "url(./img/work-together.jpg) "
+    "bgImage": "url(./img/letter.png)"
+},{
+    "type": "image",
+    "width": "150px",
+    "height": "150px",
+    "border": "1px solid #c6c3af",
+    "bgImage": "url(./img/web-programming.png)"
 },{
     "type": "icon",
-    "width": "24px",
-    "height": "24px",
-    "border": "1px solid #c6c3af",
+    "width": "30px",
+    "height": "30px",
     "icon": "url(./img/social/facebook.svg)",
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><path d='M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z'/></svg>",
     "link": "https://www.facebook.com"
 },{
     "type": "icon",
-    "width": "24px",
-    "height": "24px",
-    "border": "1px solid #c6c3af",
-    "icon": "url(./img/social/facebook.svg)",
-    "link": "https://www.facebook.com"
-}]`
+    "width": "30px",
+    "height": "30px",
+    "icon": "url(./img/social/twitter.svg)",
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><path d='M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-48.9 158.8c.2 2.8.2 5.7.2 8.5 0 86.7-66 186.6-186.6 186.6-37.2 0-71.7-10.8-100.7-29.4 5.3.6 10.4.8 15.8.8 30.7 0 58.9-10.4 81.4-28-28.8-.6-53-19.5-61.3-45.5 10.1 1.5 19.2 1.5 29.6-1.2-30-6.1-52.5-32.5-52.5-64.4v-.8c8.7 4.9 18.9 7.9 29.6 8.3a65.447 65.447 0 0 1-29.2-54.6c0-12.2 3.2-23.4 8.9-33.1 32.3 39.8 80.8 65.8 135.2 68.6-9.3-44.5 24-80.6 64-80.6 18.9 0 35.9 7.9 47.9 20.7 14.8-2.8 29-8.3 41.6-15.8-4.9 15.2-15.2 28-28.8 36.1 13.2-1.4 26-5.1 37.8-10.2-8.9 13.1-20.1 24.7-32.9 34z'/></svg>",
+    "link": "https://www.twitter.com"
+},{
+    "type": "icon",
+    "width": "30px",
+    "height": "30px",
+    "icon": "url(./img/social/telegram.svg)",
+    "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 496 512'><path d='M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z'/></svg>",
+    "link": "https://www.telegram.com"
+}]
+`
 
 const leftSidebarButton = document.querySelector('.left-sidebar__button');
 const leftSidebarMenu = document.querySelector('.left-sidebar__menu');
@@ -374,7 +654,6 @@ let categories = document.querySelectorAll(".categories__button");
 for (let i = 0; i < categories.length; i++) {
     categories[i].addEventListener('click', function (event) {
         let target = event.target;
-
         switch (true) {
             case (target.classList.contains('left-sidebar__categories-block')): {
                 leftSidebarElements.classList.add('menuFlexStyle');
@@ -385,12 +664,13 @@ for (let i = 0; i < categories.length; i++) {
                     elementsContent +=
                         `<div class="element elementPreview"
                     draggable="true"
+                    tabindex="0" 
                     data-type="${element.type}" style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height}; border: ${element.border}; bgImage: ${element.bgImage}; icon: ${element.icon}; border-radius: ${element.borderRadius}; border-left: ${element.borderLeft};border-right: ${element.borderRight}; border-bottom: ${element.borderBottom}; border-top: ${element.borderTop};
                     "></div>`;
                 }
 
                 leftSidebarElements.innerHTML = elementsContent;
-                dragFromSidebar();
+                // dragFromSidebar();
                 break;
             }
             case (target.classList.contains('left-sidebar__categories-button')): {
@@ -401,17 +681,14 @@ for (let i = 0; i < categories.length; i++) {
                 for (let element of elements) {
                     elementsContent +=
                         `<div class="element elementPreview flexible"
-                        draggable="true"
-                        contenteditable="true"
-                        data-type="${element.type}"
-                        style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height}; color: ${element.color}; font-size: ${element.fontSize}; border: ${element.border}; bgImage: ${element.bgImage}; icon: ${element.icon}; link: ${element.link}; border-radius: ${element.borderRadius}; border-left: ${element.borderLeft}; border-right: ${element.borderRight}; border-bottom: ${element.borderBottom}; border-top: ${element.borderTop}; font-family: ${element.fontFamily}; font-size: ${element.fontSize}; font-style: ${element.fontStyle}; font-weight: ${element.fontWeight};
+                        draggable="true" tabindex="0" data-type="${element.type}" style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height}; color: ${element.color}; font-size: ${element.fontSize}; border: ${element.border}; bgImage: ${element.bgImage}; icon: ${element.icon}; link: ${element.link}; border-radius: ${element.borderRadius}; border-left: ${element.borderLeft}; border-right: ${element.borderRight}; border-bottom: ${element.borderBottom}; border-top: ${element.borderTop}; font-family: ${element.fontFamily}; font-size: ${element.fontSize}; font-style: ${element.fontStyle}; font-weight: ${element.fontWeight};
                         ">` +
-                        ((element.text == undefined) ? `` : `${element.text}`) +
+                        ((element.text !== undefined) ? `${element.text}` : (element.svg !== undefined) ? `${element.svg}` : '') +
                         `</div>`;
                 }
 
                 leftSidebarElements.innerHTML = elementsContent;
-                dragFromSidebar();
+                // dragFromSidebar();
                 break;
             }
             case (target.classList.contains('left-sidebar__categories-text')): {
@@ -422,31 +699,26 @@ for (let i = 0; i < categories.length; i++) {
                 for (let element of elements) {
                     elementsContent +=
                         `<div class="element elementPreview"
-                        draggable="true"
-                        contenteditable="true"
+                        draggable="true" tabindex="0"
                         data-type="${element.type}"
-                        style="color: ${element.color}; font-size: ${element.fontSize}; font-family: ${element.fontFamily}; font-weight: ${element.fontWeight}; font-style: ${element.fontStyle};
-                        ">` + `${element.text}` + `</div>`;
+                        data-textstyle="${element.textStyle}"
+                        style = "color: ${element.color}; font-size: ${element.fontSize}; font-family: ${element.fontFamily}; width: ${element.width}; font-weight: ${element.fontWeight}; font-style: ${element.fontStyle};">${element.text}</div>`;
                 }
 
                 leftSidebarElements.innerHTML = elementsContent;
-                dragFromSidebar();
+                // dragFromSidebar();
                 break;
             }
             case (target.classList.contains('left-sidebar__categories-image')): {
-                leftSidebarElements.classList.add('menuFlexStyle');
+                leftSidebarElements.classList.remove('menuFlexStyle');
                 let elements = imagesArray;
                 let elementsContent = "";
                 for (let element of elements) {
                     elementsContent +=
-                        `<div class="element elementPreview"
-                        draggable="true"
-                        data-type="${element.type}"
-                        style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height}; border: ${element.border}; bgImage: ${element.bgImage}; link: ${element.link}; border-radius: ${element.borderRadius}; border-left: ${element.borderLeft}; border-right: ${element.borderRight}; border-bottom: ${element.borderBottom}; border-top: ${element.borderTop};
-                        "></div>`;
+                        `<div class="element elementPreview" draggable="true" tabindex = "0" data-type="${element.type}" style="width: ${element.width}; height: ${element.height}; border: ${element.border}; background-image: ${element.bgImage};"></div>`;
                 }
                 leftSidebarElements.innerHTML = elementsContent;
-                dragFromSidebar();
+                // dragFromSidebar();
                 break;
             }
             case (target.classList.contains('left-sidebar__categories-icon')): {
@@ -456,647 +728,575 @@ for (let i = 0; i < categories.length; i++) {
                 for (let element of elements) {
                     elementsContent +=
                         `<div class="element elementPreview"
-                        draggable="true"
-                        data-type="${element.type}"
-                        style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height}; color: ${element.color}; font-size: ${element.fontSize}; border: ${element.border}; bgImage: ${element.bgImage}; icon: ${element.icon}; link: ${element.link}; border-radius: ${element.borderRadius}; border-left: ${element.borderLeft}; border-right: ${element.borderRight}; border-bottom: ${element.borderBottom}; border-top: ${element.borderTop};
-                        "></div>`;
+                        draggable="true" tabindex="0" data-type="${element.type}" style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height}; color: ${element.color}; font-size: ${element.fontSize}; border: ${element.border};link: ${element.link}; border-radius: ${element.borderRadius}; border-left: ${element.borderLeft}; border-right: ${element.borderRight}; border-bottom: ${element.borderBottom}; border-top: ${element.borderTop};
+                        ">${element.svg}</div>`;
                 }
                 leftSidebarElements.innerHTML = elementsContent;
-                dragFromSidebar();
+                // dragFromSidebar();
+                //  background-image: ${element.icon}; 
                 break;
             }
         }
+        dragAndDrop();
     });
 };
 
 //при клике на элемент выводит его в body, где потом его можно переносить с dragndrop
-let elementId = 0;
+// let elementId = 0;
 
-function dragFromSidebar() {
-    let newElements = document.querySelectorAll(".elementPreview");
+// function dragFromSidebar() {
+// 	let newElements = document.querySelectorAll(".elementPreview");
 
-    for (let j = 0; j < newElements.length; j++) {
-        newElements[j].addEventListener('click', function (event) {
-            let target = event.target;
-            const newDiv = target.cloneNode(true);
-            elementId++;
-            newDiv.id = elementId; //чтобы обратиться по id
-            document.body.appendChild(newDiv);
-            newDiv.classList.remove("elementPreview");
-            newDiv.classList.add("elementMovable"); //новый класс, чтобы привязать dragndrop
-            newDiv.classList.add("flexible");
-        });
-    }
-};;
-document.addEventListener("DOMContentLoaded", function (event) {
-    let login = localStorage.getItem('login');
-    let firstName = localStorage.getItem('firstname');
-    if (login != null) {
-        document.getElementById('wrapper__button').innerHTML = `<div>Привет, ${firstName}!</div><button id="buttonOut" onclick="outUser()" class="regButton">Выйти</button>`
-    }
-})
+// 	for (let j = 0; j < newElements.length; j++) {
+// 		newElements[j].addEventListener('click', function (event) {
+// 			let target = event.target;
+// 			const newDiv = target.cloneNode(true);
+// 			elementId++;
+// 			newDiv.id = elementId; //чтобы обратиться по id
+// 			document.body.appendChild(newDiv);
+// 			newDiv.classList.remove("elementPreview");
+// 			newDiv.classList.add("elementMovable"); //новый класс, чтобы привязать dragndrop
+// 			newDiv.classList.add("flexible");
+// 		});
+// 	}
+// };;
+let templateIndCount = 0;
+const menuBlock = document.querySelector('.left-sidebar__elements');
+const templateBlock = document.querySelector('.template');
 
-let errors = [];
-
-function showReg(state) {
-    errors = [];
-    document.getElementById('windowReg').style.display = state;
-    document.getElementById('gray').style.display = state;
-}
-
-function showIn(state) {
-    document.getElementById('windowIn').style.display = state;
-    document.getElementById('gray2').style.display = state;
-    let email = localStorage.getItem('email');
-    let password = localStorage.getItem('pass');
-    if (email != null) {
-        document.querySelector('#email__in').value = email;
-    }
-    if (email != null) {
-        document.querySelector('#pass__in').value = password;
-    }
-}
-
-function checkValidity(input) {
-    let validity = input.validity;
-    console.log(validity.valueMissing);
-
-    if (validity.valueMissing) {
-        errors.push('Поле ' + input.placeholder + ' не заполнено');
-    }
-    if (validity.patternMismatch) {
-        errors.push('Не верный формат заполнения e-mail');
-    }
-    return errors;
-}
-
-function checkPassword() {
-    let password = document.querySelector('#pass1').value;
-    let password2 = document.querySelector('#pass2').value;
-    console.log(password);
-    if (password != null) {
-        if (password.length < 4) {
-            errors.push('Минимальное значение пароля не может быть меньше, чем 4');
-        }
-        if (password.length > 10) {
-            errors.push('Максимальное значение пароля не может быть больше, чем 10');
-        }
-        if (password.search(/[a-z]/) === -1) {
-            errors.push('Пароль должен содержать минимум одну прописную букву');
-        }
-        if (password.search(/[A-Z]/) === -1) {
-            errors.push('Пароль должен содержать минимум одну заглавную букву');
-        }
-        if (password.search(/[0123456789]/) === -1) {
-            errors.push('Пароль должен содержать минимум одну цифру');
-        }
-        if (password != password2) {
-            errors.push('Пароль не совпадает!');
-        }
-    }
-    return errors;
-}
-
-function pushReg() {
-    let inputs = document.querySelectorAll(".inputReg");
-    console.log(inputs);
-    for (let input of inputs) {
-        checkValidity(input);
-    }
-
-    checkPassword();
-
-    if (errors == false) {
-        saveData();
-    } else {
-        document.getElementById("error").innerHTML = errors.join('.<br>');
-        errors = [];
-    }
-    document.querySelector('form').addEventListener('submit', (e) => e.preventDefault())
-
-}
-
-function saveData() {
-    let firstName = document.querySelector('#firstname').value;
-    let lastName = document.querySelector('#lastname').value;
-    let email = document.querySelector('#email').value;
-    let password = document.querySelector('#pass1').value;
-    let password2 = document.querySelector('#pass2').value;
-    console.log(password, password2);
-    document.querySelector('.error').innerHTML = '';
-
-    if (localStorage.getItem('firstName') == null) {
-        localStorage.setItem('firstname', firstName);
-    }
-    if (localStorage.getItem('lastname') == null) {
-        localStorage.setItem('lastname', lastName);
-    }
-    if (localStorage.getItem('email') == null) {
-        localStorage.setItem('email', email);
-    }
-    if (localStorage.getItem('pass') == null) {
-        localStorage.setItem('pass', password2);
-    }
-
-localStorage.setItem('login', true);
-document.getElementById('windowReg').style.display = "none";
-document.getElementById('gray').style.display = "none";
-document.querySelector('form').addEventListener('submit', (e) => e.preventDefault())
-document.getElementById('wrapper__button').innerHTML = `<div>Привет, ${firstName}!</div><button id="buttonOut" onclick="outUser()" class="regButton">Выйти</button>`
-}
-
-function getIn() {
-    document.querySelector('#inForm').addEventListener('submit', (e) => e.preventDefault())
-    document.getElementById('windowIn').style.display = "none";
-    document.getElementById('gray2').style.display = "none";
-    document.getElementById('wrapper__button').innerHTML = `<div>Привет, ${localStorage.getItem('firstname')}!</div><button id="buttonOut" onclick="outUser()" class="regButton">Выйти</button>`
-    localStorage.setItem('login', true);
-}
-
-function outUser() {
-    document.getElementById('wrapper__button').innerHTML = `<button id="buttonReg" onclick="showReg('block')" class="regButton">Регистрация</button>
-    <button id="buttonIn" onclick="showIn('block')" class="regButton">Войти</button>`
-    localStorage.removeItem('login');
-}
-;
-// block, button : setColor()
-// block, image : setBackground()
-// text, button : setText()
-// icon : setLink()
-
-/*
-const elementExample = {
-	templateInd: 0,
-	menuId: '#idMenu',
-	type: ['block', 'button', 'text', 'image', 'icon'],
-	position: {
-		x: 0,
-		y: 0
+templateBlock.addEventListener('dragover', dragOver);
+templateBlock.addEventListener('dragenter', dragEnter);
+templateBlock.addEventListener('dragleave', dragLeave);
+templateBlock.addEventListener('drop', dragDrop, {
+	capture: true
+});
+const elementsProps = {
+	templNameBtn: {
+		classes: ['btnForm', 'selectTemplateBtn'],
 	},
-	size: {
-		width: 0,
-		height: 0
-	},
-	classes: ['class1', 'class2'],
-	text: 'text',
-	parent: parentNode,
-	color: 'color',
-	border: 'border',
-	bgColor: 'color',
-	bgImage: 'url',
-	icon: 'url',
-	link: 'url'
+	templateNameInput: {
+		classes: ['inputReg', 'templateNameInput'],
+		id: 'projectname',
+		placeholder: 'Название проекта',
+		type: 'text'
+	}
 }
-*/
-const dragAndDrop = () => {
-	const menuBlock = document.querySelector('.menu');
-	const templateBlock = document.querySelector('.template');
-	// let elementsInLS = [];
-	const templateElements = [{
-		templateInd: 0,
-		type: 'block',
-		size: {
-			width: '100%',
-			height: '80px'
-		},
-		classes: [],
-		parent: menuBlock,
-		bgColor: '#c6c3af'
-	}, {
-		templateInd: 1,
-		type: 'block',
-		size: {
-			width: '100%',
-			height: '500px'
-		},
-		classes: [],
-		parent: templateBlock,
-		bgColor: '#fff973'
-	}, {
-		templateInd: 2,
-		type: 'block',
-		size: {
-			width: '100%',
-			height: '300px'
-		},
-		classes: [],
-		parent: menuBlock,
-		bgColor: '#ffffff'
-	}, {
-		templateInd: 3,
-		type: 'block',
-		size: {
-			width: '100%',
-			height: '500px'
-		},
-		classes: [],
-		parent: menuBlock,
-		bgColor: '#c6c3af'
-	}, {
-		templateInd: 4,
-		type: 'block',
-		size: {
-			width: '100%',
-			height: '100px'
-		},
-		classes: [],
-		parent: templateBlock,
-		bgColor: '#fff973'
-	}, {
-		type: 'button',
-		size: {
-			width: '150px',
-			height: '30px'
-		},
-		position: {
-			x: 200,
-			y: 500
-		},
-		classes: [],
-		parent: templateBlock,
-		bgColor: '#fff973',
-		text: 'Кнопка',
-	}, {
-		type: 'button',
-		size: {
-			width: '150px',
-			height: '30px'
-		},
-		position: {
-			x: 200,
-			y: 200
-		},
-		classes: [],
-		parent: templateBlock,
-		bgColor: '#c6c3af',
-		text: 'Кнопка'
-	}, {
-		type: 'text',
-		size: {
-			width: '150px',
-			height: '30px'
-		},
-		position: {
-			x: 400,
-			y: 100
-		},
-		classes: [],
-		fontSize: '24px',
-		parent: templateBlock,
-		color: '#000',
-		text: 'Заголовок 1'
-	}, {
-		type: 'text',
-		size: {
-			width: '150px',
-			height: '30px'
-		},
-		position: {
-			x: 400,
-			y: 200
-		},
-		classes: [],
-		fontSize: '20px',
-		parent: templateBlock,
-		color: '#000',
-		text: 'Заголовок 2'
-	}, {
-		type: 'text',
-		size: {
-			width: '150px',
-			height: '30px'
-		},
-		position: {
-			x: 400,
-			y: 500
-		},
-		classes: [],
-		fontSize: '14px',
-		parent: templateBlock,
-		color: '#000',
-		text: 'Ваш текст будет написан в этом блоке'
-	}, {
-		type: 'image',
-		size: {
-			width: '150px',
-			height: '150px'
-		},
-		position: {
-			x: 200,
-			y: 800
-		},
-		classes: [],
-		parent: templateBlock,
-		border: '1px solid #c6c3af',
-		bgImage: './img/work-together.jpg'
-	}, {
-		type: 'icon',
-		size: {
-			width: '24px',
-			height: '24px'
-		},
-		position: {
-			x: 500,
-			y: 1000
-		},
-		classes: [],
-		parent: templateBlock,
-		border: '1px solid #c6c3af',
-		icon: './img/social/facebook.svg',
-		link: 'https://www.facebook.com'
-	}];
 
-	let templateIndCount = 0;
 
-	class DragNDrop {
-		// static
+// --------------- render ---------------
+renderHeader();
+handleDocLoad();
 
+function handleDocLoad() {
+	const email = userLoggedIn();
+	if (isUserTemplateInLS(email)) {
+		renderPopup('open');
 	}
+}
 
-	class Element {
-		constructor(type, classes) {
-			// super(menuId, parent);
-			this.type = type;
-			this.classes = classes;
-		}
-		duplicate() {
-			// TODO
-		}
-		showMenu() {
-			// TODO
-		}
-		delete() {
-			// TODO
-		}
-		saveToLS() {
-			let elArray = [];
-			let data = null;
-			if (!localStorage.getItem('template')) {
-				localStorage.setItem('template', JSON.stringify(this));
-			} else {
-				data = JSON.parse(localStorage.getItem('template'));
-				if (data.length > 1) {
-					elArray.push(...data, this);
-				} else {
-					elArray.push(data, this);
-				}
-				localStorage.setItem('template', JSON.stringify(elArray));
-			}
+function userLoggedIn() {
+	const email = localStorage.getItem('email')
+	return ((email) && (localStorage.getItem('login') === 'true')) ? email : false;
+}
+
+function isUserTemplateInLS(email) {
+	return (localStorage.getItem(email) !== null) ? true : false;
+}
+
+function renderHeader() {
+	renderSaveBtn();
+	renderListBtn();
+}
+
+function renderSaveBtn() {
+	const btn = document.createElement('div');
+	btn.classList.add('headerBtn', 'save');
+	btn.innerHTML = '<img src="./img/save.svg" alt="Save to Local Storage">'
+	document.querySelector('header').prepend(btn);
+	document.querySelector('.save').addEventListener('click', handleSaveClick);
+}
+
+function renderListBtn() {
+	const btn = document.createElement('div');
+	btn.classList.add('headerBtn', 'list');
+	btn.innerHTML = '<img src="./img/list.svg" alt="List of Projects">'
+	document.querySelector('header').prepend(btn);
+	document.querySelector('.list').addEventListener('click', handleListClick);
+}
+
+function renderProjBtn(action, el, i) {
+	console.log(el);
+	let selectTemplateBtn;
+	if (action === 'list') {
+		selectTemplateBtn = document.createElement('button');
+	} else {
+		selectTemplateBtn = document.createElement('button');
+	}
+	selectTemplateBtn.textContent = el.name;
+	selectTemplateBtn.classList.add('btnForm', 'selectTemplateBtn');
+	selectTemplateBtn.dataset.id = i;
+	selectTemplateBtn.dataset.action = action;
+	document.querySelector('#windowSelectTemplate > .popup__form').append(selectTemplateBtn);
+	selectTemplateBtn.addEventListener('click', selectTemplate);
+}
+
+function selectTemplate(e) {
+	e.preventDefault();
+	const email = userLoggedIn();
+	const template = JSON.parse(localStorage.getItem(email));
+	if (e.target.dataset.action === 'open') {
+		renderHtmlById(e.target.dataset.id, template);
+		handleTemplateLoad();
+	} else if (e.target.dataset.action === 'save') {
+		saveTemplateAs(e.target.dataset.id);
+	} else if (e.target.dataset.action === 'list') {
+		renderHtmlById(e.target.dataset.id, template);
+		handleTemplateLoad();
+	}
+	showPopup('none');
+}
+
+function renderPopup(action) {
+	const popupSelectTemplate = document.querySelector('#windowSelectTemplate > .popup__form');
+	popupSelectTemplate.innerHTML = '';
+	const email = userLoggedIn();
+	if (isUserTemplateInLS(email)) {
+		const template = JSON.parse(localStorage.getItem(email));
+		try {
+			template.forEach((el, i) => {
+				renderProjBtn(action, el, i);
+			});
+		} catch (e) {
+			renderProjBtn(action, template, 0);
 		}
 	}
-
-	class ResizableElement extends Element {
-		constructor(type, classes, width, height, posX, posY) {
-			super(type, classes);
-			this.width = width;
-			this.height = height;
-			this.posX = posX;
-			this.posY = posY;
+	let title;
+	if (action === 'open') {
+		title = renderTitle('Выберите проект');
+		popupSelectTemplate.prepend(title);
+		addEmptyTemplateBtn(popupSelectTemplate);
+	} else if (action === 'save') {
+		if (isUserTemplateInLS(email)) {
+			title = renderTitle('Сохранить под именем:')
+			popupSelectTemplate.prepend(title);
 		}
-		changeHeight() {
-			// TODO
-		}
-		changeWidth() {
-			// TODO
-		}
-		changePosX() {
-			// TODO
-		}
-		changePosY() {
-			// TODO
-		}
-	}
-
-	class Block extends Element {
-		constructor(type, classes, bgColor) {
-			super(type, classes);
-			this.bgColor = bgColor;
-			this.templateInd = templateIndCount++;
-		}
-		setTemplateInd() {
-			// this.templateInd = templateIndCount++;
-		}
-		setBackgroundColor() {
-			// TODO
-		}
-		// saveToLS() {
-		// 	let item = JSON.stringify(this);
-		// 	console.log(item);
-		// 	if (!localStorage.getItem('template')) {
-		// 		localStorage.setItem('template', JSON.stringify(this))
-		// 	} else {
-		// 		localStorage.setItem('template', [...localStorage.getItem('template'), JSON.stringify(this)])
-		// 	}
-		// }
-	}
-	class Button extends ResizableElement {
-		constructor(type, classes, width, height, posX, posY, bgColor, btnLabel, fontColor) {
-			super(type, classes, width, height, posX, posY);
-			this.bgColor = bgColor;
-			this.btnLabel = btnLabel;
-			this.fontColor = fontColor;
-		}
-		setBackgroundColor() {
-			// TODO
-		}
-		setBtnLabel() {
-			// TODO
-		}
-		setFontColor() {
-			// TODO
-		}
-	}
-	class Image extends ResizableElement {
-		constructor(menuId, parent, type, classes, width, height, posX, posY, bgImage, border) {
-			super(menuId, parent, type, classes, width, height, posX, posY);
-			this.bgImage = bgImage;
-			this.border = border;
-		}
-		setBackgroundImage() {
-			// TODO
-		}
-		setBorder() {
-			// TODO
-		}
-	}
-	class SocialIcon extends ResizableElement {
-		constructor(type, classes, width, height, posX, posY, iconColor, link) {
-			super(type, classes, width, height, posX, posY);
-			this.iconColor = iconColor;
-			this.link = link;
-		}
-		setIconColor() {
-			// TODO
-		}
-		setLink() {
-			// TODO
-		}
-	}
-	class Text extends Element {
-		constructor(menuId, parent, type, classes, color) {
-			super(menuId, parent, type, classes);
-			this.color = color;
-		}
-		setColor() {
-			// TODO
-		}
-	}
-
-	// const saveAllToLS = () => {
-	// 	localStorage.setItem('template', JSON.stringify(templateElements));
-	// }
-	// saveAllToLS();
-	// const makeMapOfElements = () => {
-	// 	const templateMap = new Map();
-	// 	templateElements.forEach(el => {
-	// 		const key = el.type;
-	// 		if (!templateMap.get(key)) {
-	// 			templateMap.set(key, [el]);
-	// 		} else {
-	// 			templateMap.set(key, [...templateMap.get(key), el]);
-	// 		}
-	// 	});
-	// }
-	// makeMapOfElements();
-
-	// const renderTemplate = () => {
-
-	// 	templateElements.forEach(el => {
-	// 		let newElement = document.createElement('div');
-	// 		newElement.style.width = el.size.width;
-	// 		newElement.style.height = el.size.height;
-	// 		if (el.type === 'block') {
-
-	// 		} else if (el.type === 'block' || el.type === 'button') {
-	// 			newElement.style.backgroundColor = el.bgColor;
-	// 		}
-
-	// 		document.querySelector('.template').append(newElement);
-	// 	})
-	// }
-	// renderTemplate();
-
-	const elements = document.querySelectorAll('.menu__element');
-	let templateFlag = false;
-	let movingElement = null;
-	let elementX = 0;
-	let elementY = 0;
-
-	const dragStart = function (e) {
-		console.log('drag start');
-		setTimeout(() => {
-			if (e.target.parentNode === menuBlock) {
-				movingElement = e.target.cloneNode(true);
-			} else if (e.target.parentNode === templateBlock) {
-				movingElement = e.target;
-			}
-		})
-	}
-
-	const dragEnd = function (e) {
-		// console.log('drag end');
-	}
-	const dragOver = function (e) {
-		e.preventDefault();
-		// console.log('drag over');
-	}
-	const dragEnter = function (e) {
-		e.preventDefault();
-		// console.log('drag enter');
-	}
-	const dragLeave = function () {
-		e.preventDefault();
-		// console.log('drag leave');
-	}
-	const createNewElement = function (e, movingElement) {
-		const type = movingElement.dataset.type;
-		let newBlock = null;
-		if (type === 'block') {
-			movingElement.classList.add('wide');
-			newBlock = new Block(type, movingElement.classList, movingElement.style.backgroundColor);
-			newBlock.saveToLS();
+		addNewTemplateInput(popupSelectTemplate);
+	} else if (action === 'list') {
+		console.log('list');
+		if (isUserTemplateInLS(email)) {
+			title = renderTitle('Мои проекты');
+			renderEditIcons();
 		} else {
-			movingElement.classList.add('draggable-element');
-			movingElement.style.top = e.layerY - elementY + 'px';
-			movingElement.style.left = e.layerX - elementX + 'px';
-			if (type === 'button') {
-				newBlock = new Button(type, movingElement.classList, movingElement.clientWidth,
-					movingElement.clientHeight,
-					movingElement.style.left,
-					movingElement.style.top,
-					movingElement.style.backgroundColor,
-					movingElement.innerHTML,
-					movingElement.style.color
-				);
-				// type, classes, width, height, posX, posY, bgColor, btnLabel, fontColor;
-				newBlock.saveToLS();
-				// console.log(newBlock);
-			} else if (type === 'icon') {
-				// newBlock = new SocialIcon(type, movingElement.classList, movingElement.clientWidth,
-				// movingElement.clientHeight,
-				// movingElement.style.left,
-				// movingElement.style.top,
-				// iconColor, link);
-				// newBlock.saveToLS();
-				// console.log(newBlock);
-			}
+			title = renderTitle('Вы пока не сохранили ни одного проекта');
 		}
+		popupSelectTemplate.prepend(title);
 	}
-	const dragDrop = function (e) {
-		e.preventDefault();
-		console.log('drag drop');
-		console.log(movingElement);
-		// console.log(e.clientY, e.clientX, e.layerY, e.layerX);
-		this.append(movingElement);
-		movingElement.classList.remove('menu__element');
-		movingElement.classList.add('template__element');
-		movingElement.removeEventListener('mousedown', getElementMousePosMenu);
-		movingElement.addEventListener('mousedown', getElementMousePosTemplate);
-		movingElement.addEventListener('dragstart', dragStart);
-		if (!templateFlag) {
-			createNewElement(e, movingElement);
+	showPopup('block');
+}
+
+function renderEditIcons() {
+	const buttons = document.querySelectorAll('.selectTemplateBtn');
+	buttons.forEach((el) => {
+		const wrapper = document.createElement('div');
+		wrapper.classList.add('popup__form--wrapper');
+		wrapper.dataset.id = el.dataset.id;
+		el.before(wrapper);
+		wrapper.append(el);
+		renderIcon('change-name', wrapper, el);
+		renderIcon('delete', wrapper, el);
+	});
+	const icons = document.querySelectorAll('.btnForm--icon');
+	icons.forEach(icon => {
+		if (icon.dataset.type === 'change-name') {
+			icon.addEventListener('click', handleChangeNameClick);
+		} else if (icon.dataset.type === 'delete') {
+			icon.addEventListener('click', handleDeleteClick);
+		}
+	})
+}
+
+function handleChangeNameClick(e) {
+	let id;
+	let node;
+	if (e.target.tagName === 'IMG') {
+		id = e.target.parentNode.dataset.id;
+		node = e.target.parentNode;
+		e.target.src = "./img/save.svg";
+	} else {
+		id = e.target.dataset.id;
+		node = e.target;
+		e.target.childNodes[0].src = "./img/save.svg";
+	}
+	node.removeEventListener('click', handleChangeNameClick);
+	node.addEventListener('click', saveChangedName);
+	const nameBtn = document.querySelector(`.selectTemplateBtn[data-id="${id}"]`);
+	nameBtn.removeEventListener('click', selectTemplate);
+	nameBtn.contentEditable = true;
+	nameBtn.focus();
+}
+
+function handleDeleteClick(e) {
+	e.preventDefault();
+	let id;
+	if (e.target.tagName === 'IMG') {
+		id = e.target.parentNode.dataset.id;
+	} else {
+		id = e.target.dataset.id;
+	}
+	const wrapper = document.querySelector(`div[data-id="${id}"]`);
+	deleteTemplateFromLS(id);
+	wrapper.remove();
+}
+
+function deleteTemplateFromLS(id) {
+	const email = userLoggedIn();
+	const template = JSON.parse(localStorage.getItem(email));
+	template.splice(id, 1);
+	localStorage.setItem(email, JSON.stringify(template));
+}
+
+function renderIcon(src, block, el) {
+	let newEl = document.createElement('div');
+	newEl.classList.add('btnForm', 'btnForm--icon');
+	newEl.dataset.id = el.dataset.id;
+	newEl.dataset.type = src;
+	newEl.innerHTML = `<img src="./img/${src}.svg" alt="icon">`;
+	block.append(newEl);
+}
+
+function renderTitle(title) {
+	let titleEl = document.createElement('h2');
+	titleEl.innerHTML = title;
+	return titleEl;
+}
+
+function addEmptyTemplateBtn(target) {
+	const emptyTemplateBtn = document.createElement('button');
+	emptyTemplateBtn.textContent = 'Создать новый проект';
+	emptyTemplateBtn.classList.add('btnForm');
+	target.append(emptyTemplateBtn);
+	emptyTemplateBtn.addEventListener('click', openEmptyProject);
+}
+
+function addNewTemplateInput(target) {
+	let title = renderTitle('Новый проект:');
+	target.append(title);
+	const inputTemplateName = document.createElement('input');
+	const inputProps = elementsProps.templateNameInput;
+	inputProps.classes.forEach(el => {
+		inputTemplateName.classList.add(el);
+	});
+	inputTemplateName.id = inputProps.id;
+	inputTemplateName.placeholder = inputProps.placeholder;
+	inputTemplateName.type = inputProps.type;
+	target.append(inputTemplateName);
+	const newNameSaveBtn = document.createElement('button');
+	newNameSaveBtn.textContent = 'Сохранить';
+	newNameSaveBtn.classList.add('btnForm');
+	target.append(newNameSaveBtn);
+	newNameSaveBtn.addEventListener('click', saveNewTemplate)
+}
+
+function openEmptyProject() {
+	showPopup('none');
+}
+
+function showPopup(state) {
+	document.getElementById('windowSelectTemplate').style.display = state;
+	document.getElementById('grayBackground').style.display = state;
+}
+
+// --------------- save and load from LS ---------------
+function handleListClick() {
+	renderPopup('list');
+}
+
+function handleSaveClick(e) {
+	const email = userLoggedIn();
+	console.log(email);
+	renderPopup('save');
+}
+
+function saveNewTemplate(e) {
+	const email = userLoggedIn();
+	const projName = document.querySelector('#projectname').value;
+	const projHtml = templateBlock.innerHTML;
+	const templateObj = {
+		name: projName,
+		html: projHtml
+	}
+	if (!isUserTemplateInLS(email)) {
+		localStorage.setItem(email, JSON.stringify(templateObj));
+	} else {
+		let elArray = [];
+		let data = null;
+		data = JSON.parse(localStorage.getItem(email));
+		if (data.length > 1) {
+			elArray.push(...data, templateObj);
 		} else {
-			movingElement.style.top = e.clientY - elementY + 'px';
-			movingElement.style.left = e.clientX - elementX + 'px';
+			elArray.push(data, templateObj);
 		}
+		localStorage.setItem(email, JSON.stringify(elArray));
 	}
+	showPopup('none');
+}
 
-	const getElementMousePosMenu = function (e) {
-		templateFlag = false;
-		console.log('from menu');
-		elementY = e.offsetY;
-		elementX = e.offsetX;
-		// if (e.target.tagName === 'path' || e.target.tagName === 'svg') {
-		// 	elementY = e.offsetY;
-		// 	elementX = e.offsetX;
-		// } else {
-		// 	elementY = e.offsetY;
-		// 	elementX = e.offsetX;
-		// }
-	}
-	const getElementMousePosTemplate = function (e) {
-		console.log('from template');
-		console.log(`e.client: ${e.clientY},${e.clientX}`);
-		console.log(e);
-		console.log('offset E: ' + e.offsetY, e.offsetX);
-		console.log('offset: ' + e.target.offsetTop, e.target.offsetLeft);
-		templateFlag = true;
-		elementY = e.offsetY;
-		elementX = e.offsetX;
-		// if (e.target.tagName === 'path' || e.target.tagName === 'svg') {
-		// 	elementY = e.offsetY + 1;
-		// } else {
-		// 	elementY = e.offsetY;
-		// }
-	}
+function handleTemplateLoad() {
+	const elements = getTemplateElements();
+	elements.forEach(el => {
+		addListenersForNewElement(el);
+	})
+}
 
+function getTemplateElements() {
+	return document.querySelectorAll('.template__element');
+}
+
+function saveChangedName(e) {
+	console.log('save as');
+	let id;
+	let node;
+	if (e.target.tagName === 'IMG') {
+		id = e.target.parentNode.dataset.id;
+		node = e.target.parentNode;
+		e.target.src = "./img/change-name.svg";
+	} else {
+		id = e.target.dataset.id;
+		node = e.target;
+		node.childNodes[0].src = "./img/change-name.svg";
+	}
+	const nameBtn = document.querySelector(`.selectTemplateBtn[data-id="${id}"]`);
+	newName = nameBtn.innerHTML.replace('<br>', '');
+	console.log(newName);
+	const email = userLoggedIn();
+	const template = JSON.parse(localStorage.getItem(email));
+	if (template.length > 1) {
+		template[id].name = newName;
+	} else {
+		template.name = newName;
+	}
+	localStorage.removeItem(email);
+	localStorage.setItem(email, JSON.stringify(template));
+	console.log(JSON.parse(localStorage.getItem(email))[id]);
+	nameBtn.addEventListener('click', selectTemplate);
+	nameBtn.contentEditable = false;
+	nameBtn.blur();
+	node.removeEventListener('click', saveChangedName);
+	node.addEventListener('click', handleChangeNameClick);
+}
+
+function saveTemplateAs(id) {
+	const email = userLoggedIn();
+	const projHtml = templateBlock.innerHTML;
+	const template = JSON.parse(localStorage.getItem(email));
+	if (template.length > 1) {
+		template[id].html = projHtml;
+	} else {
+		template.html = projHtml;
+	}
+	localStorage.setItem(email, JSON.stringify(template));
+}
+
+function renderHtmlById(htmlId, template) {
+	let name;
+	if (template.length > 1) {
+		html = template[htmlId].html;
+		name = template[htmlId].name;
+	} else {
+		html = template.html;
+		name = template.name;
+	}
+	addTitleToHeader(name);
+
+	templateBlock.innerHTML = html;
+}
+
+function addTitleToHeader(name) {
+	document.querySelector('header').innerHTML += `<div class="header__title">${name}</div>`;
+	document.querySelector('.list').addEventListener('click', handleListClick);
+	document.querySelector('.save').addEventListener('click', handleSaveClick);
+}
+// ----------------- drag and drop -----------------
+
+let templateFlag = false;
+let movingElement = null;
+let elementX = 0;
+let elementY = 0;
+
+function dragAndDrop() {
+	const elements = document.querySelectorAll('.element');
 	elements.forEach(el => {
 		el.addEventListener('dragstart', dragStart);
 		el.addEventListener('dragend', dragEnd);
-		el.addEventListener('mousedown', getElementMousePosMenu)
 	});
-	templateBlock.addEventListener('dragover', dragOver);
-	templateBlock.addEventListener('dragenter', dragEnter);
-	templateBlock.addEventListener('drop', dragDrop);
 }
-dragAndDrop();;
+
+function dragStart(e) {
+	getPosition(e);
+	getTemplateFlag(e);
+	setTimeout(() => {
+		if (e.target.parentNode.isSameNode(menuBlock)) {
+			movingElement = e.target.cloneNode(true);
+		} else if (e.target.parentNode.isSameNode(templateBlock)) {
+			movingElement = e.target;
+		}
+	})
+}
+
+function dragEnd(e) {
+	e.preventDefault();
+}
+
+function dragOver(e) {
+	e.preventDefault();
+}
+
+function dragEnter(e) {
+	e.preventDefault();
+}
+
+function dragLeave(e) {
+	e.preventDefault();
+}
+
+function dragDrop(e) {
+	e.stopPropagation();
+	e.preventDefault();
+	if (!e.target.isSameNode(movingElement)) {
+		this.append(movingElement);
+		movingElement.classList.remove('element', 'elementPreview');
+		movingElement.classList.add('template__element');
+		addListenersForNewElement(movingElement);
+		if (!templateFlag) {
+			createNewElement(e, movingElement);
+		} else {
+			setPosition(e);
+		}
+	}
+}
+
+function createNewElement(e, movingElement) {
+	const type = movingElement.dataset.type;
+	if (type === 'block') {
+		movingElement.classList.add('wide');
+	} else {
+		movingElement.classList.add('draggable-element');
+		setPosition(e);
+		switch (type) {
+			case 'button':
+				movingElement.classList.add('template__button');
+				break;
+			case 'icon':
+				break;
+			case 'text':
+				movingElement.style.width = '';
+				const textStyleClassName = movingElement.dataset.textstyle;
+				movingElement.classList.add(textStyleClassName, 'template__text');
+				break;
+			case 'image':
+				movingElement.classList.add('template__image');
+				break;
+		}
+	}
+}
+
+function addListenersForNewElement(movingElement) {
+	movingElement.addEventListener('click', handleClick);
+	movingElement.addEventListener('dblclick', handleDoubleClick);
+	movingElement.addEventListener('focusout', handleFocusOut);
+	movingElement.addEventListener('dragstart', dragStart);
+}
+
+function pasteCopiedElement(movingElement) {
+	templateBlock.append(movingElement);
+	movingElement.style.top = movingElement.style.top.slice(0, -2) - (-50) + 'px';
+	movingElement.style.left = movingElement.style.left.slice(0, -2) - (-50) + 'px';
+	movingElement.classList.remove('selected');
+	addListenersForNewElement(movingElement);
+}
+
+// ----------------- positioning ----------------
+
+function getTemplateFlag(e) {
+	if (e.target.parentNode.isSameNode(templateBlock)) {
+		templateFlag = true;
+	} else {
+		templateFlag = false;
+	}
+}
+
+function setPosition(e) {
+	const scroll = document.scrollingElement.scrollTop;
+	offParTop = e.target.offsetParent.offsetTop;
+	offParLeft = e.target.offsetParent.offsetLeft;
+	movingElement.style.top = e.clientY - elementY - offParTop + scroll + 'px';
+	movingElement.style.left = e.clientX - elementX - offParLeft + 'px';
+}
+
+function getPosition(e) {
+	elementY = e.offsetY;
+	elementX = e.offsetX;
+}
+
+// -------------- editing handlers -------------------
+function getTarget(e) {
+	let node;
+	if (e.target.tagName === 'path') {
+		node = e.target.parentNode.parentNode;
+	} else if (e.target.tagName === 'svg') {
+		node = e.target.parentNode;
+	} else {
+		node = e.target;
+	}
+	return node;
+}
+
+function handleClick(e) {
+	let target = getTarget(e);
+	target.classList.add('selected');
+	target.focus();
+	target.addEventListener('keydown', handleKeyDown);
+	// node.addEventListener('focusout', handleFocusOut);
+}
+
+function handleDoubleClick(e) {
+	let target = getTarget(e);
+	target.contentEditable = true;
+	target.removeEventListener('click', handleClick);
+	target.removeEventListener('keydown', handleKeyDown);
+	target.classList.add('selected');
+	if (target.dataset.type === 'text') {
+		target.style.height = 'auto';
+	}
+}
+
+function handleFocusOut(e) {
+	let target = getTarget(e);
+	window.getSelection().removeAllRanges();
+	target.contentEditable = false;
+	target.classList.remove('selected');
+	target.addEventListener('click', handleClick);
+}
+
+function handleKeyDown(e) {
+	e.preventDefault();
+	if (e.ctrlKey === true && e.key === 'c') {
+		movingElement = e.target.cloneNode(true);
+	} else if (e.ctrlKey === true && e.key === 'v') {
+		pasteCopiedElement(movingElement);
+	} else if (e.key === 'Delete') {
+		e.target.remove();
+	} else if (e.key === 'ArrowLeft') {
+		let left = e.target.style.left;
+		e.target.style.left = left.slice(0, left.length - 2) - 1 + 'px';
+	} else if (e.key === 'ArrowRight') {
+		let right = e.target.style.left;
+		e.target.style.left = right.slice(0, right.length - 2) - (-1) + 'px';
+	} else if (e.key === 'ArrowUp') {
+		let up = e.target.style.top;
+		e.target.style.top = up.slice(0, up.length - 2) - 1 + 'px';
+	} else if (e.key === 'ArrowDown') {
+		let down = e.target.style.top;
+		e.target.style.top = down.slice(0, down.length - 2) - (-1) + 'px';
+	}
+};

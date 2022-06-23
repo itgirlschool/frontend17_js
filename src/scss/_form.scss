@@ -1,10 +1,11 @@
 .wrapper__button {
+    padding: 10px 20px;
     gap: 10px;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     align-items: baseline;
-    font-size: 26px;
+    font-size: 20px;
 }
 
 .regButton {
@@ -20,7 +21,8 @@
 }
 
 #gray,
-#gray2 {
+#gray2,
+#grayBackground {
     background-color: rgb(1, 1, 1, 0.75);
     position: fixed;
     top: 0;
@@ -33,8 +35,9 @@
 }
 
 #windowReg,
-#windowIn {
-    width: 350px;
+#windowIn,
+#windowSelectTemplate {
+    max-width: 400px;
     height: fit-content;
     margin: 40px auto;
     background: rgb(238, 159, 159);
@@ -51,7 +54,8 @@
 
 .close {
     position: absolute;
-    margin: 10px 0 0 320px;
+    top: 10px;
+    right: 10px;
     cursor: pointer;
     border: 1px solid #ccc;
     padding: 2px;
@@ -63,9 +67,19 @@
 }
 
 .popup__form {
-    width: 275px;
+    width: 80%;
     margin: 15px auto 20px auto;
     text-align: center;
+
+    &>h2 {
+        margin-bottom: 5px;
+    }
+
+    &--wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
 }
 
 .input,
@@ -78,7 +92,18 @@
     border: 1px solid rgb(180, 97, 97);
 }
 
-.btnForm:hover {
+.btnForm--icon {
+    width: 42px;
+    margin-left: 10px;
+    background-color: #fff;
+
+    & img {
+        width: 15px;
+        height: 15px;
+    }
+}
+
+.btnForm:not([contenteditable="true"]):hover {
     background: rgb(180, 97, 97);
 }
 
@@ -86,4 +111,9 @@
     font-size: 20px;
     font-weight: bold;
     padding-bottom: 15px;
+}
+
+.selectTemplateBtn {
+    background-color: #fff;
+    text-align: left;
 }

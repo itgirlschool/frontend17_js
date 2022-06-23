@@ -1,481 +1,540 @@
-// block, button : setColor()
-// block, image : setBackground()
-// text, button : setText()
-// icon : setLink()
+let templateIndCount = 0;
+const menuBlock = document.querySelector('.left-sidebar__elements');
+const templateBlock = document.querySelector('.template');
 
-/*
-const elementExample = {
-	templateInd: 0,
-	menuId: '#idMenu',
-	type: ['block', 'button', 'text', 'image', 'icon'],
-	position: {
-		x: 0,
-		y: 0
+templateBlock.addEventListener('dragover', dragOver);
+templateBlock.addEventListener('dragenter', dragEnter);
+templateBlock.addEventListener('dragleave', dragLeave);
+templateBlock.addEventListener('drop', dragDrop, {
+	capture: true
+});
+const elementsProps = {
+	templNameBtn: {
+		classes: ['btnForm', 'selectTemplateBtn'],
 	},
-	size: {
-		width: 0,
-		height: 0
-	},
-	classes: ['class1', 'class2'],
-	text: 'text',
-	parent: parentNode,
-	color: 'color',
-	border: 'border',
-	bgColor: 'color',
-	bgImage: 'url',
-	icon: 'url',
-	link: 'url'
+	templateNameInput: {
+		classes: ['inputReg', 'templateNameInput'],
+		id: 'projectname',
+		placeholder: 'Название проекта',
+		type: 'text'
+	}
 }
-*/
-const dragAndDrop = () => {
-	const menuBlock = document.querySelector('.menu');
-	const templateBlock = document.querySelector('.template');
-	// let elementsInLS = [];
-	const templateElements = [{
-		templateInd: 0,
-		type: 'block',
-		size: {
-			width: '100%',
-			height: '80px'
-		},
-		classes: [],
-		parent: menuBlock,
-		bgColor: '#c6c3af'
-	}, {
-		templateInd: 1,
-		type: 'block',
-		size: {
-			width: '100%',
-			height: '500px'
-		},
-		classes: [],
-		parent: templateBlock,
-		bgColor: '#fff973'
-	}, {
-		templateInd: 2,
-		type: 'block',
-		size: {
-			width: '100%',
-			height: '300px'
-		},
-		classes: [],
-		parent: menuBlock,
-		bgColor: '#ffffff'
-	}, {
-		templateInd: 3,
-		type: 'block',
-		size: {
-			width: '100%',
-			height: '500px'
-		},
-		classes: [],
-		parent: menuBlock,
-		bgColor: '#c6c3af'
-	}, {
-		templateInd: 4,
-		type: 'block',
-		size: {
-			width: '100%',
-			height: '100px'
-		},
-		classes: [],
-		parent: templateBlock,
-		bgColor: '#fff973'
-	}, {
-		type: 'button',
-		size: {
-			width: '150px',
-			height: '30px'
-		},
-		position: {
-			x: 200,
-			y: 500
-		},
-		classes: [],
-		parent: templateBlock,
-		bgColor: '#fff973',
-		text: 'Кнопка',
-	}, {
-		type: 'button',
-		size: {
-			width: '150px',
-			height: '30px'
-		},
-		position: {
-			x: 200,
-			y: 200
-		},
-		classes: [],
-		parent: templateBlock,
-		bgColor: '#c6c3af',
-		text: 'Кнопка'
-	}, {
-		type: 'text',
-		size: {
-			width: '150px',
-			height: '30px'
-		},
-		position: {
-			x: 400,
-			y: 100
-		},
-		classes: [],
-		fontSize: '24px',
-		parent: templateBlock,
-		color: '#000',
-		text: 'Заголовок 1'
-	}, {
-		type: 'text',
-		size: {
-			width: '150px',
-			height: '30px'
-		},
-		position: {
-			x: 400,
-			y: 200
-		},
-		classes: [],
-		fontSize: '20px',
-		parent: templateBlock,
-		color: '#000',
-		text: 'Заголовок 2'
-	}, {
-		type: 'text',
-		size: {
-			width: '150px',
-			height: '30px'
-		},
-		position: {
-			x: 400,
-			y: 500
-		},
-		classes: [],
-		fontSize: '14px',
-		parent: templateBlock,
-		color: '#000',
-		text: 'Ваш текст будет написан в этом блоке'
-	}, {
-		type: 'image',
-		size: {
-			width: '150px',
-			height: '150px'
-		},
-		position: {
-			x: 200,
-			y: 800
-		},
-		classes: [],
-		parent: templateBlock,
-		border: '1px solid #c6c3af',
-		bgImage: './img/work-together.jpg'
-	}, {
-		type: 'icon',
-		size: {
-			width: '24px',
-			height: '24px'
-		},
-		position: {
-			x: 500,
-			y: 1000
-		},
-		classes: [],
-		parent: templateBlock,
-		border: '1px solid #c6c3af',
-		icon: './img/social/facebook.svg',
-		link: 'https://www.facebook.com'
-	}];
 
-	let templateIndCount = 0;
 
-	class DragNDrop {
-		// static
+// --------------- render ---------------
+renderHeader();
+handleDocLoad();
 
+function handleDocLoad() {
+	const email = userLoggedIn();
+	if (isUserTemplateInLS(email)) {
+		renderPopup('open');
 	}
+}
 
-	class Element {
-		constructor(type, classes) {
-			// super(menuId, parent);
-			this.type = type;
-			this.classes = classes;
-		}
-		duplicate() {
-			// TODO
-		}
-		showMenu() {
-			// TODO
-		}
-		delete() {
-			// TODO
-		}
-		saveToLS() {
-			let elArray = [];
-			let data = null;
-			if (!localStorage.getItem('template')) {
-				localStorage.setItem('template', JSON.stringify(this));
-			} else {
-				data = JSON.parse(localStorage.getItem('template'));
-				if (data.length > 1) {
-					elArray.push(...data, this);
-				} else {
-					elArray.push(data, this);
-				}
-				localStorage.setItem('template', JSON.stringify(elArray));
-			}
+function userLoggedIn() {
+	const email = localStorage.getItem('email')
+	return ((email) && (localStorage.getItem('login') === 'true')) ? email : false;
+}
+
+function isUserTemplateInLS(email) {
+	return (localStorage.getItem(email) !== null) ? true : false;
+}
+
+function renderHeader() {
+	renderSaveBtn();
+	renderListBtn();
+}
+
+function renderSaveBtn() {
+	const btn = document.createElement('div');
+	btn.classList.add('headerBtn', 'save');
+	btn.innerHTML = '<img src="./img/save.svg" alt="Save to Local Storage">'
+	document.querySelector('header').prepend(btn);
+	document.querySelector('.save').addEventListener('click', handleSaveClick);
+}
+
+function renderListBtn() {
+	const btn = document.createElement('div');
+	btn.classList.add('headerBtn', 'list');
+	btn.innerHTML = '<img src="./img/list.svg" alt="List of Projects">'
+	document.querySelector('header').prepend(btn);
+	document.querySelector('.list').addEventListener('click', handleListClick);
+}
+
+function renderProjBtn(action, el, i) {
+	console.log(el);
+	let selectTemplateBtn;
+	if (action === 'list') {
+		selectTemplateBtn = document.createElement('button');
+	} else {
+		selectTemplateBtn = document.createElement('button');
+	}
+	selectTemplateBtn.textContent = el.name;
+	selectTemplateBtn.classList.add('btnForm', 'selectTemplateBtn');
+	selectTemplateBtn.dataset.id = i;
+	selectTemplateBtn.dataset.action = action;
+	document.querySelector('#windowSelectTemplate > .popup__form').append(selectTemplateBtn);
+	selectTemplateBtn.addEventListener('click', selectTemplate);
+}
+
+function selectTemplate(e) {
+	e.preventDefault();
+	const email = userLoggedIn();
+	const template = JSON.parse(localStorage.getItem(email));
+	if (e.target.dataset.action === 'open') {
+		renderHtmlById(e.target.dataset.id, template);
+		handleTemplateLoad();
+	} else if (e.target.dataset.action === 'save') {
+		saveTemplateAs(e.target.dataset.id);
+	} else if (e.target.dataset.action === 'list') {
+		renderHtmlById(e.target.dataset.id, template);
+		handleTemplateLoad();
+	}
+	showPopup('none');
+}
+
+function renderPopup(action) {
+	const popupSelectTemplate = document.querySelector('#windowSelectTemplate > .popup__form');
+	popupSelectTemplate.innerHTML = '';
+	const email = userLoggedIn();
+	if (isUserTemplateInLS(email)) {
+		const template = JSON.parse(localStorage.getItem(email));
+		try {
+			template.forEach((el, i) => {
+				renderProjBtn(action, el, i);
+			});
+		} catch (e) {
+			renderProjBtn(action, template, 0);
 		}
 	}
-
-	class ResizableElement extends Element {
-		constructor(type, classes, width, height, posX, posY) {
-			super(type, classes);
-			this.width = width;
-			this.height = height;
-			this.posX = posX;
-			this.posY = posY;
+	let title;
+	if (action === 'open') {
+		title = renderTitle('Выберите проект');
+		popupSelectTemplate.prepend(title);
+		addEmptyTemplateBtn(popupSelectTemplate);
+	} else if (action === 'save') {
+		if (isUserTemplateInLS(email)) {
+			title = renderTitle('Сохранить под именем:')
+			popupSelectTemplate.prepend(title);
 		}
-		changeHeight() {
-			// TODO
-		}
-		changeWidth() {
-			// TODO
-		}
-		changePosX() {
-			// TODO
-		}
-		changePosY() {
-			// TODO
-		}
-	}
-
-	class Block extends Element {
-		constructor(type, classes, bgColor) {
-			super(type, classes);
-			this.bgColor = bgColor;
-			this.templateInd = templateIndCount++;
-		}
-		setTemplateInd() {
-			// this.templateInd = templateIndCount++;
-		}
-		setBackgroundColor() {
-			// TODO
-		}
-		// saveToLS() {
-		// 	let item = JSON.stringify(this);
-		// 	console.log(item);
-		// 	if (!localStorage.getItem('template')) {
-		// 		localStorage.setItem('template', JSON.stringify(this))
-		// 	} else {
-		// 		localStorage.setItem('template', [...localStorage.getItem('template'), JSON.stringify(this)])
-		// 	}
-		// }
-	}
-	class Button extends ResizableElement {
-		constructor(type, classes, width, height, posX, posY, bgColor, btnLabel, fontColor) {
-			super(type, classes, width, height, posX, posY);
-			this.bgColor = bgColor;
-			this.btnLabel = btnLabel;
-			this.fontColor = fontColor;
-		}
-		setBackgroundColor() {
-			// TODO
-		}
-		setBtnLabel() {
-			// TODO
-		}
-		setFontColor() {
-			// TODO
-		}
-	}
-	class Image extends ResizableElement {
-		constructor(menuId, parent, type, classes, width, height, posX, posY, bgImage, border) {
-			super(menuId, parent, type, classes, width, height, posX, posY);
-			this.bgImage = bgImage;
-			this.border = border;
-		}
-		setBackgroundImage() {
-			// TODO
-		}
-		setBorder() {
-			// TODO
-		}
-	}
-	class SocialIcon extends ResizableElement {
-		constructor(type, classes, width, height, posX, posY, iconColor, link) {
-			super(type, classes, width, height, posX, posY);
-			this.iconColor = iconColor;
-			this.link = link;
-		}
-		setIconColor() {
-			// TODO
-		}
-		setLink() {
-			// TODO
-		}
-	}
-	class Text extends Element {
-		constructor(menuId, parent, type, classes, color) {
-			super(menuId, parent, type, classes);
-			this.color = color;
-		}
-		setColor() {
-			// TODO
-		}
-	}
-
-	// const saveAllToLS = () => {
-	// 	localStorage.setItem('template', JSON.stringify(templateElements));
-	// }
-	// saveAllToLS();
-	// const makeMapOfElements = () => {
-	// 	const templateMap = new Map();
-	// 	templateElements.forEach(el => {
-	// 		const key = el.type;
-	// 		if (!templateMap.get(key)) {
-	// 			templateMap.set(key, [el]);
-	// 		} else {
-	// 			templateMap.set(key, [...templateMap.get(key), el]);
-	// 		}
-	// 	});
-	// }
-	// makeMapOfElements();
-
-	// const renderTemplate = () => {
-
-	// 	templateElements.forEach(el => {
-	// 		let newElement = document.createElement('div');
-	// 		newElement.style.width = el.size.width;
-	// 		newElement.style.height = el.size.height;
-	// 		if (el.type === 'block') {
-
-	// 		} else if (el.type === 'block' || el.type === 'button') {
-	// 			newElement.style.backgroundColor = el.bgColor;
-	// 		}
-
-	// 		document.querySelector('.template').append(newElement);
-	// 	})
-	// }
-	// renderTemplate();
-
-	const elements = document.querySelectorAll('.menu__element');
-	let templateFlag = false;
-	let movingElement = null;
-	let elementX = 0;
-	let elementY = 0;
-
-	const dragStart = function (e) {
-		console.log('drag start');
-		setTimeout(() => {
-			if (e.target.parentNode === menuBlock) {
-				movingElement = e.target.cloneNode(true);
-			} else if (e.target.parentNode === templateBlock) {
-				movingElement = e.target;
-			}
-		})
-	}
-
-	const dragEnd = function (e) {
-		// console.log('drag end');
-	}
-	const dragOver = function (e) {
-		e.preventDefault();
-		// console.log('drag over');
-	}
-	const dragEnter = function (e) {
-		e.preventDefault();
-		// console.log('drag enter');
-	}
-	const dragLeave = function () {
-		e.preventDefault();
-		// console.log('drag leave');
-	}
-	const createNewElement = function (e, movingElement) {
-		const type = movingElement.dataset.type;
-		let newBlock = null;
-		if (type === 'block') {
-			movingElement.classList.add('wide');
-			newBlock = new Block(type, movingElement.classList, movingElement.style.backgroundColor);
-			newBlock.saveToLS();
+		addNewTemplateInput(popupSelectTemplate);
+	} else if (action === 'list') {
+		console.log('list');
+		if (isUserTemplateInLS(email)) {
+			title = renderTitle('Мои проекты');
+			renderEditIcons();
 		} else {
-			movingElement.classList.add('draggable-element');
-			movingElement.style.top = e.layerY - elementY + 'px';
-			movingElement.style.left = e.layerX - elementX + 'px';
-			if (type === 'button') {
-				newBlock = new Button(type, movingElement.classList, movingElement.clientWidth,
-					movingElement.clientHeight,
-					movingElement.style.left,
-					movingElement.style.top,
-					movingElement.style.backgroundColor,
-					movingElement.innerHTML,
-					movingElement.style.color
-				);
-				// type, classes, width, height, posX, posY, bgColor, btnLabel, fontColor;
-				newBlock.saveToLS();
-				// console.log(newBlock);
-			} else if (type === 'icon') {
-				// newBlock = new SocialIcon(type, movingElement.classList, movingElement.clientWidth,
-				// movingElement.clientHeight,
-				// movingElement.style.left,
-				// movingElement.style.top,
-				// iconColor, link);
-				// newBlock.saveToLS();
-				// console.log(newBlock);
-			}
+			title = renderTitle('Вы пока не сохранили ни одного проекта');
 		}
+		popupSelectTemplate.prepend(title);
 	}
-	const dragDrop = function (e) {
-		e.preventDefault();
-		console.log('drag drop');
-		console.log(movingElement);
-		// console.log(e.clientY, e.clientX, e.layerY, e.layerX);
-		this.append(movingElement);
-		movingElement.classList.remove('menu__element');
-		movingElement.classList.add('template__element');
-		movingElement.removeEventListener('mousedown', getElementMousePosMenu);
-		movingElement.addEventListener('mousedown', getElementMousePosTemplate);
-		movingElement.addEventListener('dragstart', dragStart);
-		if (!templateFlag) {
-			createNewElement(e, movingElement);
+	showPopup('block');
+}
+
+function renderEditIcons() {
+	const buttons = document.querySelectorAll('.selectTemplateBtn');
+	buttons.forEach((el) => {
+		const wrapper = document.createElement('div');
+		wrapper.classList.add('popup__form--wrapper');
+		wrapper.dataset.id = el.dataset.id;
+		el.before(wrapper);
+		wrapper.append(el);
+		renderIcon('change-name', wrapper, el);
+		renderIcon('delete', wrapper, el);
+	});
+	const icons = document.querySelectorAll('.btnForm--icon');
+	icons.forEach(icon => {
+		if (icon.dataset.type === 'change-name') {
+			icon.addEventListener('click', handleChangeNameClick);
+		} else if (icon.dataset.type === 'delete') {
+			icon.addEventListener('click', handleDeleteClick);
+		}
+	})
+}
+
+function handleChangeNameClick(e) {
+	let id;
+	let node;
+	if (e.target.tagName === 'IMG') {
+		id = e.target.parentNode.dataset.id;
+		node = e.target.parentNode;
+		e.target.src = "./img/save.svg";
+	} else {
+		id = e.target.dataset.id;
+		node = e.target;
+		e.target.childNodes[0].src = "./img/save.svg";
+	}
+	node.removeEventListener('click', handleChangeNameClick);
+	node.addEventListener('click', saveChangedName);
+	const nameBtn = document.querySelector(`.selectTemplateBtn[data-id="${id}"]`);
+	nameBtn.removeEventListener('click', selectTemplate);
+	nameBtn.contentEditable = true;
+	nameBtn.focus();
+}
+
+function handleDeleteClick(e) {
+	e.preventDefault();
+	let id;
+	if (e.target.tagName === 'IMG') {
+		id = e.target.parentNode.dataset.id;
+	} else {
+		id = e.target.dataset.id;
+	}
+	const wrapper = document.querySelector(`div[data-id="${id}"]`);
+	deleteTemplateFromLS(id);
+	wrapper.remove();
+}
+
+function deleteTemplateFromLS(id) {
+	const email = userLoggedIn();
+	const template = JSON.parse(localStorage.getItem(email));
+	template.splice(id, 1);
+	localStorage.setItem(email, JSON.stringify(template));
+}
+
+function renderIcon(src, block, el) {
+	let newEl = document.createElement('div');
+	newEl.classList.add('btnForm', 'btnForm--icon');
+	newEl.dataset.id = el.dataset.id;
+	newEl.dataset.type = src;
+	newEl.innerHTML = `<img src="./img/${src}.svg" alt="icon">`;
+	block.append(newEl);
+}
+
+function renderTitle(title) {
+	let titleEl = document.createElement('h2');
+	titleEl.innerHTML = title;
+	return titleEl;
+}
+
+function addEmptyTemplateBtn(target) {
+	const emptyTemplateBtn = document.createElement('button');
+	emptyTemplateBtn.textContent = 'Создать новый проект';
+	emptyTemplateBtn.classList.add('btnForm');
+	target.append(emptyTemplateBtn);
+	emptyTemplateBtn.addEventListener('click', openEmptyProject);
+}
+
+function addNewTemplateInput(target) {
+	let title = renderTitle('Новый проект:');
+	target.append(title);
+	const inputTemplateName = document.createElement('input');
+	const inputProps = elementsProps.templateNameInput;
+	inputProps.classes.forEach(el => {
+		inputTemplateName.classList.add(el);
+	});
+	inputTemplateName.id = inputProps.id;
+	inputTemplateName.placeholder = inputProps.placeholder;
+	inputTemplateName.type = inputProps.type;
+	target.append(inputTemplateName);
+	const newNameSaveBtn = document.createElement('button');
+	newNameSaveBtn.textContent = 'Сохранить';
+	newNameSaveBtn.classList.add('btnForm');
+	target.append(newNameSaveBtn);
+	newNameSaveBtn.addEventListener('click', saveNewTemplate)
+}
+
+function openEmptyProject() {
+	showPopup('none');
+}
+
+function showPopup(state) {
+	document.getElementById('windowSelectTemplate').style.display = state;
+	document.getElementById('grayBackground').style.display = state;
+}
+
+// --------------- save and load from LS ---------------
+function handleListClick() {
+	renderPopup('list');
+}
+
+function handleSaveClick(e) {
+	const email = userLoggedIn();
+	console.log(email);
+	renderPopup('save');
+}
+
+function saveNewTemplate(e) {
+	const email = userLoggedIn();
+	const projName = document.querySelector('#projectname').value;
+	const projHtml = templateBlock.innerHTML;
+	const templateObj = {
+		name: projName,
+		html: projHtml
+	}
+	if (!isUserTemplateInLS(email)) {
+		localStorage.setItem(email, JSON.stringify(templateObj));
+	} else {
+		let elArray = [];
+		let data = null;
+		data = JSON.parse(localStorage.getItem(email));
+		if (data.length > 1) {
+			elArray.push(...data, templateObj);
 		} else {
-			movingElement.style.top = e.clientY - elementY + 'px';
-			movingElement.style.left = e.clientX - elementX + 'px';
+			elArray.push(data, templateObj);
 		}
+		localStorage.setItem(email, JSON.stringify(elArray));
 	}
+	showPopup('none');
+}
 
-	const getElementMousePosMenu = function (e) {
-		templateFlag = false;
-		console.log('from menu');
-		elementY = e.offsetY;
-		elementX = e.offsetX;
-		// if (e.target.tagName === 'path' || e.target.tagName === 'svg') {
-		// 	elementY = e.offsetY;
-		// 	elementX = e.offsetX;
-		// } else {
-		// 	elementY = e.offsetY;
-		// 	elementX = e.offsetX;
-		// }
-	}
-	const getElementMousePosTemplate = function (e) {
-		console.log('from template');
-		console.log(`e.client: ${e.clientY},${e.clientX}`);
-		console.log(e);
-		console.log('offset E: ' + e.offsetY, e.offsetX);
-		console.log('offset: ' + e.target.offsetTop, e.target.offsetLeft);
-		templateFlag = true;
-		elementY = e.offsetY;
-		elementX = e.offsetX;
-		// if (e.target.tagName === 'path' || e.target.tagName === 'svg') {
-		// 	elementY = e.offsetY + 1;
-		// } else {
-		// 	elementY = e.offsetY;
-		// }
-	}
+function handleTemplateLoad() {
+	const elements = getTemplateElements();
+	elements.forEach(el => {
+		addListenersForNewElement(el);
+	})
+}
 
+function getTemplateElements() {
+	return document.querySelectorAll('.template__element');
+}
+
+function saveChangedName(e) {
+	console.log('save as');
+	let id;
+	let node;
+	if (e.target.tagName === 'IMG') {
+		id = e.target.parentNode.dataset.id;
+		node = e.target.parentNode;
+		e.target.src = "./img/change-name.svg";
+	} else {
+		id = e.target.dataset.id;
+		node = e.target;
+		node.childNodes[0].src = "./img/change-name.svg";
+	}
+	const nameBtn = document.querySelector(`.selectTemplateBtn[data-id="${id}"]`);
+	newName = nameBtn.innerHTML.replace('<br>', '');
+	console.log(newName);
+	const email = userLoggedIn();
+	const template = JSON.parse(localStorage.getItem(email));
+	if (template.length > 1) {
+		template[id].name = newName;
+	} else {
+		template.name = newName;
+	}
+	localStorage.removeItem(email);
+	localStorage.setItem(email, JSON.stringify(template));
+	console.log(JSON.parse(localStorage.getItem(email))[id]);
+	nameBtn.addEventListener('click', selectTemplate);
+	nameBtn.contentEditable = false;
+	nameBtn.blur();
+	node.removeEventListener('click', saveChangedName);
+	node.addEventListener('click', handleChangeNameClick);
+}
+
+function saveTemplateAs(id) {
+	const email = userLoggedIn();
+	const projHtml = templateBlock.innerHTML;
+	const template = JSON.parse(localStorage.getItem(email));
+	if (template.length > 1) {
+		template[id].html = projHtml;
+	} else {
+		template.html = projHtml;
+	}
+	localStorage.setItem(email, JSON.stringify(template));
+}
+
+function renderHtmlById(htmlId, template) {
+	let name;
+	if (template.length > 1) {
+		html = template[htmlId].html;
+		name = template[htmlId].name;
+	} else {
+		html = template.html;
+		name = template.name;
+	}
+	addTitleToHeader(name);
+
+	templateBlock.innerHTML = html;
+}
+
+function addTitleToHeader(name) {
+	document.querySelector('header').innerHTML += `<div class="header__title">${name}</div>`;
+	document.querySelector('.list').addEventListener('click', handleListClick);
+	document.querySelector('.save').addEventListener('click', handleSaveClick);
+}
+// ----------------- drag and drop -----------------
+
+let templateFlag = false;
+let movingElement = null;
+let elementX = 0;
+let elementY = 0;
+
+function dragAndDrop() {
+	const elements = document.querySelectorAll('.element');
 	elements.forEach(el => {
 		el.addEventListener('dragstart', dragStart);
 		el.addEventListener('dragend', dragEnd);
-		el.addEventListener('mousedown', getElementMousePosMenu)
 	});
-	templateBlock.addEventListener('dragover', dragOver);
-	templateBlock.addEventListener('dragenter', dragEnter);
-	templateBlock.addEventListener('drop', dragDrop);
 }
-dragAndDrop();
+
+function dragStart(e) {
+	getPosition(e);
+	getTemplateFlag(e);
+	setTimeout(() => {
+		if (e.target.parentNode.isSameNode(menuBlock)) {
+			movingElement = e.target.cloneNode(true);
+		} else if (e.target.parentNode.isSameNode(templateBlock)) {
+			movingElement = e.target;
+		}
+	})
+}
+
+function dragEnd(e) {
+	e.preventDefault();
+}
+
+function dragOver(e) {
+	e.preventDefault();
+}
+
+function dragEnter(e) {
+	e.preventDefault();
+}
+
+function dragLeave(e) {
+	e.preventDefault();
+}
+
+function dragDrop(e) {
+	e.stopPropagation();
+	e.preventDefault();
+	if (!e.target.isSameNode(movingElement)) {
+		this.append(movingElement);
+		movingElement.classList.remove('element', 'elementPreview');
+		movingElement.classList.add('template__element');
+		addListenersForNewElement(movingElement);
+		if (!templateFlag) {
+			createNewElement(e, movingElement);
+		} else {
+			setPosition(e);
+		}
+	}
+}
+
+function createNewElement(e, movingElement) {
+	const type = movingElement.dataset.type;
+	if (type === 'block') {
+		movingElement.classList.add('wide');
+	} else {
+		movingElement.classList.add('draggable-element');
+		setPosition(e);
+		switch (type) {
+			case 'button':
+				movingElement.classList.add('template__button');
+				break;
+			case 'icon':
+				break;
+			case 'text':
+				movingElement.style.width = '';
+				const textStyleClassName = movingElement.dataset.textstyle;
+				movingElement.classList.add(textStyleClassName, 'template__text');
+				break;
+			case 'image':
+				movingElement.classList.add('template__image');
+				break;
+		}
+	}
+}
+
+function addListenersForNewElement(movingElement) {
+	movingElement.addEventListener('click', handleClick);
+	movingElement.addEventListener('dblclick', handleDoubleClick);
+	movingElement.addEventListener('focusout', handleFocusOut);
+	movingElement.addEventListener('dragstart', dragStart);
+}
+
+function pasteCopiedElement(movingElement) {
+	templateBlock.append(movingElement);
+	movingElement.style.top = movingElement.style.top.slice(0, -2) - (-50) + 'px';
+	movingElement.style.left = movingElement.style.left.slice(0, -2) - (-50) + 'px';
+	movingElement.classList.remove('selected');
+	addListenersForNewElement(movingElement);
+}
+
+// ----------------- positioning ----------------
+
+function getTemplateFlag(e) {
+	if (e.target.parentNode.isSameNode(templateBlock)) {
+		templateFlag = true;
+	} else {
+		templateFlag = false;
+	}
+}
+
+function setPosition(e) {
+	const scroll = document.scrollingElement.scrollTop;
+	offParTop = e.target.offsetParent.offsetTop;
+	offParLeft = e.target.offsetParent.offsetLeft;
+	movingElement.style.top = e.clientY - elementY - offParTop + scroll + 'px';
+	movingElement.style.left = e.clientX - elementX - offParLeft + 'px';
+}
+
+function getPosition(e) {
+	elementY = e.offsetY;
+	elementX = e.offsetX;
+}
+
+// -------------- editing handlers -------------------
+function getTarget(e) {
+	let node;
+	if (e.target.tagName === 'path') {
+		node = e.target.parentNode.parentNode;
+	} else if (e.target.tagName === 'svg') {
+		node = e.target.parentNode;
+	} else {
+		node = e.target;
+	}
+	return node;
+}
+
+function handleClick(e) {
+	let target = getTarget(e);
+	target.classList.add('selected');
+	target.focus();
+	target.addEventListener('keydown', handleKeyDown);
+	// node.addEventListener('focusout', handleFocusOut);
+}
+
+function handleDoubleClick(e) {
+	let target = getTarget(e);
+	target.contentEditable = true;
+	target.removeEventListener('click', handleClick);
+	target.removeEventListener('keydown', handleKeyDown);
+	target.classList.add('selected');
+	if (target.dataset.type === 'text') {
+		target.style.height = 'auto';
+	}
+}
+
+function handleFocusOut(e) {
+	let target = getTarget(e);
+	window.getSelection().removeAllRanges();
+	target.contentEditable = false;
+	target.classList.remove('selected');
+	target.addEventListener('click', handleClick);
+}
+
+function handleKeyDown(e) {
+	e.preventDefault();
+	if (e.ctrlKey === true && e.key === 'c') {
+		movingElement = e.target.cloneNode(true);
+	} else if (e.ctrlKey === true && e.key === 'v') {
+		pasteCopiedElement(movingElement);
+	} else if (e.key === 'Delete') {
+		e.target.remove();
+	} else if (e.key === 'ArrowLeft') {
+		let left = e.target.style.left;
+		e.target.style.left = left.slice(0, left.length - 2) - 1 + 'px';
+	} else if (e.key === 'ArrowRight') {
+		let right = e.target.style.left;
+		e.target.style.left = right.slice(0, right.length - 2) - (-1) + 'px';
+	} else if (e.key === 'ArrowUp') {
+		let up = e.target.style.top;
+		e.target.style.top = up.slice(0, up.length - 2) - 1 + 'px';
+	} else if (e.key === 'ArrowDown') {
+		let down = e.target.style.top;
+		e.target.style.top = down.slice(0, down.length - 2) - (-1) + 'px';
+	}
+}

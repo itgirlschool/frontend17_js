@@ -86,12 +86,13 @@ h6 {
 }
 
 .wrapper__button {
+  padding: 10px 20px;
   gap: 10px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: baseline;
-  font-size: 26px;
+  font-size: 20px;
 }
 
 .regButton {
@@ -107,7 +108,8 @@ h6 {
 }
 
 #gray,
-#gray2 {
+#gray2,
+#grayBackground {
   background-color: rgba(1, 1, 1, 0.75);
   position: fixed;
   top: 0;
@@ -120,8 +122,9 @@ h6 {
 }
 
 #windowReg,
-#windowIn {
-  width: 350px;
+#windowIn,
+#windowSelectTemplate {
+  max-width: 400px;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -140,7 +143,8 @@ h6 {
 
 .close {
   position: absolute;
-  margin: 10px 0 0 320px;
+  top: 10px;
+  right: 10px;
   cursor: pointer;
   border: 1px solid #ccc;
   padding: 2px;
@@ -152,9 +156,19 @@ h6 {
 }
 
 .popup__form {
-  width: 275px;
+  width: 80%;
   margin: 15px auto 20px auto;
   text-align: center;
+}
+
+.popup__form > h2 {
+  margin-bottom: 5px;
+}
+
+.popup__form--wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .input,
@@ -167,7 +181,18 @@ h6 {
   border: 1px solid rgb(180, 97, 97);
 }
 
-.btnForm:hover {
+.btnForm--icon {
+  width: 42px;
+  margin-left: 10px;
+  background-color: #fff;
+}
+
+.btnForm--icon img {
+  width: 15px;
+  height: 15px;
+}
+
+.btnForm:not([contenteditable=true]):hover {
   background: rgb(180, 97, 97);
 }
 
@@ -177,15 +202,26 @@ h6 {
   padding-bottom: 15px;
 }
 
+.selectTemplateBtn {
+  background-color: #fff;
+  text-align: left;
+}
+
+.left-sidebar {
+  z-index: 10;
+  max-width: 45vw;
+  position: absolute;
+}
+
 .left-sidebar__button {
   position: fixed;
   padding: 5px;
   background: #fff;
-  height: 100vh;
   width: 50px;
+  height: 100vh;
   left: 0px;
   cursor: pointer;
-  z-index: 1;
+  z-index: 100;
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 2px 10px 0 rgba(0, 0, 0, 0.08), 0 1px 20px 0 rgba(0, 0, 0, 0.08);
 }
 
@@ -195,9 +231,11 @@ h6 {
   transform: translateY(100%);
   background: #fff;
   width: 45vw;
-  min-width: 500px;
+  max-width: 550px;
+  min-width: 300px;
   height: 100vh;
   background: rgb(255, 255, 255);
+  text-align: center;
   box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 2px 10px 0 rgba(0, 0, 0, 0.08), 0 1px 20px 0 rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
@@ -215,7 +253,7 @@ h6 {
 
 .left-sidebar__content {
   display: grid;
-  grid-template-columns: 0.5fr 1fr;
+  grid-template-columns: 0.37fr 1fr;
 }
 
 .left-sidebar__categories {
@@ -234,6 +272,7 @@ h6 {
   list-style: none;
   cursor: pointer;
   padding: 4px 12px;
+  z-index: 10;
 }
 
 .left-sidebar__categories a:hover {
@@ -275,18 +314,30 @@ h6 {
   }
 }
 
+.left-sidebar__elements {
+  display: grid;
+  max-height: 50vh;
+  grid-gap: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  padding: 10px;
+}
+
 .element {
+  max-width: 150px;
+  max-height: 200px;
   margin: auto;
-  padding: 5px;
+}
+
+body {
+  padding-left: 50px;
 }
 
 .elementPreview {
-  max-height: 100px;
+  max-height: 150px;
   justify-self: flex-start;
   align-self: center;
   cursor: pointer;
   margin: auto;
-  padding: 5px;
 }
 
 .menuFlexStyle {
@@ -300,4 +351,114 @@ h6 {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.template {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  box-shadow: inset 1px 1px 10px lightgrey;
+}
+
+.template__button {
+  text-align: center;
+  line-height: 2;
+}
+
+.save {
+  left: 60px;
+}
+
+.list {
+  left: 110px;
+}
+
+.headerBtn {
+  width: 42px;
+  height: 42px;
+  position: absolute;
+  top: 5px;
+  background-color: #fff;
+  border-radius: 2px;
+  z-index: 50;
+}
+
+.headerBtn:hover {
+  cursor: pointer;
+}
+
+.headerBtn img {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 32px;
+  height: 32px;
+}
+
+.wide {
+  width: 100%;
+}
+
+.draggable-element {
+  position: absolute;
+  cursor: move;
+}
+
+.selected {
+  box-shadow: 0px 0px 2px rgb(29, 195, 255);
+  cursor: default;
+}
+
+.element {
+  cursor: move;
+}
+
+.element[data-type=button] {
+  line-height: 2;
+}
+
+[data-type=image] {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+[data-type=icon] > svg {
+  fill: grey;
+}
+
+.header_h1 {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 40px !important;
+}
+
+.header_h2 {
+  color: whitesmoke;
+  width: auto;
+  font-size: 30px !important;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.header__title {
+  position: absolute;
+  top: 15px;
+  left: 170px;
+  font-size: 20px;
+}
+
+.simple_text {
+  max-width: 250px;
+  height: auto;
+}
+
+body {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  color: #0b0c0c;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
 }
