@@ -32,53 +32,262 @@ let json = `[{
     "height": "100px",
     "bgColor": "pink"
 },{
-    "type": "block",
-    "width": "0",
-	"height": "0",
-    "borderLeft": "50px solid transparent",
-	"borderRight": "50px solid transparent",
-	"borderBottom": "100px solid #fff973"
-},{
-    "type": "block",
-    "width": "0",
-	"height": "0",
-    "borderTop": "50px solid transparent",
-	"borderRight": "100px solid pink",
-	"borderBottom": "50px solid transparent"
-},{
-    "type": "block",
-    "width": "0",
-	"height": "0",
-	"borderRight": "100px solid transparent",
-	"borderBottom": "100px solid yellow"
+    "type": "button",
+    "width": "150px",
+    "height": "40px",
+    "bgColor": "black",
+    "color": "white",
+    "text": "View More",
+    "fontFamily": "Courier New",
+    "fontSize": "16px"
 },{
     "type": "button",
     "width": "150px",
-    "height": "30px",
-    "bgColor": "#fff973",
+    "height": "40px",
+    "bgColor": "white",
     "color": "black",
-    "text": "Кнопка"
+    "text": "Read More",
+    "fontSize": "20px"
 },{
     "type": "button",
     "width": "150px",
-    "height": "30px",
-    "bgColor": "#c6c3af",
+    "height": "40px",
+    "bgColor": "rgb(11, 47, 91)",
+    "color": "rgb(202, 215, 231)",
+    "text": "SEND",
+    "fontFamily": "Trebuchet MS",
+    "fontSize": "20px",
+    "border": "2px solid rgb(202, 215, 231)"
+},{
+    "type": "button",
+    "width": "150px",
+    "height": "40px",
+    "bgColor": "rgb(63, 118, 82)",
+    "color": "white",
+    "text": "SHOP &#8594;",
+    "fontFamily": "Cambria",
+    "fontSize": "20px",
+    "borderRadius": "40px"
+},{
+    "type": "button",
+    "width": "150px",
+    "height": "40px",
+    "bgColor": "white",
+    "color": "blue",
+    "text": "VIEW ALL",
+    "fontFamily": "Helvetica",
+    "fontSize": "20px"
+},{
+    "type": "button",
+    "width": "150px",
+    "height": "40px",
+    "bgColor": "rgb(7, 61, 81)",
+    "color": "white",
+    "text": "DOWNLOAD",
+    "fontFamily": "Helvetica",
+    "fontSize": "14px"
+},{
+    "type": "button",
+    "width": "150px",
+    "height": "40px",
+    "bgColor": "rgb(229, 235, 250)",
+    "color": "rgb(4, 107, 254)",
+    "text": "JOIN US",
+    "fontFamily": "Helvetica",
+    "fontSize": "14px",
+    "borderRadius": "40px"
+},{
+    "type": "button",
+    "width": "70px",
+    "height": "40px",
+    "bgColor": "pink",
+    "color": "red",
+    "text": "&#10084;",
+    "fontFamily": "Helvetica",
+    "fontSize": "40px",
+    "borderRadius": "100px"
+},{
+    "type": "button",
+    "width": "70px",
+    "height": "40px",
+    "bgColor": "rgb(229, 235, 250)",
+    "color": "rgb(4, 107, 254)",
+    "text": "&#10006;",
+    "fontFamily": "Helvetica",
+    "fontSize": "30px",
+    "borderRadius": "5px"
+},{
+    "type": "button",
+    "width": "45px",
+    "height": "40px",
+    "bgColor": "rgb(229, 235, 250)",
+    "color": "rgb(4, 107, 254)",
+    "text": "&#128386;",
+    "fontFamily": "Helvetica",
+    "fontSize": "30px",
+    "borderRadius": "5px"
+},{
+    "type": "button",
+    "width": "45px",
+    "height": "40px",
+    "bgColor": "rgb(229, 235, 250)",
+    "color": "rgb(4, 107, 254)",
+    "text": "&#9742;",
+    "fontFamily": "Helvetica",
+    "fontSize": "30px",
+    "borderRadius": "5px"
+},{
+    "type": "button",
+    "width": "45px",
+    "height": "40px",
+    "bgColor": "rgb(229, 235, 250)",
+    "color": "rgb(4, 107, 254)",
+    "text": "&#9997;",
+    "fontFamily": "Helvetica",
+    "fontSize": "30px",
+    "borderRadius": "5px"
+},{
+    "type": "button",
+    "width": "45px",
+    "height": "40px",
+    "bgColor": "rgb(229, 235, 250)",
+    "color": "rgb(4, 107, 254)",
+    "text": "&#9786;",
+    "fontFamily": "Helvetica",
+    "fontSize": "30px",
+    "borderRadius": "5px"
+},{
+    "type": "button",
+    "width": "45px",
+    "height": "40px",
+    "bgColor": "rgb(229, 235, 250)",
+    "color": "rgb(4, 107, 254)",
+    "text": "&#10046;",
+    "fontFamily": "Helvetica",
+    "fontSize": "30px",
+    "borderRadius": "5px"
+},{
+    "type": "button",
+    "width": "150px",
+    "height": "40px",
+    "bgColor": "white",
+    "color": "rgb(63, 118, 82)",
+    "text": "Apply Now",
+    "fontFamily": "Franklin Gothic Medium",
+    "fontSize": "18px",
+    "fontStyle": "italic"
+},{
+    "type": "button",
+    "width": "150px",
+    "height": "40px",
+    "bgColor": "white",
+    "color": "rgb(63, 118, 82)",
+    "text": "Featured",
+    "fontFamily": "Arial",
+    "fontSize": "18px",
+    "border": "2px solid rgb(63, 118, 82)"
+},{
+    "type": "button",
+    "width": "45px",
+    "height": "40px",
+    "bgColor": "rgb(255, 252, 204)",
+    "color": "rgb(161, 103, 7)",
+    "text": "&#62;",
+    "fontFamily": "Helvetica",
+    "fontSize": "30px"
+},{
+    "type": "button",
+    "width": "110px",
+    "height": "40px",
+    "bgColor": "rgb(255, 248, 107)",
     "color": "black",
-    "text": "Кнопка"
+    "text": "SEND",
+    "fontFamily": "Verdana",
+    "fontSize": "18px",
+    "fontWeight": "bold"
+},{
+    "type": "button",
+    "width": "110px",
+    "height": "40px",
+    "bgColor": "white",
+    "color": "rgb(12, 68, 38)",
+    "text": "BACK TO TOP",
+    "fontFamily": "Franklin Gothic Medium",
+    "fontSize": "16px"
 },{
     "type": "text",
-    "width": "150px",
-    "height": "30px",
     "fontSize": "20px",
     "color": "#000",
-    "text": "Заголовок 2"
+    "text": "Arial",
+    "fontFamily": "Arial"
 },{
     "type": "text",
-    "width": "150px",
-    "height": "30px",
     "fontSize": "20px",
     "color": "#000",
-    "text": "Ваш текст будет написан в этом блоке"
+    "text": "Times New Roman",
+    "fontFamily": "Times New Roman"
+},{
+    "type": "text",
+    "fontSize": "20px",
+    "color": "#000",
+    "text": "Courier New",
+    "fontFamily": "Courier New"
+},{
+    "type": "text",
+    "fontSize": "20px",
+    "color": "#000",
+    "text": "Verdana",
+    "fontFamily": "Verdana"
+},{
+    "type": "text",
+    "fontSize": "20px",
+    "color": "#000",
+    "text": "Trebuchet MS",
+    "fontFamily": "Trebuchet MS"
+},{
+    "type": "text",
+    "fontSize": "20px",
+    "color": "#000",
+    "text": "Cambria",
+    "fontFamily": "Cambria"
+},{
+    "type": "text",
+    "fontSize": "20px",
+    "color": "#000",
+    "text": "Franklin Gothic Medium",
+    "fontFamily": "Franklin Gothic Medium"
+},{
+    "type": "text",
+    "fontSize": "20px",
+    "color": "#000",
+    "text": "Helvetica",
+    "fontFamily": "Helvetica"
+},{
+    "type": "text",
+    "fontSize": "16px",
+    "color": "#000",
+    "text": "Helvetica Light is an easy-to-read font, with tall and narrow letters, that works well on almost every site.",
+    "fontFamily": "Helvetica"
+},{
+    "type": "text",
+    "fontSize": "16px",
+    "color": "#000",
+    "text": "Helvetica Light is an easy-to-read font, with tall and narrow letters, that works well on almost every site.",
+    "fontFamily": "Helvetica",
+    "fontWeight": "bold"
+},{
+    "type": "text",
+    "fontSize": "16px",
+    "color": "#000",
+    "text": "Helvetica Light is an easy-to-read font, with tall and narrow letters, that works well on almost every site.",
+    "fontFamily": "Helvetica",
+    "fontStyle": "italic"
+},{
+    "type": "image",
+    "width": "150px",
+    "height": "150px",
+    "border": "1px solid #c6c3af",
+    "bgImage": "url(./img/work-together.jpg) "
 },{
     "type": "image",
     "width": "150px",
@@ -92,10 +301,18 @@ let json = `[{
     "border": "1px solid #c6c3af",
     "icon": "url(./img/social/facebook.svg)",
     "link": "https://www.facebook.com"
+},{
+    "type": "icon",
+    "width": "24px",
+    "height": "24px",
+    "border": "1px solid #c6c3af",
+    "icon": "url(./img/social/facebook.svg)",
+    "link": "https://www.facebook.com"
 }]`
 
 const leftSidebarButton = document.querySelector('.left-sidebar__button');
 const leftSidebarMenu = document.querySelector('.left-sidebar__menu');
+const leftSidebarElements = document.querySelector(".left-sidebar__elements");
 
 leftSidebarButton.addEventListener('click', function () {
     leftSidebarMenu.classList.toggle("leftSidebarMenu");
@@ -134,22 +351,24 @@ for (let jsonElement of jsonElements) {
     }
 }
 
-//отрисовываем элементы из json в меню
-function drawCategories(elements) {
-    let elementsContent = "";
-    for (let element of elements) {
-        elementsContent +=
-            `<div class="element elementPreview"
-            draggable="true"
-            data-type="${element.type}"
-            style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height}; color: ${element.color}; fontSize: ${element.fontSize}; border: ${element.border}; bgImage: ${element.bgImage}; icon: ${element.icon}; link: ${element.link}; border-radius: ${element.borderRadius}; border-left: ${element.borderLeft}; border-right: ${element.borderRight}; border-bottom: ${element.borderBottom}; border-top: ${element.borderTop};
-            ">` +
-            ((element.text == undefined) ? `` : `"${element.text}"`) +
-            `</div>`;
-    }
-    document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
-    dragFromSidebar();
-}
+// //отрисовываем элементы из json в меню
+// //переделано в отдельные функции для каждого типа блока
+// function drawCategories(elements) {
+//     let elementsContent = "";
+//     for (let element of elements) {
+//         elementsContent +=
+//             `<div class="element elementPreview"
+//             draggable="true"
+//             contenteditable="true"
+//             data-type="${element.type}"
+//             style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height}; color: ${element.color}; font-size: ${element.fontSize}; border: ${element.border}; bgImage: ${element.bgImage}; icon: ${element.icon}; link: ${element.link}; border-radius: ${element.borderRadius}; border-left: ${element.borderLeft}; border-right: ${element.borderRight}; border-bottom: ${element.borderBottom}; border-top: ${element.borderTop};
+//             ">` +
+//             ((element.text == undefined) ? `` : `"${element.text}"`) +
+//             `</div>`;
+//     }
+//     document.querySelector(".left-sidebar__elements").innerHTML = elementsContent;
+//     dragFromSidebar();
+// }
 
 let categories = document.querySelectorAll(".categories__button");
 for (let i = 0; i < categories.length; i++) {
@@ -158,28 +377,92 @@ for (let i = 0; i < categories.length; i++) {
 
         switch (true) {
             case (target.classList.contains('left-sidebar__categories-block')): {
+                leftSidebarElements.classList.add('menuFlexStyle');
                 let elements = blocksArray;
-                drawCategories(elements);
+                let elementsContent = "";
+
+                for (let element of elements) {
+                    elementsContent +=
+                        `<div class="element elementPreview"
+                    draggable="true"
+                    data-type="${element.type}" style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height}; border: ${element.border}; bgImage: ${element.bgImage}; icon: ${element.icon}; border-radius: ${element.borderRadius}; border-left: ${element.borderLeft};border-right: ${element.borderRight}; border-bottom: ${element.borderBottom}; border-top: ${element.borderTop};
+                    "></div>`;
+                }
+
+                leftSidebarElements.innerHTML = elementsContent;
+                dragFromSidebar();
                 break;
             }
             case (target.classList.contains('left-sidebar__categories-button')): {
+                leftSidebarElements.classList.add('menuFlexStyle');
                 let elements = buttonsArray;
-                drawCategories(elements);
+                let elementsContent = "";
+
+                for (let element of elements) {
+                    elementsContent +=
+                        `<div class="element elementPreview flexible"
+                        draggable="true"
+                        contenteditable="true"
+                        data-type="${element.type}"
+                        style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height}; color: ${element.color}; font-size: ${element.fontSize}; border: ${element.border}; bgImage: ${element.bgImage}; icon: ${element.icon}; link: ${element.link}; border-radius: ${element.borderRadius}; border-left: ${element.borderLeft}; border-right: ${element.borderRight}; border-bottom: ${element.borderBottom}; border-top: ${element.borderTop}; font-family: ${element.fontFamily}; font-size: ${element.fontSize}; font-style: ${element.fontStyle}; font-weight: ${element.fontWeight};
+                        ">` +
+                        ((element.text == undefined) ? `` : `${element.text}`) +
+                        `</div>`;
+                }
+
+                leftSidebarElements.innerHTML = elementsContent;
+                dragFromSidebar();
                 break;
             }
             case (target.classList.contains('left-sidebar__categories-text')): {
+                leftSidebarElements.classList.remove('menuFlexStyle');
                 let elements = textArray;
-                drawCategories(elements);
+                let elementsContent = "";
+
+                for (let element of elements) {
+                    elementsContent +=
+                        `<div class="element elementPreview"
+                        draggable="true"
+                        contenteditable="true"
+                        data-type="${element.type}"
+                        style="color: ${element.color}; font-size: ${element.fontSize}; font-family: ${element.fontFamily}; font-weight: ${element.fontWeight}; font-style: ${element.fontStyle};
+                        ">` + `${element.text}` + `</div>`;
+                }
+
+                leftSidebarElements.innerHTML = elementsContent;
+                dragFromSidebar();
                 break;
             }
             case (target.classList.contains('left-sidebar__categories-image')): {
+                leftSidebarElements.classList.add('menuFlexStyle');
                 let elements = imagesArray;
-                drawCategories(elements);
+                let elementsContent = "";
+                for (let element of elements) {
+                    elementsContent +=
+                        `<div class="element elementPreview"
+                        draggable="true"
+                        data-type="${element.type}"
+                        style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height}; border: ${element.border}; bgImage: ${element.bgImage}; link: ${element.link}; border-radius: ${element.borderRadius}; border-left: ${element.borderLeft}; border-right: ${element.borderRight}; border-bottom: ${element.borderBottom}; border-top: ${element.borderTop};
+                        "></div>`;
+                }
+                leftSidebarElements.innerHTML = elementsContent;
+                dragFromSidebar();
                 break;
             }
             case (target.classList.contains('left-sidebar__categories-icon')): {
+                leftSidebarElements.classList.add('menuFlexStyle');
                 let elements = iconsArray;
-                drawCategories(elements);
+                let elementsContent = "";
+                for (let element of elements) {
+                    elementsContent +=
+                        `<div class="element elementPreview"
+                        draggable="true"
+                        data-type="${element.type}"
+                        style="background: ${element.bgColor}; width: ${element.width}; height: ${element.height}; color: ${element.color}; font-size: ${element.fontSize}; border: ${element.border}; bgImage: ${element.bgImage}; icon: ${element.icon}; link: ${element.link}; border-radius: ${element.borderRadius}; border-left: ${element.borderLeft}; border-right: ${element.borderRight}; border-bottom: ${element.borderBottom}; border-top: ${element.borderTop};
+                        "></div>`;
+                }
+                leftSidebarElements.innerHTML = elementsContent;
+                dragFromSidebar();
                 break;
             }
         }
@@ -190,7 +473,7 @@ for (let i = 0; i < categories.length; i++) {
 let elementId = 0;
 
 function dragFromSidebar() {
-    let newElements = document.querySelectorAll(".element");
+    let newElements = document.querySelectorAll(".elementPreview");
 
     for (let j = 0; j < newElements.length; j++) {
         newElements[j].addEventListener('click', function (event) {
@@ -200,6 +483,8 @@ function dragFromSidebar() {
             newDiv.id = elementId; //чтобы обратиться по id
             document.body.appendChild(newDiv);
             newDiv.classList.remove("elementPreview");
+            newDiv.classList.add("elementMovable"); //новый класс, чтобы привязать dragndrop
+            newDiv.classList.add("flexible");
         });
     }
 };;
