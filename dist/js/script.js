@@ -806,8 +806,8 @@ const elementsProps = {
 	}
 }
 
-
 // --------------- render ---------------
+
 renderHeader();
 handleDocLoad();
 
@@ -1136,7 +1136,8 @@ function renderHtmlById(htmlId, template) {
 }
 
 function addTitleToHeader(name) {
-	document.querySelector('header').innerHTML += `<div class="header__title">${name}</div>`;
+	document.querySelector('header').innerHTML += `<div class="header__title"></div>`;
+	document.querySelector('.header__title').innerHTML = name;
 	document.querySelector('.list').addEventListener('click', handleListClick);
 	document.querySelector('.save').addEventListener('click', handleSaveClick);
 }
