@@ -782,8 +782,8 @@ const elementsProps = {
 	}
 }
 
-
 // --------------- render ---------------
+
 renderHeader();
 handleDocLoad();
 
