@@ -1,86 +1,86 @@
 let json = `[{
-    "type": "block",
+    "data-type": "block",
         "style":{
     "width": "100%",
     "height": "80px",
     "background-color": "#DCDCDC"}
 },{
-    "type": "block",
+    "data-type": "block",
         "style":{
     "width": "100%",
     "height": "80px",
     "background-color": "#fff973dd"}
 },{
-    "type": "block",
+    "data-type": "block",
         "style":{
     "width": "100%",
     "height": "500px",
     "background-color": "#FFE4E1"}
 },{
-    "type": "block",
+    "data-type": "block",
         "style":{
     "width": "100%",
     "height": "500px",
     "background-color": "#DCDCDC"}
 },{
-    "type": "block",
+    "data-type": "block",
         "style":{
     "width": "100%",
     "height": "100px",
     "background-color": "#fff973dd"}
 },{
-    "type": "block",
+    "data-type": "block",
         "style":{
     "width": "100%",
     "height": "100px",
     "background-color": "#FFE4E1"}
 },{
-    "type": "block",
+    "data-type": "block",
         "style":{
     "width": "100%",
     "height": "80px",
     "background-color": "#F0FFF0"}
 }, {
-	"type": "block",
+	"data-type": "block",
         "style":{
 	"width": "100%",
 	"height": "500px",
 	"background-color": "#FFFFF0"}
 },{
-	"type": "block",
+	"data-type": "block",
         "style":{
 	"width": "100%",
 	"height": "150px",
 	"background-color": "#c6c3af",
 	"border-radius": "40px"}
 },{
-    "type": "block",
+    "data-type": "block",
         "style":{
     "width": "100px",
     "height": "100px",
     "border": "thick solid grey"}
 },{
-	"type": "block",
+	"data-type": "block",
         "style":{
 	"width": "80px",
 	"height": "80px",
 	"background-color": "grey",
 	"border-radius": "50%"}
 },{
-    "type": "block",
+    "data-type": "block",
         "style":{
     "width": "100px",
     "height": "50px",
     "background-color": "#fff973",
     "border-radius": "100px / 50px"}
 },{
-    "type": "block",
+    "data-type": "block",
         "style":{
     "width": "100%",
     "height": "100px",
     "background-color": "pink"}
 },{
-	"type": "button",
+	"data-type": "button",
         "style":{
 	"width": "150px",
 	"height": "30px",
@@ -88,7 +88,7 @@ let json = `[{
 	"color": "black"},
 	"text": "Кнопка"
 },{
-	"type": "button",
+	"data-type": "button",
         "style":{
 	"width": "150px",
 	"height": "30px",
@@ -96,7 +96,7 @@ let json = `[{
 	"color": "black"},
 	"text": "Кнопка"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "150px",
     "height": "40px",
@@ -106,7 +106,7 @@ let json = `[{
     "font-size": "16px"},
     "text": "View More"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "150px",
     "height": "40px",
@@ -115,7 +115,7 @@ let json = `[{
     "font-size": "20px"},
     "text": "Read More"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "150px",
     "height": "40px",
@@ -126,7 +126,7 @@ let json = `[{
     "border": "2px solid rgb(202, 215, 231)"},
     "text": "SEND"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "150px",
     "height": "40px",
@@ -137,7 +137,7 @@ let json = `[{
     "border-radius": "40px"},
     "text": "SHOP &#8594;"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "150px",
     "height": "40px",
@@ -147,7 +147,7 @@ let json = `[{
     "font-size": "20px"},
     "text": "VIEW ALL"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "150px",
     "height": "40px",
@@ -157,7 +157,7 @@ let json = `[{
     "font-size": "14px"},
     "text": "DOWNLOAD"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "150px",
     "height": "40px",
@@ -168,7 +168,7 @@ let json = `[{
     "border-radius": "40px"},
     "text": "JOIN US"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "70px",
     "height": "40px",
@@ -179,7 +179,7 @@ let json = `[{
     "border-radius": "100px"},
     "text": "&#10084;"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "70px",
     "height": "40px",
@@ -190,7 +190,7 @@ let json = `[{
     "border-radius": "5px"},
     "text": "&#10006;"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "45px",
     "height": "40px",
@@ -201,7 +201,7 @@ let json = `[{
     "border-radius": "5px"},
     "text": "&#128386;"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "45px",
     "height": "40px",
@@ -212,7 +212,7 @@ let json = `[{
     "border-radius": "5px"},
     "text": "&#9742;"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "45px",
     "height": "40px",
@@ -223,7 +223,7 @@ let json = `[{
     "border-radius": "5px"},
     "text": "&#9997;"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "45px",
     "height": "40px",
@@ -234,7 +234,7 @@ let json = `[{
     "border-radius": "5px"},
     "text": "&#9786;"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "45px",
     "height": "40px",
@@ -245,7 +245,7 @@ let json = `[{
     "border-radius": "5px"},
     "text": "&#10046;"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "150px",
     "height": "40px",
@@ -256,7 +256,7 @@ let json = `[{
     "font-style": "italic"},
     "text": "Apply Now"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "150px",
     "height": "40px",
@@ -267,7 +267,7 @@ let json = `[{
     "border": "2px solid rgb(63, 118, 82)"},
     "text": "Featured"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "45px",
     "height": "40px",
@@ -277,7 +277,7 @@ let json = `[{
     "font-size": "30px"},
     "text": "&#62;"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "110px",
     "height": "40px",
@@ -288,7 +288,7 @@ let json = `[{
     "font-weight": "bold"},
     "text": "SEND"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "110px",
     "height": "40px",
@@ -298,31 +298,31 @@ let json = `[{
     "font-size": "16px"},
     "text": "BACK TO TOP"
 },{
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "40px",
     "height": "40px"},
     "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d='M256 112c-48.6 0-88 39.4-88 88C168 248.6 207.4 288 256 288s88-39.4 88-88C344 151.4 304.6 112 256 112zM256 240c-22.06 0-40-17.95-40-40C216 177.9 233.9 160 256 160s40 17.94 40 40C296 222.1 278.1 240 256 240zM256 0C114.6 0 0 114.6 0 256s114.6 256 256 256s256-114.6 256-256S397.4 0 256 0zM256 464c-46.73 0-89.76-15.68-124.5-41.79C148.8 389 182.4 368 220.2 368h71.69c37.75 0 71.31 21.01 88.68 54.21C345.8 448.3 302.7 464 256 464zM416.2 388.5C389.2 346.3 343.2 320 291.8 320H220.2c-51.36 0-97.35 26.25-124.4 68.48C65.96 352.5 48 306.3 48 256c0-114.7 93.31-208 208-208s208 93.31 208 208C464 306.3 446 352.5 416.2 388.5z' fill='#401a49'/></svg>"
 }, {
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "48px",
     "height": "48px"},
     "svg": "<svg xmlns='http://www.w3.org/2000/svg' height='48' width='48'><path d='M6 36V33H42V36ZM6 25.5V22.5H42V25.5ZM6 15V12H42V15Z' fill='#401a49'/></svg>"
 }, {
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "48px",
     "height": "48px"},
     "svg": "<svg xmlns='http://www.w3.org/2000/svg' height='48' width='48'><path d='M24 32.35 14.35 22.7 16.5 20.55 22.5 26.55V8H25.5V26.55L31.5 20.55L33.65 22.7ZM11 40Q9.8 40 8.9 39.1Q8 38.2 8 37V29.85H11V37Q11 37 11 37Q11 37 11 37H37Q37 37 37 37Q37 37 37 37V29.85H40V37Q40 38.2 39.1 39.1Q38.2 40 37 40Z' fill='#401a49'/></svg>"
 }, {
-    "type": "button",
+    "data-type": "button",
         "style":{
     "width": "48px",
     "height": "48px"},
     "svg": "<svg xmlns='http://www.w3.org/2000/svg' height='48' width='48'><path d='M23 33.5H25.25V25.3H33.5V23H25.25V14.5H23V23H14.5V25.3H23ZM24 43Q20 43 16.525 41.55Q13.05 40.1 10.475 37.525Q7.9 34.95 6.45 31.475Q5 28 5 24Q5 20 6.45 16.55Q7.9 13.1 10.475 10.525Q13.05 7.95 16.525 6.475Q20 5 24 5Q28 5 31.45 6.475Q34.9 7.95 37.475 10.525Q40.05 13.1 41.525 16.55Q43 20 43 24Q43 28 41.525 31.475Q40.05 34.95 37.475 37.525Q34.9 40.1 31.45 41.55Q28 43 24 43ZM24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24Q24 24 24 24ZM24 40.75Q30.9 40.75 35.825 35.825Q40.75 30.9 40.75 24Q40.75 17.1 35.825 12.175Q30.9 7.25 24 7.25Q17.1 7.25 12.175 12.175Q7.25 17.1 7.25 24Q7.25 30.9 12.175 35.825Q17.1 40.75 24 40.75Z' fill='#401a49'/></svg>"
 }, {
-	"type": "text",
+	"data-type": "text",
         "style":{
 	"textStyle": "header_h1",
 	"width": "150px",
@@ -331,7 +331,7 @@ let json = `[{
 	"font-family": "Verdana"},
     "text": "Название"
 },{
-    "type": "text",
+    "data-type": "text",
         "style":{
     "textStyle": "header_h2",
     "width": "150px",
@@ -340,7 +340,7 @@ let json = `[{
     "font-family": "Verdana"},
     "text": "Заголовок"
 },{
-	"type": "text",
+	"data-type": "text",
         "style":{
 	"textStyle": "simple_text",
 	"width": "150px",
@@ -348,7 +348,7 @@ let json = `[{
 	"color": "#000"},
 	"text": "Ваш текст будет написан в этом блоке"
 },{
-    "type": "text",
+    "data-type": "text",
         "style":{
 	"textStyle": "simple_text",
 	"width": "150px",
@@ -357,7 +357,7 @@ let json = `[{
     "font-family": "Arial"},
     "text": "Arial"
 },{
-    "type": "text",
+    "data-type": "text",
         "style":{
 	"textStyle": "simple_text",
 	"width": "150px",
@@ -366,7 +366,7 @@ let json = `[{
     "font-family": "Times New Roman"},
     "text": "Times New Roman"
 },{
-    "type": "text",
+    "data-type": "text",
         "style":{
 	"textStyle": "simple_text",
 	"width": "150px",
@@ -375,7 +375,7 @@ let json = `[{
     "font-family": "Courier New"},
     "text": "Courier New"
 },{
-    "type": "text",
+    "data-type": "text",
         "style":{
 	"textStyle": "simple_text",
 	"width": "150px",
@@ -384,7 +384,7 @@ let json = `[{
     "font-family": "Verdana"},
     "text": "Verdana"
 },{
-    "type": "text",
+    "data-type": "text",
         "style":{
 	"textStyle": "simple_text",
 	"width": "150px",
@@ -393,7 +393,7 @@ let json = `[{
     "font-family": "Trebuchet MS"},
     "text": "Trebuchet MS"
 },{
-    "type": "text",
+    "data-type": "text",
         "style":{
 	"textStyle": "simple_text",
 	"width": "150px",
@@ -402,7 +402,7 @@ let json = `[{
     "font-family": "Cambria"},
     "text": "Cambria"
 },{
-    "type": "text",
+    "data-type": "text",
         "style":{
 	"textStyle": "simple_text",
 	"width": "150px",
@@ -411,7 +411,7 @@ let json = `[{
     "font-family": "Franklin Gothic Medium"},
     "text": "Franklin Gothic Medium"
 },{
-    "type": "text",
+    "data-type": "text",
         "style":{
 	"textStyle": "simple_text",
 	"width": "150px",
@@ -420,7 +420,7 @@ let json = `[{
     "font-family": "Helvetica"},
     "text": "Helvetica"
 },{
-    "type": "text",
+    "data-type": "text",
         "style":{
 	"textStyle": "simple_text",
 	"width": "150px",
@@ -429,7 +429,7 @@ let json = `[{
     "font-family": "Helvetica"},
     "text": "Helvetica Light is an easy-to-read font, with tall and narrow letters, that works well on almost every site."
 },{
-    "type": "text",
+    "data-type": "text",
         "style":{
 	"textStyle": "simple_text",
 	"width": "150px",
@@ -439,7 +439,7 @@ let json = `[{
     "font-weight": "bold"},
     "text": "Helvetica Light is an easy-to-read font, with tall and narrow letters, that works well on almost every site."
 },{
-    "type": "text",
+    "data-type": "text",
         "style":{
 	"textStyle": "simple_text",
 	"width": "150px",
@@ -449,7 +449,7 @@ let json = `[{
     "font-style": "italic"},
     "text": "Helvetica Light is an easy-to-read font, with tall and narrow letters, that works well on almost every site."
 },{
-	"type": "image",
+	"data-type": "image",
         "style":{
 	"width": "300px",
 	"height": "300px",
@@ -457,7 +457,7 @@ let json = `[{
 	"background-image": "url(./img/bar-chart.png)",
     "background-size": "contain"}
 },{
-	"type": "image",
+	"data-type": "image",
         "style":{
 	"width": "300px",
 	"height": "300px",
@@ -465,7 +465,7 @@ let json = `[{
 	"background-image": "url(./img/team-work.png)",
     "background-size": "contain"}
 },{
-    "type": "image",
+    "data-type": "image",
         "style":{
     "width": "150px",
     "height": "150px",
@@ -473,7 +473,7 @@ let json = `[{
     "background-image": "url(./img/letter.png)",
     "background-size": "contain"}
 },{
-    "type": "image",
+    "data-type": "image",
         "style":{
     "width": "150px",
     "height": "150px",
@@ -481,21 +481,21 @@ let json = `[{
     "background-image": "url(./img/web-programming.png)",
     "background-size": "contain"}
 },{
-    "type": "icon",
+    "data-type": "icon",
         "style":{
     "width": "30px",
     "height": "30px"},
     "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><path d='M400 32H48A48 48 0 0 0 0 80v352a48 48 0 0 0 48 48h137.25V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.27c-30.81 0-40.42 19.12-40.42 38.73V256h68.78l-11 71.69h-57.78V480H400a48 48 0 0 0 48-48V80a48 48 0 0 0-48-48z'/></svg>",
     "link": "https://www.facebook.com"
 },{
-    "type": "icon",
+    "data-type": "icon",
         "style":{
     "width": "30px",
     "height": "30px"},
     "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><path d='M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48zm-48.9 158.8c.2 2.8.2 5.7.2 8.5 0 86.7-66 186.6-186.6 186.6-37.2 0-71.7-10.8-100.7-29.4 5.3.6 10.4.8 15.8.8 30.7 0 58.9-10.4 81.4-28-28.8-.6-53-19.5-61.3-45.5 10.1 1.5 19.2 1.5 29.6-1.2-30-6.1-52.5-32.5-52.5-64.4v-.8c8.7 4.9 18.9 7.9 29.6 8.3a65.447 65.447 0 0 1-29.2-54.6c0-12.2 3.2-23.4 8.9-33.1 32.3 39.8 80.8 65.8 135.2 68.6-9.3-44.5 24-80.6 64-80.6 18.9 0 35.9 7.9 47.9 20.7 14.8-2.8 29-8.3 41.6-15.8-4.9 15.2-15.2 28-28.8 36.1 13.2-1.4 26-5.1 37.8-10.2-8.9 13.1-20.1 24.7-32.9 34z'/></svg>",
     "link": "https://www.twitter.com"
 },{
-    "type": "icon",
+    "data-type": "icon",
         "style":{
     "width": "30px",
     "height": "30px"},
@@ -520,11 +520,14 @@ let iconsArray = [];
 
 jsonElements = JSON.parse(json);
 jsonElements.forEach(el => {
-    const jsonElementType = el.type;
-    let newEl = `<div class="element elementPreview flexible" draggable="true"`
+    let jsonElementType = ''; //= Object.entries(el)[0][1]
+    let newEl = `<div class="element elementPreview flexible" tabindex="0" draggable="true"`
     const elProperties = Object.entries(el);
     let text = '';
     elProperties.forEach(pr => {
+        if (pr[0] === 'data-type') {
+            jsonElementType = pr[1];
+        }
         if (pr[0] === 'style') {
             const styleAttributes = Object.entries(pr[1]);
             newEl += ` style="`;
@@ -539,32 +542,37 @@ jsonElements.forEach(el => {
         }
     });
     newEl += `>${text}</div>`;
-
+    // console.log(newEl);
+    // console.log(jsonElementType);
     switch (true) {
-        case (jsonElementType == "block"): {
+        case (jsonElementType === "block"): {
             blocksArray.push(newEl);
             break;
         }
-        case (jsonElementType == "button"): {
+        case (jsonElementType === "button"): {
             buttonsArray.push(newEl)
             break;
         }
-        case (jsonElementType == "text"): {
+        case (jsonElementType === "text"): {
             textArray.push(newEl)
             break;
         }
-        case (jsonElementType == "image"): {
+        case (jsonElementType === "image"): {
             imagesArray.push(newEl)
             break;
         }
-        case (jsonElementType == "icon"): {
+        case (jsonElementType === "icon"): {
             iconsArray.push(newEl)
             break;
         }
     }
 });
 
-
+console.log(blocksArray);
+console.log(buttonsArray);
+console.log(textArray);
+console.log(imagesArray);
+console.log(iconsArray);
 // //отрисовываем элементы из json в меню
 // //переделано в отдельные функции для каждого типа блока
 // function drawCategories(elements) {
